@@ -59,4 +59,16 @@ A brief description of key files in this repo and what they do
 #### syncFirewall()
 - basically synchronizes our firewall rules
 - in our case its creating an iptables rule that is redirecting traffic going to 
-  kubernetes api server host and port to the sidecar with mitmproxy running
+  kubernetes api server host and port to mitmproxy container running on the same
+  pod
+
+
+## sidecar
+
+### what it does
+- adds some more iptables rules - nothing related though?
+
+## mitmproxy/mitmproxy:3.0.3
+
+- stock upstream container
+- bundled into same pod as podwatch
