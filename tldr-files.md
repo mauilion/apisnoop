@@ -41,3 +41,22 @@ A brief description of key files in this repo and what they do
 - Can set annotation name, config map name and namespace here
 - Possibly a couple of bugs possible?
 
+##  charts/tproxy/templates/initializer-configmap.yaml
+
+### what it does
+
+- injects only the container 'sidecar'
+- volumes and volume mounts are used for injecting mitm certs into the ca certs dir
+- injects the `http_proxy` and `https_proxy` env vars, but only when addStandardModeProxy is true (default false) 
+
+## cmd/tproxy-podwatch/main.go
+
+### what it does
+
+#### main()
+- watches for pods and adds them to a work queue
+
+#### syncFirewall()
+- basically synchronizes our firewall rules
+- in our case its creating an iptables rule that is redirecting traffic going to 
+  kubernetes api server host and port to the sidecar with mitmproxy running
