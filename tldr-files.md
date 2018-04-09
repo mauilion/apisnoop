@@ -21,7 +21,7 @@ A brief description of key files in this repo and what they do
 #### initializeDeployment()
 - if there are no initializers for the deployment, return
 - get the pending initializers for the deployment -- possibly returns empty set?
-- if first pending initializers name is the tproxy initializer, return -- bug?
+- if first pending initializers name is not the tproxy initializer, return -- bug?
 - deep copy the deployment object (hereby known as 'the working copy')
 - remove initializer from pending set
 - if an annotation is required, check for annotation on deployment. if it is
