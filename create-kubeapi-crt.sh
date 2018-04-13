@@ -27,8 +27,8 @@ openssl genrsa -out mitm.key 2048
 # so we template the config and inject the k8s apiserver IPs
 echo Generating CSR request
 cat ../csr.settings.template |\
-        sed "s/REPLACE_INTERNAL_IP/$(kubectl get services -o jsonpath='{.items[0].spec.clusterIP}')/g" |\
-        sed "s/REPLACE_EXTERNAL_IP/$(kubectl get endpoints -o jsonpath='{.items[0].subsets[0].addresses[0].ip}')/g" > csr.settings
+        sed "s/REPLACE_INTERNAL_IP/$(kubectl get services kubernetes -o jsonpath='{.spec.clusterIP}')/g" |\
+        sed "s/REPLACE_EXTERNAL_IP/$(kubectl get endpoints kubernetes -o jsonpath='{.subsets[0].addresses[0].ip}')/g" > csr.settings
 openssl req -new -key mitm.key -out mitm.csr -config csr.settings
 
 echo Adding CSR to Kubernetes
