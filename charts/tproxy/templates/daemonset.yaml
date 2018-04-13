@@ -56,7 +56,7 @@ spec:
               hostPort: 1080
               protocol: TCP
           command:
-            - mitmdump
+            - 'mitmweb'
             - '-p'
             - '1080'
             - '--insecure'
@@ -84,7 +84,7 @@ spec:
               hostPort: {{ .Values.tproxy.hostPort }}
               protocol: TCP
           command:
-            - mitmweb
+            - 'mitmweb' 
             - '-v'
             - '-p'
             - '{{ .Values.tproxy.hostPort }}'
@@ -94,6 +94,8 @@ spec:
             - '--ssl-insecure'
             - '--set'
             - 'stream_large_bodies=4096'
+            - '--save-stream-file'
+            - '/tmp/mitmweb-captures.log'
             - '--certs'
             - '*=/opt/mitmproxy-scripts/mitm-kube-apiserver.pem'
             - '-s'
