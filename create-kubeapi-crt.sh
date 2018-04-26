@@ -50,7 +50,7 @@ EOF
 echo Approving CSR
 kubectl certificate approve $CSR_NAME
 echo Getting result cert
-# sleep 3
+sleep 3
 kubectl get csr $CSR_NAME -o jsonpath='{.status.certificate}' | base64 -d > mitm.crt
 # Combine the private key and certificate into one file for mitmproxy 
 cat mitm.crt mitm.key > mitm-combined.pem

@@ -1,2 +1,2 @@
 #!/bin/bash
-kubectl get pods -o jsonpath='POD NODE:{range.items[*]}{.metadata.name} {.spec.nodeName}:{end}' | tr ':' '\n' | column -t
+kubectl get pods --all-namespaces -o jsonpath='POD NODE:{range.items[*]}{.metadata.name} {.spec.nodeName}:{end}' | tr ':' '\n' | column -t
