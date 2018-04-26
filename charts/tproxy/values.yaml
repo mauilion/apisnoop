@@ -1,10 +1,10 @@
 images:
   pullPolicy: Always
   mitmproxy: mitmproxy/mitmproxy:3.0.3
-  tproxy_registry: registry.ii.coop/cncf/kube-apisnoop
-  tproxy_initializer: initializer:kubesnoop
-  tproxy_podwatch: podwatch:kubesnoop
-  tproxy_sidecar: sidecar:kubesnoop
+  tproxy_registry: gcr.io/ii-coop
+  tproxy_initializer: tproxy-initializer:0.1.0
+  tproxy_podwatch: tproxy-podwatch:0.1.0
+  tproxy_sidecar: tproxy-sidecar:0.1.0
 
 tproxy:
   useRBAC: false
