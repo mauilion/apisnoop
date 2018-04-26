@@ -20,7 +20,7 @@ Based on kubernetes-tproxy - https://github.com/danisla/kubernetes-tproxy
 ## Requirements
 
 - **Kubernetes** 
-    - with **Initializers enabled (alpha feature)** (Tested on GKE v1.9.3-gke.0) 
+    - with **Initializers enabled (alpha feature)** (Tested on GKE v1.9.6-gke.0) 
         - Self-hosted - https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature
         - On GKE - https://cloud.google.com/kubernetes-engine/docs/concepts/alpha-clusters
     - with **RBAC disabled (currently)** 
@@ -29,12 +29,12 @@ Based on kubernetes-tproxy - https://github.com/danisla/kubernetes-tproxy
 
 ```bash
 gcloud container clusters create tproxy-example \
-  --zone us-central1-f \
+  --zone australia-southeast1-c \
   --machine-type n1-standard-1 \
   --num-nodes 3 \
   --enable-kubernetes-alpha \
   --enable-legacy-authorization \
-  --cluster-version 1.9.3
+  --cluster-version 1.9.6
 ```
 
 - **Helm**
