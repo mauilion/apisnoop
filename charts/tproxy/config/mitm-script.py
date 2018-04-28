@@ -16,8 +16,9 @@ def send_thread_run(*args, **kwargs):
         payload = send_queue.get()
         print("Sending payload:", str(payload))
         try:
-            requests.post(WEBHOOK, data=payload)
-        except e:
+            r = requests.post(WEBHOOK, json=payload)
+            print("Payload sent:", r.status_code)
+        except Exception as e:
             print("Error sending to webhook: ", e)
         send_queue.task_done()
 
@@ -33,14 +34,16 @@ def request(flow: http.HTTPFlow) -> None:
     #     return
     try:
         payload = {
-            "request_data": flow.request.content,
+            "request_data": flow.request.content.decode('utf-8'),
             "timestamp": flow.request.timestamp_start,
             #"status_code": flow.response.status_code,
             "url": flow.request.pretty_url,
             "method": flow.request.method,
             "sender_ip": flow.client_conn.address,
         }
-    except e:
+        for k in payload:
+            print(k, type(payload[k]))
+    except Exception as e:
         print("Error: ", e)
         return
 
