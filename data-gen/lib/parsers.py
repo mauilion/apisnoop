@@ -86,9 +86,12 @@ def load_openapi_spec(url):
 
     swagger = load_swagger_file(url, cache=True)
     openapi_spec['paths'] = {}
+    openapi_spec['definitions'] = {}
     openapi_spec['prefix_cache'] = defaultdict(dict)
     openapi_spec['hit_cache'] = {}
-
+    # import ipdb; ipdb.set_trace(context=60)
+    for kind, definition in swagger['definitions'].items():
+        openapi_spec['definitions'][kind]= definition
     for path in swagger['paths']:
         path_regex = compile_path_regex(path)
 

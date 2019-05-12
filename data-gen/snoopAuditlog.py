@@ -3,6 +3,7 @@ import sys
 import os
 import re
 import json
+import ipdb
 
 # python 2 and 3 provide urlparse in different modules
 try:
@@ -27,6 +28,38 @@ def generate_endpoints_tree(openapi_spec):
   endpoints = {}
 
   for endpoint in openapi_spec['paths'].values():
+    for (method_name, method) in endpoint['methods'].items():
+      method = endpoint['methods'][method_name]
+      deprecated = True if re.match("[Dd]eprecated", method["description"]) else False
+      operationId = method['operationId']
+
+      if operationId not in endpoints.keys():
+        # Populate the initial endpoint[operation]
+        endpoints[operationId] = {}
+        endpoints[operationId]["path"] = endpoint["path"]
+        endpoints[operationId]["level"] = endpoint["level"]
+
+      if method_name == "watch":
+        endpoints[operationId]["hasWatch"] = True
+        continue # to next method in endpoint[operationId]
+
+      # Hoist/flatten method information up to operationId
+      for item in ["category", "group", "kind", "version", "description" ]:
+        endpoints[operationId][item] = endpoint["methods"][method_name][item]
+
+      endpoints[operationId]["isDeprecated"] = deprecated
+      endpoints[operationId]["hits"] = 0
+      endpoints[operationId]["testHits"] = 0
+      endpoints[operationId]["conformanceHits"] = 0
+
+  return endpoints
+
+def generate_definitions_tree(openapi_spec):
+  # Base tests structure, without audit / test loade
+  definitions = {}
+  import ipdb; ipdb.set_trace(context=60)
+
+  for endpoint in openapi_spec['definitons'].values():
     for (method_name, method) in endpoint['methods'].items():
       method = endpoint['methods'][method_name]
       deprecated = True if re.match("[Dd]eprecated", method["description"]) else False
@@ -240,6 +273,7 @@ def main():
 
   openapi_spec = load_openapi_spec(openapi_uri)
   audit_log = load_audit_log(filename)
+  definitions = generate_definitions_tree(openapi_spec)
   report = generate_coverage_report(openapi_spec, audit_log)
 
   output_path = sys.argv[2]

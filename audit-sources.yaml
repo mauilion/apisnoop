@@ -1,20 +1,20 @@
 buckets:
     ci-kubernetes-e2e-gce-cos-k8sbeta-default:
         jobs:
-        - '1123720090269782017'
+        - '1126156964926066688'
     ci-kubernetes-e2e-gce-cos-k8sstable1-default:
         jobs:
-        - '1123713042312335360'
+        - '1126179348844384256'
     ci-kubernetes-e2e-gce-cos-k8sstable2-default:
         jobs:
-        - '1123638123377463296'
+        - '1126181621226016768'
     ci-kubernetes-e2e-gce-cos-k8sstable3-default:
         jobs:
-        - '1123621511530287106'
+        - '1125797307111968770'
     ci-kubernetes-e2e-gci-gce:
         jobs:
-        - '1123708008795213828'
+        - '1126161988959866880'
 default-view:
     bucket: ci-kubernetes-e2e-gci-gce
-    job: '1123708008795213828'
+    job: '1126161988959866880'
 source: prow.k8s.io
