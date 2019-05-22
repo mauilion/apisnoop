@@ -4,15 +4,11 @@
 #+CREATOR: ii.coop
 #+DATE:  1st May, 2019
 #+PROPERTY: header-args:bash  :tangle ./config-kubetest.sh
-#+PROPERTY: header-args:bash+ :noweb yes
-#+PROPERTY: header-args:bash+ :noeval
-#+PROPERTY: header-args:bash+ :comments org
-#+PROPERTY: header-args:bash+ :noweb-ref (nth 4 (org-heading-components))
 #+STARTUP: showeverything
 
 * Objective
 
-The end goal for this document is to show how to run a group of tests using ~kubetest~. It follows on from this [[setup-kubetest-kind-on-packet.org][setup document]]. 
+The end goal for this document is to show how to run a group of tests using ~kubetest~. It follows on from this [[setup-kubetest-kind-on-packet.org][setup document]].
 
 /Note: The setup requires using an account with 'root' privileges on the server./
 
@@ -26,10 +22,14 @@ There's several key bits of software required to support [[https://github.com/ku
 
 We just installed a number of components, so we need the current shell session to be in sync with the new environment variables.
 
-#+BEGIN_SRC shell 
-. ~/.bashrc 
+#+BEGIN_SRC shell
+. ~/.bashrc
 env | grep GO
 #+END_SRC
+
+#+RESULTS:
+#+begin_EXAMPLE
+#+end_EXAMPLE
 
 This should provide a result as below.
 
@@ -51,7 +51,7 @@ mkdir -p "${ARTIFACTS}"
 export ARTIFACTS
 #+END_SRC
 
-** Add Environment variables  
+** Add Environment variables
 
 #+BEGIN_SRC bash
 export KUBECONFIG="/root/.kube/kind-config-kind-kubetest"
@@ -97,7 +97,7 @@ export -f run_tests
 
 ** Move to k8s folder and start a new subshell
 
-#+BEGIN_SRC bash 
+#+BEGIN_SRC tmate
 cd $GOPATH/src/k8s.io/kubernetes
 bash
 #+END_SRC
@@ -122,7 +122,7 @@ SUCCESS! -- 0 Passed | 0 Failed | 0 Pending | 3960 Skipped
 
 ** Run a group of tests
 
-Updating the variable ~FOCUS~ will give kubetest a smaller set of tests to process, therefore giving faster feedback. 
+Updating the variable ~FOCUS~ will give kubetest a smaller set of tests to process, therefore giving faster feedback.
 
 #+BEGIN_SRC shell :eval no
 FOCUS="Secrets"
@@ -141,6 +141,4 @@ SUCCESS! -- 13 Passed | 0 Failed | 0 Pending | 3947 Skipped
 
 * References
 
-- [[https://github.com/kubernetes/community/blob/master/contributors/devel/sig-testing/e2e-tests.md#testing-against-local-clusters][Testing against local clusters]] 
-
-
+- [[https://github.com/kubernetes/community/blob/master/contributors/devel/sig-testing/e2e-tests.md#testing-against-local-clusters][Testing against local clusters]]
