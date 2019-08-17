@@ -1,0 +1,1392 @@
+#+TITLE: ApiSnoop_v3 Flow
+#+TODO: TODO(t) IN-PROGRESS(i) BLOCKED(b) | DONE(d)
+#+PROPERTY: header-args: :noweb yes
+#+PROPERTY: header-args:shell+ :results output list
+* Purpose
+  This org file will serve as a dev diary/primer on apisnoop_v3, to track the days and hours in which we worked on something, and the reasoning behind how we worked on it.  It will be used in tandem with our gitlab tickets, where this org can give further context than the tickets would potentially allow.
+* Resources
+** Gitlab
+   - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3][Our Repo]]
+   - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues][Our Issues]]
+   - Boards (these double as milestone trackers):
+     - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/boards/129?milestone_title=A%2520Shared%2520%2520Schema][A Shared Schema]]
+     - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/boards/130?milestone_title=Graphql-Compliant%2520Backend][Graphql-Compliant Backend]]
+** Iteration Loop
+ These steps assume you have pasted the tmate code into a new terminal, when you started up this org file.
+ If you have not done this, type == SPC SPC normal-mode== to reset this org file.  It should give you the command again, which you can paste into a new terminal.
+*** Navigate to our v3 Repo and start up server
+    I would like to be able to get to the root of our apisnoop_v3 repo, based on where someone is reading this org, but am having trouble with the src code block to do so.  This is a rabbit hole i'm avoiding, by hardcoding right now.  This assumes you have the repo at ~/ii/apisnoop_v3
+   
+    #+NAME: Navigate to Repo
+    #+BEGIN_SRC tmate
+      cd ~/ii/apisnoop_v3
+      node ./src/index.js
+    #+END_SRC
+
+*** View the Playground
+    From your browser, navigate to =localhost:4000=
+
+*** deploy new database model to our prisma database
+** Useful Links
+   - [[https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apiserver/pkg/apis/audit/v1/types.go#L72][Audit Log Event Struct in kubernetes go types]]
+   - [[https://www.twistlock.com/2019/03/14/kubernetes-auditsink-real-time-k8s-audits-forensics/][Twistlock: example of doing dynamic reading of audit logs]]
+   - [[https://scanner.heptio.com/][sonobuoy: good example of the UX/UI we are ultimately aiming for]]
+     - being able to run =kubectl apply apisnoop= and it reads teh audit log on the cluster yr working on, and gives you a sunburst and graphql playground for your work.
+** Notes from talk with hh
+   - Take a look at an auditlog
+     - each line of the auditlog we suspect to be valid, consistent json.
+       - each line of the auditlog is a serialized json representation of the auditlog entry go type.  and the auditlog entry go type is defined.
+     - data-gen adds to db each line, mapped 1-to-1
+     - think of the uploading
+   - our data structures we have now are not auditlogs but "prowjob logs"
+   - look at the Auditlog Event Go Type where it is sharply defined what the structure for an audit log entry is.  We can use this to define the schema for our mutations.
+** Sample Audit Log stored in ./data/kube-apiserver-audit.log
+   this is only on my local one, since it's a 400mb file.  future flow.org will have script to download it from a set bucket.
+** The kubernetes types.go Auditlog Event Struct
+   #+NAME: Audit Log Event Struct
+   #+BEGIN_SRC go
+     // Event captures all the information that can be included in an API audit log.
+     type Event struct {
+       metav1.TypeMeta `json:",inline"`
+
+       // AuditLevel at which event was generated
+       Level Level `json:"level" protobuf:"bytes,1,opt,name=level,casttype=Level"`
+
+       // Unique audit ID, generated for each request.
+       AuditID types.UID `json:"auditID" protobuf:"bytes,2,opt,name=auditID,casttype=k8s.io/apimachinery/pkg/types.UID"`
+       // Stage of the request handling when this event instance was generated.
+       Stage Stage `json:"stage" protobuf:"bytes,3,opt,name=stage,casttype=Stage"`
+
+       // RequestURI is the request URI as sent by the client to a server.
+       RequestURI string `json:"requestURI" protobuf:"bytes,4,opt,name=requestURI"`
+       // Verb is the kubernetes verb associated with the request.
+       // For non-resource requests, this is the lower-cased HTTP method.
+       Verb string `json:"verb" protobuf:"bytes,5,opt,name=verb"`
+       // Authenticated user information.
+       User authnv1.UserInfo `json:"user" protobuf:"bytes,6,opt,name=user"`
+       // Impersonated user information.
+       // +optional
+       ImpersonatedUser *authnv1.UserInfo `json:"impersonatedUser,omitempty" protobuf:"bytes,7,opt,name=impersonatedUser"`
+       // Source IPs, from where the request originated and intermediate proxies.
+       // +optional
+       SourceIPs []string `json:"sourceIPs,omitempty" protobuf:"bytes,8,rep,name=sourceIPs"`
+       // UserAgent records the user agent string reported by the client.
+       // Note that the UserAgent is provided by the client, and must not be trusted.
+       // +optional
+       UserAgent string `json:"userAgent,omitempty" protobuf:"bytes,16,opt,name=userAgent"`
+       // Object reference this request is targeted at.
+       // Does not apply for List-type requests, or non-resource requests.
+       // +optional
+       ObjectRef *ObjectReference `json:"objectRef,omitempty" protobuf:"bytes,9,opt,name=objectRef"`
+       // The response status, populated even when the ResponseObject is not a Status type.
+       // For successful responses, this will only include the Code and StatusSuccess.
+       // For non-status type error responses, this will be auto-populated with the error Message.
+       // +optional
+       ResponseStatus *metav1.Status `json:"responseStatus,omitempty" protobuf:"bytes,10,opt,name=responseStatus"`
+
+       // API object from the request, in JSON format. The RequestObject is recorded as-is in the request
+       // (possibly re-encoded as JSON), prior to version conversion, defaulting, admission or
+       // merging. It is an external versioned object type, and may not be a valid object on its own.
+       // Omitted for non-resource requests.  Only logged at Request Level and higher.
+       // +optional
+       RequestObject *runtime.Unknown `json:"requestObject,omitempty" protobuf:"bytes,11,opt,name=requestObject"`
+       // API object returned in the response, in JSON. The ResponseObject is recorded after conversion
+       // to the external type, and serialized as JSON.  Omitted for non-resource requests.  Only logged
+       // at Response Level.
+       // +optional
+       ResponseObject *runtime.Unknown `json:"responseObject,omitempty" protobuf:"bytes,12,opt,name=responseObject"`
+       // Time the request reached the apiserver.
+       // +optional
+       RequestReceivedTimestamp metav1.MicroTime `json:"requestReceivedTimestamp" protobuf:"bytes,13,opt,name=requestReceivedTimestamp"`
+       // Time the request reached current audit stage.
+       // +optional
+       StageTimestamp metav1.MicroTime `json:"stageTimestamp" protobuf:"bytes,14,opt,name=stageTimestamp"`
+
+       // Annotations is an unstructured key value map stored with an audit event that may be set by
+       // plugins invoked in the request serving chain, including authentication, authorization and
+       // admission plugins. Note that these annotations are for the audit event, and do not correspond
+       // to the metadata.annotations of the submitted object. Keys should uniquely identify the informing
+       // component to avoid name collisions (e.g. podsecuritypolicy.admission.k8s.io/policy). Values
+       // should be short. Annotations are included in the Metadata level.
+       // +optional
+       Annotations map[string]string `json:"annotations,omitempty" protobuf:"bytes,15,rep,name=annotations"`
+     }
+   #+END_SRC
+
+** Testing!
+   #+BEGIN_SRC tmate
+pwd
+   #+END_SRC
+
+* Example Queries
+** Running Queries
+  - [[Navigate to our v3 Repo and start up server][Navigate to our v3 Repo and start up server]] 
+  - [[View the Playground][View the Playground]] 
+  - Paste the query into the left side and hit play, or =ctrl-enter= 
+   
+** All AuditLogs and Endpoints, including endpoints hits
+   What's useful for this is to see that you can have an endpoint with the same opId and associated with different AuditLogs
+   #+BEGIN_SRC graphql
+     query{
+       auditLogs{
+         id
+         version
+         endpoints{
+           id
+           operationID
+           hits
+           conformanceHits
+           testHits
+         }
+       }
+     }
+   #+END_SRC
+
+** List the job runs and their timestamps in our db
+   We have 192m rows in our audit_events table, each one being an audit event with an id.  These are being pulled from like 5 test runs.  If we wanted info about the test_run, and just put in   If we did a graphql query for just 'testrun_id', it'd list the same 5 ids across all 192 million results and crash hasura.
+
+Instead, you use the 'distinct_on' and 'order_by' filters to the call, so only unique testruns show....giving us 5 results.   
+
+#+NAME: List Test Run's and their Timestamp
+#+BEGIN_EXAMPLE graphql
+{
+  audit_events(distinct_on: testrun_id, order_by: {testrun_id: asc}, limit: 30) {
+    testrun_id
+    stage_ts
+  }
+}
+#+END_EXAMPLE
+
+
+** 
+
+* Hasura / Postgres
+
+
+** Ensure Connectivity
+#+NAME: Start Postgresql Connection
+#+BEGIN_SRC emacs-lisp :results silent
+(sql-connect connection (concat "*SQL: postgres:default*"))
+#+END_SRC
+
+#+BEGIN_SRC sql-mode
+  \conninfo
+#+END_SRC
+
+#+RESULTS:
+#+begin_src sql-mode
+You are connected to database "zz" as user "zz" via socket in "/var/run/postgresql" at port "5432".
+#+end_src
+** No tables yet
+#+BEGIN_SRC sql-mode 
+  \d+
+#+END_SRC
+
+#+RESULTS:
+: Did not find any relations.
+
+* Dev Diary
+** July
+*** 1st
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-15 Mon 17:05]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *5:38* |
+|--------------+--------|
+#+END:
+**** DONE Prepare this Org
+     CLOSED: [2019-07-01 Mon 10:05]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 10:00]--[2019-07-01 Mon 10:04] =>  0:04
+     :END:
+     I want to have a basic structure that Josmar and others can follow for what I'm doing and why.
+     This will grow as needed, so will not spend too long on it now.
+**** DONE Add Dan's Comments to tickets in gitlab
+     CLOSED: [2019-07-01 Mon 10:19]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 10:07]--[2019-07-01 Mon 10:19] =>  0:12
+     :END:
+     This is based off a slack convo [[https://mattermost.ii.coop/files/ihzmi3whb3d4xpssynbnh7sude/public?h=5CpNsQ9EyK3IZeHl2Ue8jdI7vD9ENx_T90EsPthuNSs][shared in mattermost]].  
+     The Key Points are:
+     - Arrange a call with Aaron, Brian, and Belamaric to see if automated tools like apisnoop would help.
+       - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/5][Issue 5]]
+     - Get Apisnoop integrated into the beginning of every call
+       - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/6][Issue 6]]
+     - Get apisnoop integrated into prow so someone can see the conformance increase for a pr.
+       - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/7][Issue 7]] 
+     
+    I would consider the last two to be 'discussion' issues, to figure out how we can design APISnoop for both, so I labeled them as such.  A future task will be to start the discussion here, as I got opinions on how we can do both.
+**** DONE Make sure we have a starting board for the schema and server boards
+     CLOSED: [2019-07-01 Mon 10:22]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 10:22]--[2019-07-01 Mon 10:22] =>  0:00
+     :END:
+     We've added this as part of the ticket writing.  The boards have been added to this org, under our [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/1][gitlab resource]]
+**** DONE Writeup Tickets for populating this backend.
+     CLOSED: [2019-07-01 Mon 10:43]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 10:25]--[2019-07-01 Mon 10:43] =>  0:18
+     :END:
+     Once we have a backend, it needs to have data in it.  This is a combination of schema design, and writing functions for how we post new data to the backend.  I think it is usefult o have thse outlined as single ticket,s to better track the work, and so will refine issue 1 to be an umbrella issue, and better outline the steps needed to show it's a workable backend.
+     
+     I've fleshed out issue 1, connecting it to all its sub-tickets.  [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/1][Check out issue 1]]
+**** DONE Issue 8: Setup backend, that's tied to a db and has a graphql explorer
+     CLOSED: [2019-07-01 Mon 15:52]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 14:43]-[2019-07-01 Mon 15:52] =>  1:09
+     CLOCK: [2019-07-01 Mon 10:45]--[2019-07-01 Mon 11:00] =>  0:15
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/8][Link to Issue 8]]
+     
+     The majority of this work has been done in this repo on Friday.  The work now is to be able to commit these changes to our repo and start to document how it works.
+     
+**** DONE Issue 9: Write a mutation for populating db with an audit log.
+     CLOSED: [2019-07-01 Mon 17:42]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 15:55]--[2019-07-01 Mon 17:42] =>  1:47
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/9][Link to Issue 9]]
+     
+     I am thinking we'l base this off the metadata.json of the audit log, since that's available from the start with the log.   So the flow will be:
+- post a new auditlog, based on the schema, that contains the basic metadata.
+- post new individual endpoints that have, for the auditlog value, the id of our just posted auditLog
+
+This should allow us to have a nicely connected tables and being able to see the coverage of an endpoint over time (comparing aacross audit logs), while also setting us up nicely for the data-generation script.
+
+I worked off the hackernews tutorial i did, simplifying and refacotring as needed.  I put in the types defined in app.org as part of our 'release metadata', but renamed release to AuditLog, as that's more accurate to what the thing is.
+     
+**** DONE Issue 10: Write a mutation for populating an endpoint to backend, that's connected to a release.
+     CLOSED: [2019-07-01 Mon 19:16]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 18:11]--[2019-07-01 Mon 19:16] =>  1:05
+     CLOCK: [2019-07-01 Mon 18:09]--[2019-07-01 Mon 18:10] =>  0:01
+     CLOCK: [2019-07-01 Mon 17:50]-[2019-07-01 Mon 18:10] =>  0:20
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/10][Link to #10]]
+     I should be able to follow the path of the auditlog schema.  The tricky part here will be connecting an endpoint to a release, and how to set that up in a resolver.  I feel I can use the graphql tutorial at howtographql.com, and follow their example of a post and a user.
+     
+     ---
+     
+     This worked out smoothly, using that example.  I've set up a mutation that requires an auditLog id, it then connects to that auditlog when put in.  This means that when I query an endpoint, I can _also_ see all the info about the audit log its a part of.  when i query audit logs I automatically see all their endpoints.  It's a nice pattern, and simply implemented.
+
+    We just need to remember in the data-gen script we'll take an audit log, and post its metadata to the db.  the db will return an ID...we then need to take that ID and use it as a variable for all the endpoints, useragents, tests, etc, we post next.  This _feels_ simple to me, and doesn't introduce anything new to how we've defined everything.  
+**** DONE Issue 12: Write a query for endpoint, to see its info including the audit log its connected to
+     CLOSED: [2019-07-01 Mon 19:46]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 19:27]-[2019-07-01 Mon 19:46] =>  0:19
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/12][Link to #12]]
+     This is asking to ping for a specific endpoint, but I feel I should just make it a filter...to put in the ability of starting to add filters like "group is SUCH" or "category is SUCH".
+     
+     I'll put in a proof of concept for this,w hich will let us return a single endpoint and the auditlog its a part of, and return to it later to figure out how to best structure these filters.
+     
+     It's now been implemented iwth operationID. I think I could add additional filters for any part of the endpoint,a nd it would be just as easy, but I worrya bout being verbose.  There must be a simpler or cleaner way of providing multiple kinds of filters.  An interesting problem for later, added to future tasks.
+**** DONE Update README with dev setup and use.
+     CLOSED: [2019-07-01 Mon 19:54]
+     :LOGBOOK:
+     CLOCK: [2019-07-01 Mon 19:46]--[2019-07-01 Mon 19:54] =>  0:08
+     :END:
+     
+**** DONE Issue One: Setup Initial Backend
+*** 2nd
+    I did not do work on v3, as work was needed to be done on the current apisnoop, to add auditlogs for july 1st and june 1st, then debug when the pr preview was not displaying correctly.
+*** 3rd
+#+BEGIN: clocktable :scope subtree :maxlevel 2
+#+CAPTION: Clock summary at [2019-07-04 Thu 11:02]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *4:39* |
+|--------------+--------|
+#+END:
+
+ 
+    Today is a small cross-roads.  I could keep working on putting individual entries into our db, to ensure we can successfully post new test_tags, useragents, and tests.  Or I could start to work on the data-gen script, so that we can start to put in actual audit logs.  
+    
+    If I work on the former, the downside is that our results back will still just be a Proof of Concept, with a single entry for each thing.  The upside is that I'll know exactly what the post should look like.
+    
+    If I work on the latter, I'll get closr to being able to populate it with real data (and could maybe try to get it to just post an auditlog's metadata and nothing else.)  The downside is that this si some big work to untangle, and I won't yet know how to post every bit of data that the datagen script is generating.
+    
+    I am making a choice to get our schema finished, with just basic entries for each thing, before moving to data-gen
+
+**** DONE Write out tickets for getting test_tags, useragents, and tests into db.
+     CLOSED: [2019-07-03 Wed 09:24]
+     :LOGBOOK:
+     CLOCK: [2019-07-03 Wed 09:10]--[2019-07-03 Wed 09:24] =>  0:14
+     :END:
+     Added tickets for 14, 15, 16, 17, 18 and added them to this flow as TODO's.
+**** DONE #14 Write a mutation for populating tests in the db, that are connected to auditlogs and endpoints.
+     CLOSED: [2019-07-05 Fri 05:30]
+     :LOGBOOK:
+     CLOCK: [2019-07-04 Thu 08:36]--[2019-07-04 Thu 09:02] =>  0:26
+     CLOCK: [2019-07-04 Thu 05:30]--[2019-07-04 Thu 06:55] =>  1:25
+     CLOCK: [2019-07-03 Wed 09:24]--[2019-07-03 Wed 11:58] =>  2:34
+     :END:
+     NOTE: didn't finish this, as convo with hh made us realize we could change tactics and d/l full auditlog instead and populate that to the db.
+
+     I want to make sure I can add a test for a specific auditlog, and then only connect it to endpoints that have the same auditlog.  The reasonb eing that there will be tests with the same name across auditlogs, and endpoints with the same name across auditlogs, and we need to ensure we aren't making duplicates.
+    
+     When I add a test, I won't know each of the endpoints id's.  I think it's well enough to match on operationID, as it should be a constant, and also auditLog.  So it's a question on whether I can do two arguments in the prisma ={ connect }= function. 
+
+***** [40%] Tasks to complete ticket:
+      - [X] populate db with another auditlog
+        - hoooo boy, this was harder than I expected!  I misunderstood what could be passed along when creating a new auditlog, after I'd made that endpoint connection.  I was thinking I needed to pass along an empty array...since auditLogs should now have an 'endpoints' field...just we don't know what'll go in them.  But you cannot add empty arrays in mutations, and i was getting a (cryptic) error message telling me this.
+        - I ended up signing up for a number of prisma forums and channels trying to find the answre to this, and got the answer within [[https://www.prisma.io/forum/t/mutation-failing-problem-with-non-nullable-array/5748][prisma.io/forum]].  This is useful though, as I now know the structure for extending this to include useragents, tests, etc and know what resources I have.
+      - [X] add an endpoint with same opId as one in there, but to this new auditlog
+        - Check it with this example query: [[All AuditLogs and Endpoints, including endpoints hits][All AuditLogs and Endpoints, including endpoints hits]]  
+      - [ ] Write a test mutation with an AuditLog field, matching the endpoints field, and an endpoints field that connects based on endpoints opId and auditLog.
+        - having an issue with this, in that I am trying to connect all these endpoints based on their operationID, but cannot as that is not a @unique field.  We are going to have the same opID's across jobs, releases, buckets etc.
+        - The tests are going to end up with a list of endpoints they hit.  It will be the same testname across releases, though somtimes there might be an adjustment (e.g. when promoted to conformance).  They'll often have the same list of endpoints, but not always (if the test is written to hit less, but more specific ones, or more get added to it.)
+        - The test json now just includes a list of operationID's for the things they hit.  I'd like to connect this list to the actual endpoints, so if you query a test, you can also grab the relevant endpoint info in the same query.
+        - The issue is that the operationID's are not unique.  What's unique is operationID + auditLogID.
+        - So Options (ordered by my preference):
+          1. figure out how to run a map on just the args.endpoints before we do the mutation, to retrun an array of endpointID's (which are unique).  use this to connect.
+          2. create a new field which is opID+auditLogID and make this @unique.  I can then connect immediately to that.
+          3. don't connect tests to endpoints within the api, and expect people to do it as a separate query.
+        - Of the first two, option 2 seems easiest, but I can timebox how to do 1 first.  If not possible, I'll adjust our endpoints api for 2.
+         
+      - [ ] Add a new test to DB, with an existing endpoint included
+      - [ ] query the test and ensure the right endpoint comes back.
+
+      To test this, I'll need to 
+    
+    
+*** 4th
+   #+BEGIN: clocktable :scope subtree :maxlevel 2
+   #+CAPTION: Clock summary at [2019-07-05 Fri 07:20]
+   | Headline     | Time   |
+   |--------------+--------|
+   | *Total time* | *3:28* |
+   |--------------+--------|
+   #+END:
+ 
+**** DONE Write Up Tickets for our new Tasks, based on [[*Notes from talk with hh][Notes from talk with hh]]  
+     CLOSED: [2019-07-05 Fri 04:20]
+     :LOGBOOK:
+     CLOCK: [2019-07-05 Fri 03:51]--[2019-07-05 Fri 04:11] =>  0:20
+     :END:
+**** DONE Organize Org file with relevant links for this work
+     CLOSED: [2019-07-05 Fri 04:20]
+     :LOGBOOK:
+     CLOCK: [2019-07-05 Fri 04:12]--[2019-07-05 Fri 04:15] =>  0:03
+     :END:
+     You can now find useful links within our resources: [[*Useful Links][Useful Links]] 
+**** DONE #19 look into our existing 'download-audits.sh' to grab an audit
+     CLOSED: [2019-07-05 Fri 05:31]
+     :LOGBOOK:
+     CLOCK: [2019-07-05 Fri 04:15]--[2019-07-05 Fri 05:31] =>  1:16
+     :END:
+   [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/19][link to #19]]  
+   I need to remember that the end goal is just to have an auditlog. And so instead of looking at code directly, i'll look at the prow job build logs from a pr, to see the lines actually run and where it's pulling data from.  Then I can do a =gsutil= to grab the relevant log.
+   
+   To grab an auditlog I:
+   - took a look at the build log and saw(remembered) that our main command is now ./apisnoop.sh, and that it stores the audit-logs as part of the --update-cache step
+   - I ssh'ed into the zpair box of packet, cloned apisnoop, and did ./apisnoop.sh --install && ./apisnoop.sh --update-cache
+   - this gave me a number of audit logs within ./data-gen/cache.  They are arranged by the version, then the job, so I went into a recent job for master (...e23-gci-gce...)
+   - The results have a single =kube-apiserver-audit.log= plus some =kube-apiserver-lotsofunumbers.gz=
+   - I gunzipped a random one, then ran =cat randomlog | jq keys=, then ran the same command on the =kube-apiserver-audit.log=.  The keys are the same, and so I could see they were the same _type_ of file, but broken into multiple sections to make the d/ling easier (I knew this, but wanted to confirm).
+   - I took the kube-apiserver-audit.log and rsynced it down to this repo's =data= folder so we could explore further.
+   - I noted the location within the resources of this flow.org (couldn't add a proper file link yet, and it felt like a rabbit hole)
+**** DONE #20 Investigate how our d/led audit log maps to the audit log struct type.
+     CLOSED: [2019-07-08 Mon 08:16]
+     :LOGBOOK:
+     CLOCK: [2019-07-08 Mon 06:44]--[2019-07-08 Mon 07:56] =>  1:12
+     CLOCK: [2019-07-05 Fri 06:05]--[2019-07-05 Fri 07:20] =>  1:15
+     CLOCK: [2019-07-05 Fri 05:31]-[2019-07-05 Fri 06:05] =>  0:34
+     :END:
+    [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/20][link to #20]] 
+    This is the Event Struct (also held in our resources here: [[*The kubernetes types.go Auditlog Event Struct][The kubernetes types.go Auditlog Event Struct]])
+    
+   #+NAME: Audit Log Event Struct
+   #+BEGIN_SRC go
+     // Event captures all the information that can be included in an API audit log.
+     type Event struct {
+       metav1.TypeMeta `json:",inline"`
+
+       // AuditLevel at which event was generated
+       Level Level `json:"level" protobuf:"bytes,1,opt,name=level,casttype=Level"`
+
+       // Unique audit ID, generated for each request.
+       AuditID types.UID `json:"auditID" protobuf:"bytes,2,opt,name=auditID,casttype=k8s.io/apimachinery/pkg/types.UID"`
+       // Stage of the request handling when this event instance was generated.
+       Stage Stage `json:"stage" protobuf:"bytes,3,opt,name=stage,casttype=Stage"`
+
+       // RequestURI is the request URI as sent by the client to a server.
+       RequestURI string `json:"requestURI" protobuf:"bytes,4,opt,name=requestURI"`
+       // Verb is the kubernetes verb associated with the request.
+       // For non-resource requests, this is the lower-cased HTTP method.
+       Verb string `json:"verb" protobuf:"bytes,5,opt,name=verb"`
+       // Authenticated user information.
+       User authnv1.UserInfo `json:"user" protobuf:"bytes,6,opt,name=user"`
+       // Impersonated user information.
+       // +optional
+       ImpersonatedUser *authnv1.UserInfo `json:"impersonatedUser,omitempty" protobuf:"bytes,7,opt,name=impersonatedUser"`
+       // Source IPs, from where the request originated and intermediate proxies.
+       // +optional
+       SourceIPs []string `json:"sourceIPs,omitempty" protobuf:"bytes,8,rep,name=sourceIPs"`
+       // UserAgent records the user agent string reported by the client.
+       // Note that the UserAgent is provided by the client, and must not be trusted.
+       // +optional
+       UserAgent string `json:"userAgent,omitempty" protobuf:"bytes,16,opt,name=userAgent"`
+       // Object reference this request is targeted at.
+       // Does not apply for List-type requests, or non-resource requests.
+       // +optional
+       ObjectRef *ObjectReference `json:"objectRef,omitempty" protobuf:"bytes,9,opt,name=objectRef"`
+       // The response status, populated even when the ResponseObject is not a Status type.
+       // For successful responses, this will only include the Code and StatusSuccess.
+       // For non-status type error responses, this will be auto-populated with the error Message.
+       // +optional
+       ResponseStatus *metav1.Status `json:"responseStatus,omitempty" protobuf:"bytes,10,opt,name=responseStatus"`
+
+       // API object from the request, in JSON format. The RequestObject is recorded as-is in the request
+       // (possibly re-encoded as JSON), prior to version conversion, defaulting, admission or
+       // merging. It is an external versioned object type, and may not be a valid object on its own.
+       // Omitted for non-resource requests.  Only logged at Request Level and higher.
+       // +optional
+       RequestObject *runtime.Unknown `json:"requestObject,omitempty" protobuf:"bytes,11,opt,name=requestObject"`
+       // API object returned in the response, in JSON. The ResponseObject is recorded after conversion
+       // to the external type, and serialized as JSON.  Omitted for non-resource requests.  Only logged
+       // at Response Level.
+       // +optional
+       ResponseObject *runtime.Unknown `json:"responseObject,omitempty" protobuf:"bytes,12,opt,name=responseObject"`
+       // Time the request reached the apiserver.
+       // +optional
+       RequestReceivedTimestamp metav1.MicroTime `json:"requestReceivedTimestamp" protobuf:"bytes,13,opt,name=requestReceivedTimestamp"`
+       // Time the request reached current audit stage.
+       // +optional
+       StageTimestamp metav1.MicroTime `json:"stageTimestamp" protobuf:"bytes,14,opt,name=stageTimestamp"`
+
+       // Annotations is an unstructured key value map stored with an audit event that may be set by
+       // plugins invoked in the request serving chain, including authentication, authorization and
+       // admission plugins. Note that these annotations are for the audit event, and do not correspond
+       // to the metadata.annotations of the submitted object. Keys should uniquely identify the informing
+       // component to avoid name collisions (e.g. podsecuritypolicy.admission.k8s.io/policy). Values
+       // should be short. Annotations are included in the Metadata level.
+       // +optional
+       Annotations map[string]string `json:"annotations,omitempty" protobuf:"bytes,15,rep,name=annotations"`
+     }
+   #+END_SRC
+   
+   And without all the comments, just the struct, it is:
+
+   #+NAME: Compact Event Struct
+   #+BEGIN_SRC go
+     type Event struct {
+       metav1.TypeMeta `json:",inline"`
+       Level Level `json:"level" protobuf:"bytes,1,opt,name=level,casttype=Level"`
+       AuditID types.UID `json:"auditID" protobuf:"bytes,2,opt,name=auditID,casttype=k8s.io/apimachinery/pkg/types.UID"`
+       Stage Stage `json:"stage" protobuf:"bytes,3,opt,name=stage,casttype=Stage"`
+       RequestURI string `json:"requestURI" protobuf:"bytes,4,opt,name=requestURI"`
+       Verb string `json:"verb" protobuf:"bytes,5,opt,name=verb"`
+       User authnv1.UserInfo `json:"user" protobuf:"bytes,6,opt,name=user"`
+       ImpersonatedUser *authnv1.UserInfo `json:"impersonatedUser,omitempty" protobuf:"bytes,7,opt,name=impersonatedUser"`
+       SourceIPs []string `json:"sourceIPs,omitempty" protobuf:"bytes,8,rep,name=sourceIPs"`
+       UserAgent string `json:"userAgent,omitempty" protobuf:"bytes,16,opt,name=userAgent"`
+       ObjectRef *ObjectReference `json:"objectRef,omitempty" protobuf:"bytes,9,opt,name=objectRef"`
+       ResponseStatus *metav1.Status `json:"responseStatus,omitempty" protobuf:"bytes,10,opt,name=responseStatus"`
+       RequestObject *runtime.Unknown `json:"requestObject,omitempty" protobuf:"bytes,11,opt,name=requestObject"`
+       ResponseObject *runtime.Unknown `json:"responseObject,omitempty" protobuf:"bytes,12,opt,name=responseObject"`
+       RequestReceivedTimestamp metav1.MicroTime `json:"requestReceivedTimestamp" protobuf:"bytes,13,opt,name=requestReceivedTimestamp"`
+       StageTimestamp metav1.MicroTime `json:"stageTimestamp" protobuf:"bytes,14,opt,name=stageTimestamp"`
+       Annotations map[string]string `json:"annotations,omitempty" protobuf:"bytes,15,rep,name=annotations"`
+     }
+   #+END_SRC
+
+    
+   We can compare this to the keys from an entry in our d/led auditlog
+   
+   #+NAME: Grab keys for one line of audit log
+   #+BEGIN_SRC shell
+     head -5 ../data/kube-apiserver-audit.log \
+          | jq keys
+   #+END_SRC
+   
+   #+RESULTS: Grab keys for one line of audit log
+   #+begin_EXAMPLE
+   [
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "level",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "requestURI",
+     "responseStatus",
+     "sourceIPs",
+     "stage",
+     "stageTimestamp",
+     "user",
+     "userAgent",
+     "verb"
+   ]
+   [
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "level",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "requestURI",
+     "responseStatus",
+     "sourceIPs",
+     "stage",
+     "stageTimestamp",
+     "user",
+     "userAgent",
+     "verb"
+   ]
+   [
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "level",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "requestURI",
+     "responseStatus",
+     "sourceIPs",
+     "stage",
+     "stageTimestamp",
+     "user",
+     "userAgent",
+     "verb"
+   ]
+   [
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "level",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "requestURI",
+     "responseStatus",
+     "sourceIPs",
+     "stage",
+     "stageTimestamp",
+     "user",
+     "userAgent",
+     "verb"
+   ]
+   [
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "level",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "requestURI",
+     "responseStatus",
+     "sourceIPs",
+     "stage",
+     "stageTimestamp",
+     "user",
+     "userAgent",
+     "verb"
+   ]
+   #+end_EXAMPLE
+   
+   The keys are largely the same, and where there isn't the same key in the json, we can see that it was listed as 'json,omitempty'.  In Golang, this means that the field can be null, and if so to omit the key from the output json.  This is similar to the graphql schema of =Something: String= versus =Something: String!= where the former can be a null value, and the latter must have something. For more about this, see: [[https://www.sohamkamani.com/blog/golang/2018-07-19-golang-omitempty/]]
+   
+   The other one that's in the struct, but not the json, is metav1.TypeMeta.  I did a cursory google search for this, and every reference to this key is specific with kubernetes and, judging from [[https://groups.google.com/d/msg/kubernetes-sig-api-machinery/deP_LDaAdVs/TEen0KkkDgAJ][this kubernetes convo]], it's a legacy convention and not meant to be encoded into the json anyway.
+   In other words, it looks like we can map the Struct direct to a graphql schema, as long as we know what each of its type definitions mean.
+   
+   Since we are using prisma, it has a convention to write a graphql.schema but also a datamodel.prisma.  The datamodel is similar to defining tables in sql, but written in the graphql SDL (schema definition language).  It's use is literally to convert our graphql requests into the relevant sql requests.  These two type definitions are slightly different, and so I'll define both here.
+   
+   I'll also post out two events to help with type definitions
+   #+NAME: full event from audit.log
+   #+BEGIN_SRC shell
+     head -3 ../data/kube-apiserver-audit.log \
+          | jq .
+   #+END_SRC
+
+   #+RESULTS: full event from audit.log
+   #+begin_EXAMPLE
+   {
+     "kind": "Event",
+     "apiVersion": "audit.k8s.io/v1",
+     "level": "Request",
+     "auditID": "c0793350-e7fe-42ce-93e6-8436a0eb3b23",
+     "stage": "ResponseComplete",
+     "requestURI": "/api/v1/namespaces/kube-system/pods/etcd-empty-dir-cleanup-bootstrap-e2e-master",
+     "verb": "get",
+     "user": {
+       "username": "kubelet",
+       "groups": [
+         "system:nodes",
+         "system:authenticated"
+       ]
+     },
+     "sourceIPs": [
+       "34.83.72.130"
+     ],
+     "userAgent": "kubelet/v1.16.0 (linux/amd64) kubernetes/0e499be",
+     "objectRef": {
+       "resource": "pods",
+       "namespace": "kube-system",
+       "name": "etcd-empty-dir-cleanup-bootstrap-e2e-master",
+       "apiVersion": "v1"
+     },
+     "responseStatus": {
+       "metadata": {},
+       "status": "Failure",
+       "reason": "Forbidden",
+       "code": 403
+     },
+     "requestReceivedTimestamp": "2019-06-18T16:24:23.098849Z",
+     "stageTimestamp": "2019-06-18T16:24:23.099005Z",
+     "annotations": {
+       "authorization.k8s.io/decision": "forbid",
+       "authorization.k8s.io/reason": ""
+     }
+   }
+   {
+     "kind": "Event",
+     "apiVersion": "audit.k8s.io/v1",
+     "level": "Metadata",
+     "auditID": "8483e074-bd75-4811-a60c-689f33f83b54",
+     "stage": "ResponseComplete",
+     "requestURI": "/apis/coordination.k8s.io/v1beta1/namespaces/kube-node-lease/leases/bootstrap-e2e-master?timeout=10s",
+     "verb": "get",
+     "user": {
+       "username": "kubelet",
+       "groups": [
+         "system:nodes",
+         "system:authenticated"
+       ]
+     },
+     "sourceIPs": [
+       "34.83.72.130"
+     ],
+     "userAgent": "kubelet/v1.16.0 (linux/amd64) kubernetes/0e499be",
+     "objectRef": {
+       "resource": "leases",
+       "namespace": "kube-node-lease",
+       "name": "bootstrap-e2e-master",
+       "apiGroup": "coordination.k8s.io",
+       "apiVersion": "v1beta1"
+     },
+     "responseStatus": {
+       "metadata": {},
+       "status": "Failure",
+       "reason": "Forbidden",
+       "code": 403
+     },
+     "requestReceivedTimestamp": "2019-06-18T16:24:23.099973Z",
+     "stageTimestamp": "2019-06-18T16:24:23.100096Z",
+     "annotations": {
+       "authorization.k8s.io/decision": "forbid",
+       "authorization.k8s.io/reason": ""
+     }
+   }
+   {
+     "kind": "Event",
+     "apiVersion": "audit.k8s.io/v1",
+     "level": "Request",
+     "auditID": "7f702534-db23-416d-b5fd-0c9c2a33d257",
+     "stage": "ResponseComplete",
+     "requestURI": "/apis/storage.k8s.io/v1beta1/csidrivers?limit=500&resourceVersion=0",
+     "verb": "list",
+     "user": {
+       "username": "kubelet",
+       "groups": [
+         "system:nodes",
+         "system:authenticated"
+       ]
+     },
+     "sourceIPs": [
+       "34.83.72.130"
+     ],
+     "userAgent": "kubelet/v1.16.0 (linux/amd64) kubernetes/0e499be",
+     "objectRef": {
+       "resource": "csidrivers",
+       "apiGroup": "storage.k8s.io",
+       "apiVersion": "v1beta1"
+     },
+     "responseStatus": {
+       "metadata": {},
+       "status": "Failure",
+       "reason": "Forbidden",
+       "code": 403
+     },
+     "requestReceivedTimestamp": "2019-06-18T16:24:23.100718Z",
+     "stageTimestamp": "2019-06-18T16:24:23.100802Z",
+     "annotations": {
+       "authorization.k8s.io/decision": "forbid",
+       "authorization.k8s.io/reason": ""
+     }
+   }
+   #+end_EXAMPLE
+
+   #+NAME: Graphql Schema for Event
+   #+BEGIN_SRC graphql
+     type Metadata {
+       name: String
+     }
+
+     type ResponseStatus {
+       metadata: Metadata
+       status: String
+       reason: String
+       code: Int
+     }
+
+     type UserInfo {
+       username: String!
+      "example groups: system:nodes, system:authenticated"
+       groups: [String!]!
+     }
+
+     "ObjectReference contains enough information to let you inspect or modify the referred object."
+     type ObjectReference{
+       resource: String
+       namespace: String
+       name: String
+       uid: ID
+       "APIGroup is the name of the API group that contains the referred object."
+       "The empty string represents the core API group."
+       "+optional"
+       apiGroup: String
+       "APIVersion is the version of the API group that contains the referred object."
+       "+optional"
+       apiVersion: String
+       resourceVersion: String
+       subresource: String
+     }
+
+     "Event captures all the information that can be included in an API audit log."
+     type Event {
+       kind: String
+       "Auditlevel at which event was generated"
+       level: String!
+       "Unique audit ID, generated for each request."
+       auditID: ID
+       "Stage of the request handling when this event instance was generated."
+       Stage: String!
+       "RequestURI is the request URI as sent by the client to a server."
+       requestURI: String!
+       "Verb is the kubernetes verb associated with the request."
+       "For non-resource requests, this is the lower-cased HTTP method."
+       verb: String!
+       "Authenticated user information."
+       user: UserInfo!
+       "Impersonated user information."
+       "+optional"
+       impersonatedUser: UserInfo
+       "Source IPs, from where the request originated and intermediate proxies."
+       "+optional"
+       sourceIPs [String!]
+       "UserAgent records the user agent string reported by the client."
+       "Note that the UserAgent is provided by the client, and must not be trusted."
+       "+optional"
+       userAgent: String 
+       "Object reference this request is targeted at."
+       "Does not apply for List-type requests, or non-resource requests."
+       "+optional"
+       objectRef: ObjectReference
+       "The response status, populated even when the ResponseObject is not a Status type."
+       "For successful responses, this will only include the Code and StatusSuccess."
+       "For non-status type error responses, this will be auto-populated with the error Message."
+       "+optional"
+       responseStatus: ResponseStatus
+       "API object from the request, in JSON format. The RequestObject is recorded as-is in the request"
+       "(possibly re-encoded as JSON), prior to version conversion, defaulting, admission or"
+       "merging. It is an external versioned object type, and may not be a valid object on its own."
+       "Omitted for non-resource requests.  Only logged at Request Level and higher."
+       "+optional"
+       requestObject: ObjectReference
+       "Time the request reached the apiserver."
+       "+optional"
+       requestReceivedTimestamp: String
+       "Time the request reached current audit stage."
+       "+optional"
+       stateTimestamp: String
+       "Annotations is an unstructured key value map stored with an audit event that may be set by"
+       "plugins invoked in the request serving chain, including authentication, authorization and"
+       "admission plugins. Note that these annotations are for the audit event, and do not correspond"
+       "to the metadata.annotations of the submitted object. Keys should uniquely identify the informing"
+       "component to avoid name collisions (e.g. podsecuritypolicy.admission.k8s.io/policy). Values"
+       "should be short. Annotations are included in the Metadata level."
+       "+optional"
+       annotations: Json
+     }
+   #+END_SRC
+   
+   #+NAME: datamodel.prisma for event
+   #+BEGIN_SRC graphql
+     type Metadata {
+       name: String
+     }
+
+     type ResponseStatus {
+       metadata: Metadata
+       status: String
+       reason: String
+       code: Int
+     }
+
+     type UserInfo {
+       username: String!
+       groups: [String!]!
+     }
+
+     type ObjectReference{
+       resource: String
+       namespace: String
+       name: String
+       uid: ID @unique
+       apiGroup: String
+       apiVersion: String
+       resourceVersion: String
+       subresource: String
+     }
+
+     type Event {
+       id: ID! @id
+       createdAt: DateTime! @createdAt
+       kind: String
+       level: String!
+       auditID: ID @unique
+       Stage: String!
+       requestURI: String!
+       verb: String!
+       user: UserInfo!
+       impersonatedUser: UserInfo
+       sourceIPs [String!]
+       userAgent: String 
+       objectRef: ObjectReference
+       responseStatus: ResponseStatus
+       requestObject: ObjectReference
+       requestReceivedTimestamp: String
+       stateTimestamp: String
+       annotations: Json
+     }
+   #+END_SRC
+   
+   When I first tried this, the prisma deploy through a number of errors, for any time I had a referenced object (like user: UserInfo!).  I needed to setup a relation between the UserInfo type and the Event type.  I solved this for them by adding an `event` field  to each of these 'subtypes'.  
+
+The other error is whenever I had a scalarList like =[String]=, to get these to add correctly, I needed to add the directive =@scalarList(strategy: RELATION)=.  I got this from [[https://www.prisma.io/forum/t/valid-values-for-the-strategy-argument-of-scalarlist-are-relation/7154][a question in the prisma forums]], and agree with the poster that the docs are not clear.
+
+The last issue I had was that the user and impersonatedUser together was throwing an error, whereas it was successful when there were just users.   They said I needed to have a set 'myImpersonatedUser' relation table.  There's intricacies here that are _fascinating_, but I want to just have an auditLog working right now, and can plumb the depths later.
+
+So the datamodel ends up looking like so.
+
+#+NAME: adjusted datamodel.prisma
+#+BEGIN_SRC graphql
+  type ResponseStatus {
+    id: ID! @id
+    createdAt: DateTime! @createdAt
+    metadata: Json
+    status: String
+    reason: String
+    code: Int
+    event: Event!
+  }
+
+  type UserInfo {
+    id: ID! @id
+    createdAt: DateTime! @createdAt
+    username: String!
+    groups: [String!]! @scalarList(strategy: RELATION)
+    event: Event!
+  }
+
+  type ObjectReference{
+    id: ID! @id
+    createdAt: DateTime! @createdAt
+    resource: String
+    namespace: String
+    name: String
+    uid: ID @unique
+    apiGroup: String
+    apiVersion: String
+    resourceVersion: String
+    subresource: String
+    event: Event!
+  }
+
+  type Event {
+    id: ID! @id
+    createdAt: DateTime! @createdAt
+    kind: String
+    level: String!
+    auditID: ID @unique
+    stage: String!
+    requestURI: String!
+    verb: String!
+    user: UserInfo! @relation(link: INLINE)
+    sourceIPs: [String!] @scalarList(strategy: RELATION)
+    userAgent: String 
+    responseStatus: ResponseStatus @relation(link: INLINE)
+    requestObject: ObjectReference @relation(link: INLINE)
+    requestReceivedTimestamp: String
+    stageTimestamp: String
+    annotations: Json
+  }
+#+END_SRC
+
+
+So in the meantime, I looked at how often impersonatedUser comes up.
+
+we can take a look at how many entries are in an audit log, by checking its line number.
+
+#+NAME: audit log entries
+#+BEGIN_SRC shell
+cat ../data/kube-apiserver-audit.log | wc -l
+#+END_SRC
+
+Then compare it to how often impersonatedUser comes up
+#+NAME: audit log entries with impersonatedUser
+#+BEGIN_SRC shell
+cat ../data/kube-apiserver-audit.log | grep impersonatedUser | wc -l
+#+END_SRC
+
+If we compare the results, we see that there are 313k entries, and 74 of them have impersonatedUser.  I think it is okay to not include this field for right now.
+
+#+RESULTS: audit log entries
+#+begin_EXAMPLE
+313441
+#+end_EXAMPLE
+
+#+RESULTS: audit log entries with impersonatedUser
+#+begin_EXAMPLE
+74
+#+end_EXAMPLE
+   
+
+*** 7th
+#+BEGIN: clocktable :scope subtree :maxlevel 2
+#+CAPTION: Clock summary at [2019-07-09 Tue 06:03]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *5:57* |
+|--------------+--------|
+#+END:
+
+**** BLOCKED #21 build a mutation for the events in our d'led audit logs to be added to our db.
+     :LOGBOOK:
+     CLOCK: [2019-07-09 Tue 11:00]--[2019-07-09 Tue 06:03] => -5:03
+     CLOCK: [2019-07-08 Mon 08:41]--[2019-07-08 Mon 10:34] =>  1:53
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/21][link to #21]] 
+     
+     BLOCKED NOTE: I hit an edge-case with prisma related to the AuditID within our audit log events.  Prisma's ID type has a char limit of 25, which the AuditID exceeds.  This can be fixed by adjusting the datamodel and sql tables for the auditID pretty simply, except that prisma has abstracted away the direct database access, and made it quite hard.  I had the option of building out the database again locally (instead of using our proof-of-concept demo hosted db on prisma), or to take a look at another service (hasura) where there was more direct access to the underlying db.  In talking with Chris, it seemed worthwhile to at least investigate hasura and see how it feels.  And so will be doing this and returing later to these tickets.
+    
+     We want to build a basic mutation, whose arguments are just the non-optional parts of our Event type.  I also wanna research into the mutationInput type, as I think this will help with the data-gen later (essentially being able to converat the event to JSON which we then add to a 'addtoDB' function).
+     
+     We'll add the required fields, and then all the other fields we find in the AuditLogs.
+     #+NAME: Required Fields
+     #+BEGIN_EXAMPLE
+       level: String!
+       stage: String!
+       requestURI: String!
+       verb: String!
+       user: UserInfo!
+     #+END_EXAMPLE
+     
+    #+NAME: Add'l fields from an audit log
+    #+BEGIN_EXAMPLE
+     "annotations",
+     "apiVersion",
+     "auditID",
+     "kind",
+     "objectRef",
+     "requestReceivedTimestamp",
+     "responseStatus",
+     "sourceIPs",
+     "stageTimestamp",
+     "userAgent",
+    #+END_EXAMPLE
+
+***** Testing This
+      I should now be able to take an auditlog JSON and post it as a mutation in our playground.
+      
+      I'll grab a random audit log then to see how this work.
+      
+      #+BEGIN_SRC shell
+      head -1 ../data/kube-apiserver-audit.log | jq .
+      #+END_SRC
+
+      #+RESULTS:
+      #+begin_EXAMPLE
+      {
+        "kind": "Event",
+        "apiVersion": "audit.k8s.io/v1",
+        "level": "Request",
+        "auditID": "c0793350-e7fe-42ce-93e6-8436a0eb3b23",
+        "stage": "ResponseComplete",
+        "requestURI": "/api/v1/namespaces/kube-system/pods/etcd-empty-dir-cleanup-bootstrap-e2e-master",
+        "verb": "get",
+        "user": {
+          "username": "kubelet",
+          "groups": [
+            "system:nodes",
+            "system:authenticated"
+          ]
+        },
+        "sourceIPs": [
+          "34.83.72.130"
+        ],
+        "userAgent": "kubelet/v1.16.0 (linux/amd64) kubernetes/0e499be",
+        "objectRef": {
+          "resource": "pods",
+          "namespace": "kube-system",
+          "name": "etcd-empty-dir-cleanup-bootstrap-e2e-master",
+          "apiVersion": "v1"
+        },
+        "responseStatus": {
+          "metadata": {},
+          "status": "Failure",
+          "reason": "Forbidden",
+          "code": 403
+        },
+        "requestReceivedTimestamp": "2019-06-18T16:24:23.098849Z",
+        "stageTimestamp": "2019-06-18T16:24:23.099005Z",
+        "annotations": {
+          "authorization.k8s.io/decision": "forbid",
+          "authorization.k8s.io/reason": ""
+        }
+      }
+      #+end_EXAMPLE
+
+      hit issues where it was asknig for input types, and i'd given them object types instead, and so I have to update my schema.
+      
+      I am also learnign the right way to do a nested mutation, as we are having arrays within objects with arrays and it can get a bit intense.   I am now at a point where I can put in all the required fields successfully: kind, level, stage, verb, requestURI, and userInfo.
+      
+      Now, I just keep adding fields based on the example log until there are no more errors!
+      
+     
+*** 8th
+**** DONE #24 Get a feel for hasura, to potentially use as our backend db.
+     CLOSED: [2019-07-10 Wed 14:55]
+     :LOGBOOK:
+     CLOCK: [2019-07-09 Tue 09:40]--[2019-07-09 Tue 11:55] =>  2:15
+     CLOCK: [2019-07-09 Tue 06:05]--[2019-07-09 Tue 08:00] =>  1:55
+     :END:
+     [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/24][Link to #24]]
+     working through their tutorial here: https://learn.hasura.io/graphql/hasura/introduction
+     
+     I quite like the building of the tables and tutorial.  I made it through to the authentication, and had issues with auth0.  I spent about 45 minutes debugging without success, and decided that this is not an immediate need and can return to it with some more patience later.
+     
+     The tutorial has us build a todo app, which was simple enough.  The trick now is to see how to throw in an event log.
+     hh, recommended looking at some go-strcut to post-gress generators.  
+     
+     I found a few:
+- meddler: https://github.com/russross/meddler
+- dgw: https://github.com/achiku/dgw
+
+DGW dosn't create relational tables, which is really the heart of what we we want, and meddler requires annotating the struct to make it fit into a table...which doesn't seem to save us work.
+
+In terms of time, I feel it is best right now to just model the table manually to better get how it all works, and if it starts to feel way too hard to look at a tool.  Going to these tools now, at least, feels like premature optimization/rabbit hole.
+
+I went through setting up the tables for audit_events, object_refs, and response_statuses.  This allowed me to easily post new audit events to the database through our graphiql playground. 
+
+I _quite_ like hasura's flow.  You start with the postgres database first,a nd then it generates supremely straightforward graphql queries for you.  You can also create new sql views just through raw sql queries.  This is playing to the team's strength, with hh's history with post gres and sql, and our growing strength with graphql.
+
+The one thing I am not sure on is how it feels connecting our frontend to this backend and querying, or how to setup the data-gen script to post direct, line by line, from an audit log.  I will read through the hasura tutorial on react/apollo to get a better feel on that side for us.
+
+*** 15th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-15 Mon 17:06]
+| Headline     | Time    |
+|--------------+---------|
+| *Total time* | *11:00* |
+|--------------+---------|
+#+END:
+**** TODO #22 Create postgresql database, run hasura, simplify audit_entry table structure
+     :LOGBOOK:
+     CLOCK: [2019-07-15 Mon 04:30]--[2019-07-15 Mon 08:00] =>  3:30
+     CLOCK: [2019-07-15 Mon 08:30]--[2019-07-15 Mon 12:00] =>  3:30
+     CLOCK: [2019-07-15 Mon 13:00]--[2019-07-15 Mon 17:00] =>  4:00
+     :END:
+- [X] Create postgresql database locally
+- [X] Run hasura against local DB
+- [X] Refactor / Simplify the audit_entry table structure
+*** 16th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-17 Wed 11:15]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *9:20* |
+|--------------+--------|
+#+END:
+**** TODO #22 refactor db again
+     :LOGBOOK:
+     CLOCK: [2019-07-16 Tue 9:35]--[2019-07-16 Tue 12:15] =>  2:40
+     CLOCK: [2019-07-16 Tue 02:45]--[2019-07-16 Tue 09:25] =>  6:40
+     :END:
+
+Found test-infra code using graphql + github:
+go/src/k8s.io/test-infra/experiment/graphql_issue_example.py
+
+Not going to include prow job definitions or artifacts for now. Just audit log entries.
+- [X] Install hasura cli
+
+#+BEGIN_SRC shell
+curl -L https://github.com/hasura/graphql-engine/raw/master/cli/get.sh | bash
+sudo hasura completion bash --file=/etc/bash_completion.d/hasura # check dir exists
+#+END_SRC
+
+- [X] Write hasura/migrations
+
+Remove '.cli-migrations' from the image and run 'hasura migrate apply' to do it via the cli/API.
+
+#+NAME: start hasura pointing to local postgres and run migrations
+#+BEGIN_SRC shell
+docker run -p 8888:8080 \
+  -e HASURA_GRAPHQL_DATABASE_URL='postgres://postgres@192.168.1.17:5434/apisnoop_hh' \
+  -e HASURA_GRAPHQENABLE_CONSOLE=false \
+  -v $PWD/hasura/migrations:/hasura-migrations\
+  hasura/graphql-engine:v1.0.0-beta.3.cli-migrations
+#+END_SRC
+*** 17th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-17 Wed 14:16]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *7:30* |
+|--------------+--------|
+#+END:
+
+#+NAME: run grahpql on public port
+#+BEGIN_SRC  shell
+docker run -p 139.178.70.135:54321:8080   \
+  -e HASURA_GRAPHQL_DATABASE_URL='postgres://postgres@172.17.0.1:5432/data' \
+  -e HASURA_GRAPHQL_ENABLE_CONSOLE=true  \
+  -v $PWD/hasura/migrations:/hasura-migrations \
+  hasura/graphql-engine:v1.0.0-beta.3.cli-migrations
+#+END_SRC
+
+**** TODO #22 build out a data-gen script that eats a d/led audit log and, per each line, posts to our db.
+     :LOGBOOK:
+     CLOCK: [2019-07-17 Wed 5:30]--[2019-07-17 Wed 8:00] =>  2:30
+     CLOCK: [2019-07-17 Wed 8:30]--[2019-07-17 Wed 12:00] =>  3:30
+     CLOCK: [2019-07-17 Wed 13:00]--[2019-07-17 Wed 14:30] =>  1:30
+     :END:
+Need to try and import json directly.
+We were getting errors for jsonb types, I was able to get that to work for the entire set.
+It requires creating views instead.
+We explored importing only parts as json.
+*** 18th
+     :LOGBOOK:
+     CLOCK: [2019-07-18 Thu 05:30]--[2019-07-18 Thu 12:00] =>  6:30
+     CLOCK: [2019-07-18 Thu 13:00]--[2019-07-18 Thu 16:30] =>  3:30
+     :END:
+
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-18 Thu 04:31]
+| Headline     | Time    |
+|--------------+---------|
+| *Total time* | *10:00* |
+|--------------+---------|
+#+END:
+Tangle [[file:data.org::%20table][data.org :: table]] to create:
+- [[file:~/ii/apisnoop_v3/hasura/migrations/10_table_audit_events.up.sql][hasura/migrations/10_table_audit_events.up.sql]]
+- [[file:~/ii/apisnoop_v3/hasura/migrations/10_table_audit_events.down.sql][hasura/migrations/10_table_audit_events.down.sql]]
+
+The files in migrations are use to create the database:
+
+- [[file:~/ii/apisnoop_v3/hasura/migrations][file:~/ii/apisnoop_v3/hasura/migrations]]
+
+
+Audot logs are fully loaded.
+Next step is loading openapi / swagger.json
+**** DONE #22 build out a data-gen script that eats a d/led audit log and, per each line, posts to our db.
+     export II=/tmp/hh.data.target.iisocket ; rm -f $II ; ssh -tAX hh@sharing.io -L $II:$II /tmp/hh.data.target.sh
+**** DONE make sure requestObject in our Event schema maps to something valid
+    I need to find an example of it in our Event Logs, or remove it if it never comes up.
+**** DONE Make sure Metadata is properly defined
+    in my examples its an empty object, should find a better example of it.
+**** DONE #23 Our Backend is populated with raw audit log events from auditlog.txt
+    [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/23][Link to #23]] 
+
+This ended up becoming where we created jsob objects for nay schemaless data, in particular request/responseObjects.
+
+*** 19th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-19 Fri 22:02]
+| Headline     | Time    |
+|--------------+---------|
+| *Total time* | *10:23* |
+|--------------+---------|
+#+END:
+**** DONE Write up tickets related to our datagen script work.
+     :LOGBOOK:
+     CLOCK: [2019-07-19 Fri 05:22]--[2019-07-19 Fri 05:45] =>  0:23
+     :END:
+**** TODO #26 Schema for OpenAPI / json
+     :LOGBOOK:
+     CLOCK: [2019-07-19 Fri 12:45]--[2019-07-19 Fri 16:30] =>  3:45
+     CLOCK: [2019-07-19 Fri 08:30]--[2019-07-19 Fri 12:00] =>  3:30
+     CLOCK: [2019-07-19 Fri 05:45]--[2019-07-19 Fri 08:30] =>  2:45
+     :END:
+    [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/26][Link to #26]]
+
+#+NAME: Start Postgresql Connection
+#+BEGIN_SRC emacs-lisp :results silent
+  ;; (sql-connect connection (concat "*SQL: postgres:data*"))
+  (sql-connect "hasura" (concat "*SQL: postgres:data*"))
+#+END_SRC
+
+#+BEGIN_SRC sql-mode
+  \conninfo
+#+END_SRC
+
+#+RESULTS:
+#+begin_src sql-mode
+You are connected to database "hh" as user "hh" on host "172.17.0.1" at port "5432".
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+#+end_src
+
+See if we can execute python code within our OBB
+
+First went to lookup the documentation for the header args:
+
+https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html
+
+> :python: Name of the command for executing Python code.
+> :session [name]: default is no session.
+ 
+I set the interpreter to "python3" and started using a session named "sql"
+I set the results to silent, because this first block doesn't really generate anything useful.
+
+#+BEGIN_SRC python :python python3 :session sql :results silent
+import psycopg2
+connection = psycopg2.connect(
+    host="172.17.0.1",
+    # host='192.168.1.17',
+    database='hh',
+    port=5432,
+    user='hh',
+    password=None,
+)
+connection.set_session(autocommit=True)
+#+END_SRC
+
+#+BEGIN_SRC python :python python3 :session sql :results silent
+
+#+END_SRC
+
+*** 20th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-19 Fri 22:03]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *6:17* |
+|--------------+--------|
+#+END:
+**** TODO #27 Loading OpenAPI via script
+     :LOGBOOK:
+     CLOCK: [2019-07-20 Sat 03:45]--[2019-07-20 Sat 10:02] =>  6:17
+     :END:
+    [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/27][Link to #27]] 
+
+
+
+*** 22nd
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-23 Tue 21:47]
+| Headline     | Time    |
+|--------------+---------|
+| *Total time* | *10:06* |
+|--------------+---------|
+#+END:
+     :LOGBOOK:
+     CLOCK: [2019-07-22 Mon 06:00]--[2019-07-22 Mon 12:04] =>  6:04
+     CLOCK: [2019-07-22 Mon 13:00]--[2019-07-22 Mon 17:02] =>  4:02
+     :END:
+**** TODO Work on DataGen script to populate database with actual audit log.
+*** 23rd
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-23 Tue 21:47]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *9:18* |
+|--------------+--------|
+#+END:
+     :LOGBOOK:
+     CLOCK: [2019-07-22 Mon 05:00]--[2019-07-22 Mon 12:04] =>  7:04
+     CLOCK: [2019-07-22 Mon 13:00]--[2019-07-22 Mon 15:14] =>  2:14
+     :END:
+**** TODO Work on DataGen script to populate database with actual audit log.
+
+*** 24th
+#+BEGIN: clocktable :scope subtree
+#+CAPTION: Clock summary at [2019-07-23 Tue 03:14]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *9:18* |
+|--------------+--------|
+#+END:
+     :LOGBOOK:
+     CLOCK: [2019-07-22 Mon 00:00]--[2019-07-22 Mon 09:35] =>  9:35
+     :END:
+**** TODO Work on DataGen script to populate database with actual audit log.
+
+*** 25th
+    :LOGBOOK:
+    CLOCK: [2019-07-24 Wed 00:46]
+    CLOCK: [2019-07-24 Wed 8:00]--[2019-07-24 Wed 12:46] =>  4:46
+    :END:
+    After a week off, I, Z, spent much of the day largely catching up with the work done around our db since I was gone.  Spent the morning with hh and heyste travelling through the db to see how it all worked, and how to set it up on my own machine.  I am now running zzhasura.sharing.io and it has all the audit events and audit_operations working.  Now I want to see how to get the graphql queries working as well.
+    
+    we have now 192 million audit events in our db, but am not quite sure how they're organized...like how to validate the data.
+    
+    for example take this query:
+
+
+In the following query, we are going to find the uniq api_operations (aka openapi endpoints) for a specific testrun.
+There are around 900 api_operations total, but only 273 are in use by this testrun.
+
+#+BEGIN_SRC graphql :todo enabled running embeded graphoql OBSB
+{
+  audit_events_aggregate(distinct_on: op_id, where: {testrun_id: {_eq: "1152045379034812417"}}) {
+    aggregate {
+      count(columns: op_id)
+    }
+  }
+}
+#+END_SRC
+
+I /think/ this query says "show me the aggregated count of distinct operation id's for audit events whose testrun_id is "1152045379034812417" (the most recent test run).  
+
+This should be 900 operation Id's, but if you run it in =zzhasura.sharing.io= it returns 273.  Is this due to the data not bringing everything over, or the query being malformed?
+
+
+* Footnotes
+
+If you setup your ~/.pgpass, our adding of --no-password should work.
+# eval: (sql-connect connection (concat "*SQL: postgres:" connection "*"))
+# sql-connection-alist: ((hasura (sql-product 'postgres) (sql-user "ygrrlqaucoxunc") (sql-database "d5a2ppmichmu74") (sql-port 5432) (sql-server "ec2-174-129-227-205.compute-1.amazonaws.com")))
+
+* Future Tasks
+** NOW: Tasks of the highest priority
+*** TODO Add to discusion in issue 6 and issue 7
+      - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/6][Issue 6]]
+      - [[https://gitlab.ii.coop/apisnoop/apisnoop_v3/issues/7][Issue 7]] 
+** FUTURE: Cool ideas for the future
+- [X] Refactor to include OpenAPI / swagger.json
+- [ ] Refactor to include endpoints
+- [ ] Refactor to include tests
+- [ ] Refactor to include Kind
+*** TODO Pandas
+https://pandas.pydata.org/#what-problem-does-pandas-solve
+*** TODO Refactor to include prow job definitions
+*** TODO Refactor to include prow job artifacts
+*** TODO Look into adding nested filters to query
+    Related to Issue 12 
+    
+*** TODO figure out how to add org links to files within repo       :org:foo:
+*** TODO add our sample audit.log to a bucket for easy =wget=
+*** TODO Create Gatsby site
+https://blog.hasura.io/create-gatsby-sites-using-graphql-on-postgres-603b5dd1e516/
+https://github.com/hasura/graphql-engine/tree/master/community/sample-apps/gatsby-postgres-graphql
+*** TODO See if TimescaleDB is something that might help
+https://blog.hasura.io/using-timescaledb-with-hasura-graphql-d05f030c4b10/
+*** TODO Check how often impersonatedUser comes up in our audit log.
+# Local Variables:
+# End:

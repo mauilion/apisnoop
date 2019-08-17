@@ -5,4 +5,7 @@ node_modules
 */artifacts/*
 */buckets/*
 apps/hasura/db_setup.sql
+__pycache__
+--PYCACHE__
+apps/*-hasura/*
 
