@@ -1,4 +1,4 @@
--- 620:Projected Change in Coverage
+-- 620: Projected Change in Coverage
 --    :PROPERTIES:
 --    :header-args:sql-mode+: :tangle ../apps/hasura/migrations/620_view_projected_change_in_coverage.up.sql
 --    :END:
@@ -24,8 +24,8 @@ CREATE OR REPLACE VIEW "public"."projected_change_in_coverage" AS
        operation_id
      FROM
          endpoint_coverage
-         WHERE test_hits > 0
-               ) tested_endpoints
+         WHERE tested is true
+               ) untested_endpoints
  ), coverage AS (
    SELECT
    baseline.test_hits AS old_coverage,

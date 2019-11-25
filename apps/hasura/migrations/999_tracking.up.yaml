@@ -61,3 +61,11 @@
   args:
     schema: public
     name: projected_change_in_coverage
+
+# possible_candidates_for_promotion 
+#  #+NAME: track projected_change_in_coverage 
+
+- type: track_table
+  args:
+    schema: public
+    name: possible_candidates_for_promotion
