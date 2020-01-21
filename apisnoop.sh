@@ -48,7 +48,7 @@ update_sources() {
 }
 
 update_cache() {
-  "${APISNOOP_PATH}"/downloadArtifacts.py "${2:-$APISNOOP_SOURCES}" "${3:-$APISNOOP_CACHE}"
+  python3 "${APISNOOP_PATH}"/downloadArtifacts.py "${2:-$APISNOOP_SOURCES}" "${3:-$APISNOOP_CACHE}"
 }
 
 process_cache() {
