@@ -1,12 +1,20 @@
-# apisnoop_v3
+# APISnoop
 
-An apisnoop built for querying your cluster from multiple angles using a shared language.  
+## Why do we need it?
 
-## Setting it up
+We ha
 
-APISnoop is intended to be run in a kubernetes cluster with auditing enabled.
+## What does it do?
 
-We've included an example config that would setup an APISnoop compatible cluster.
+APISnoop contains tooling necessary to analyze audit logs for the Kubernetes API server.
+
+These logs are loaded into postgres+hasura for analisys via sql+graphql.
+
+Th
+
+is intended either be run in a kubernetes cluster with auditing enabled.
+
+
 
 
 ```shell
