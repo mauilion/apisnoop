@@ -89,7 +89,7 @@ The timeline would start at k8s v.1.9 to today, v.1.19 and show However, it was 
   1 directory, 8 files
   #+end_example
 ** Explore data using babashka
-   babashka lets us write clojure as shell scripts by adding ~#!/usr/bin/env~ to the top
+   [[https://github.com/borkdude/babashka][babashka]] lets us write clojure as shell scripts by adding ~#!/usr/bin/env bb~ to the top
    We wrote a script at [[file:parse_data.clj][parse_data.clj]] to generate json of our key stats
    With this we can run a script like so:
 
