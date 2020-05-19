@@ -1,0 +1,80 @@
+#+TITLE: Ticket 341: A storyline graph
+
+* Ticket
+  #+begin_quote
+Create an initial visual story of conformance test writing--a straightforward infographic that shows how test writing has increased over time, and how these increases map to important dates in conformance testing and apisnoop.
+
+Important Dates include:
+
+2018 TOC meeting in LA, where oomici pointed out the scary tests / endpoints ratio .... 9-11%
+ii hired for APISnoop tooling
+Globant hired to write tests
+ii hired to write tests
+process started of org-file mock tickets that convert to real tickets.
+
+    k8s releases
+
+For each point, The graph would display:
+
+total conformance eligible endpoints
+
+    total endpoints covered by conformance tests.
+
+With this, one should be able to easily comprehend how test-writing has increased over time, and any velocity increase.
+
+The timeline would start at k8s v.1.9 to today, v.1.19 and show However, it was not possible to easily determine testing coverage until changes put in place in 1.12...and so coverage would show as 0 until v.1.12
+  #+end_quote
+* Strategy
+  - Gather older data for 1.9 through 1.14
+  - calculate total eligible endpoints for each set
+  - calculate conformance hits for each set
+  - writed this data to a json file to be used in new webpage
+  - create a route in webapp called '/timeline'
+  - in timeline make graph, based loosely on our coverage over time graph, that uses our json as its data
+  - incorporate interactivity for the timeline events
+* Process
+** Gather older data
+   We still have buckets of processed data in our google cloud bucket.
+   This bucket, specifically, seems like a good resource: [[https://console.cloud.google.com/storage/browser/apisnoop/dev/?forceOnBucketsSortingFiltering=false&project=apisnoop][gs://apisnoop/dev]]
+   as it includes processed data for 1.9 through 1.12.
+   The processed data is from our earlier time where it is all done as .json, like ~endpoints.json~ and ~tests.json~ etc.  ~endpoints.json~ shows each endpoint and its number of conf hits.  We can parse this data to get total eligible endopints and the conformance coverage.
+
+   I would expect conformance hits to be 0 until we get to 1.12.  If that's not the case, i will need to check with hh about how these numbers were generated.
+
+   For processing, I will be using clojure, as its the sweetest environment for working in.  To adi in this, i'll copy the endpoint.json down to a data folder in this directory
+
+  #+NAME: Copy down endpoints.json for each release
+  #+begin_src shell
+    mkdir data
+    #1.9
+    gsutil cp gs://apisnoop/dev/1.9/ci-kubernetes-e2e-gce-cos-k8sstable3-default-357/endpoints.json data/1.9_endpoints.json
+    #1.10
+    gsutil cp \
+           gs://apisnoop/dev/1.10/ci-kubernetes-e2e-gce-cos-k8sstable2-default-1398/endpoints.json \
+           data/1.10_endpoints.json
+    #1.11
+    gsutil cp \
+           gs://apisnoop/dev/1.11/ci-kubernetes-e2e-gce-cos-k8sstable1-default-4123/endpoints.json \
+           data/1.11_endpoints.json
+    #1.12
+    gsutil cp \
+           gs://apisnoop/dev/1.12/ci-kubernetes-e2e-gce-cos-k8sbeta-default-6525/endpoints.json \
+           data/1.12_endpoints.json
+    tree
+  #+end_src
+
+  #+RESULTS: Copy down endpoints.json for each release
+  #+begin_example
+  .
+  ├── 341_storyline_graph.org
+  └── data
+      ├── 1.10_endpoints.json
+      ├── 1.11_endpoints.json
+      ├── 1.12_endpoints.json
+      └── 1.9_endpoints.json
+
+  1 directory, 5 files
+  #+end_example
+** Explore data using babashka
+
+* Conclusion
