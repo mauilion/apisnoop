@@ -100,133 +100,133 @@ The timeline would start at k8s v.1.9 to today, v.1.19 and show However, it was 
 
    #+RESULTS: generate stats.json
    #+begin_example
-   [ {
-     "confTested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     },
-     "date" : "2017-12-15",
-     "release" : "1.9",
-     "endpoints" : {
-       "eligible" : 942,
-       "eligibleStable" : 465,
-       "stable" : 481,
-       "total" : 958
-     },
-     "tested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     }
-   }, {
-     "confTested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     },
-     "date" : "2018-03-28",
-     "release" : "1.10",
-     "endpoints" : {
-       "eligible" : 929,
-       "eligibleStable" : 434,
-       "stable" : 450,
-       "total" : 945
-     },
-     "tested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     }
-   }, {
-     "confTested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     },
-     "date" : "2018-07-03",
-     "release" : "1.11",
-     "endpoints" : {
-       "eligible" : 947,
-       "eligibleStable" : 436,
-       "stable" : 452,
-       "total" : 963
-     },
-     "tested" : {
-       "eligible" : 0,
-       "eligibleStable" : 0,
-       "stable" : 0,
-       "total" : 0
-     }
-   }, {
-     "confTested" : {
-       "eligible" : 115,
-       "eligibleStable" : 77,
-       "stable" : 77,
-       "total" : 115
-     },
-     "date" : "2018-09-27",
-     "release" : "1.12",
-     "endpoints" : {
-       "eligible" : 786,
-       "eligibleStable" : 357,
-       "stable" : 373,
-       "total" : 802
-     },
-     "tested" : {
-       "eligible" : 193,
-       "eligibleStable" : 121,
-       "stable" : 122,
-       "total" : 194
-     }
-   }, {
-     "confTested" : {
-       "eligible" : 111,
-       "eligibleStable" : 76,
-       "stable" : 76,
-       "total" : 111
-     },
-     "date" : "2018-12-03",
-     "release" : "1.13",
-     "endpoints" : {
-       "eligible" : 795,
-       "eligibleStable" : 358,
-       "stable" : 384,
-       "total" : 821
-     },
-     "tested" : {
-       "eligible" : 197,
-       "eligibleStable" : 131,
-       "stable" : 131,
-       "total" : 197
-     }
-   }, {
-     "confTested" : {
-       "eligible" : 125,
-       "eligibleStable" : 82,
-       "stable" : 82,
-       "total" : 125
-     },
-     "date" : "2019-03-25",
-     "release" : "1.14",
-     "endpoints" : {
-       "eligible" : 847,
-       "eligibleStable" : 376,
-       "stable" : 402,
-       "total" : 873
-     },
-     "tested" : {
-       "eligible" : 212,
-       "eligibleStable" : 142,
-       "stable" : 142,
-       "total" : 212
-     }
-   } ]
+     [ {
+       "confTested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       },
+       "date" : "2017-12-15",
+       "release" : "1.9",
+       "endpoints" : {
+         "eligible" : 942,
+         "eligibleStable" : 465,
+         "stable" : 481,
+         "total" : 958
+       },
+       "tested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       }
+     }, {
+       "confTested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       },
+       "date" : "2018-03-28",
+       "release" : "1.10",
+       "endpoints" : {
+         "eligible" : 929,
+         "eligibleStable" : 434,
+         "stable" : 450,
+         "total" : 945
+       },
+       "tested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       }
+     }, {
+       "confTested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       },
+       "date" : "2018-07-03",
+       "release" : "1.11",
+       "endpoints" : {
+         "eligible" : 947,
+         "eligibleStable" : 436,
+         "stable" : 452,
+         "total" : 963
+       },
+       "tested" : {
+         "eligible" : 0,
+         "eligibleStable" : 0,
+         "stable" : 0,
+         "total" : 0
+       }
+     }, {
+       "confTested" : {
+         "eligible" : 115,
+         "eligibleStable" : 77,
+         "stable" : 77,
+         "total" : 115
+       },
+       "date" : "2018-09-27",
+       "release" : "1.12",
+       "endpoints" : {
+         "eligible" : 786,
+         "eligibleStable" : 357,
+         "stable" : 373,
+         "total" : 802
+       },
+       "tested" : {
+         "eligible" : 193,
+         "eligibleStable" : 121,
+         "stable" : 122,
+         "total" : 194
+       }
+     }, {
+       "confTested" : {
+         "eligible" : 111,
+         "eligibleStable" : 76,
+         "stable" : 76,
+         "total" : 111
+       },
+       "date" : "2018-12-03",
+       "release" : "1.13",
+       "endpoints" : {
+         "eligible" : 795,
+         "eligibleStable" : 358,
+         "stable" : 384,
+         "total" : 821
+       },
+       "tested" : {
+         "eligible" : 197,
+         "eligibleStable" : 131,
+         "stable" : 131,
+         "total" : 197
+       }
+     }, {
+       "confTested" : {
+         "eligible" : 125,
+         "eligibleStable" : 82,
+         "stable" : 82,
+         "total" : 125
+       },
+       "date" : "2019-03-25",
+       "release" : "1.14",
+       "endpoints" : {
+         "eligible" : 847,
+         "eligibleStable" : 376,
+         "stable" : 402,
+         "total" : 873
+       },
+       "tested" : {
+         "eligible" : 212,
+         "eligibleStable" : 142,
+         "stable" : 142,
+         "total" : 212
+       }
+     } ]
    #+end_example
 
    All the data is gathered from our google cloud bucket, and so we are trustiong that the numbers generated back then are accurate.  This wnds up being a 'close-enough' graph.
@@ -234,4 +234,120 @@ The timeline would start at k8s v.1.9 to today, v.1.19 and show However, it was 
    Now, we wanna output this json to a file in our webapp that we can use for our graph.  We will need to add 1.15-1.19, which we can do directly from our sql queries.
 
    As I need to generate new data anyway, I am going to run this query on our main server and then paste the results back here.
+** Results for 1.15 through 1.19
+   I created a json from the main server  (see [[file:~/apisnoop/org/explorations/postgres_to_json.org][explorations: "Postgres to JSON"]] )
+   Resulting in this:
+  #+NAME: Results for 1.15 through 1.19
+  #+begin_example json
+[{
+    "release": "1.15.13",
+    "date": "2019-06-20",
+    "endpoints": {
+        "total": 873,
+        "stable": 402,
+        "eligible": 824,
+        "eligibleStable": 367
+    },
+    "tested": {
+        "total": 214,
+        "stable": 140,
+        "eligible": 204,
+        "eligibleStable": 131
+    },
+    "confTested": {
+        "total": 126,
+        "stable": 86,
+        "eligible": 124,
+        "eligibleStable": 84
+    }
+}, {
+    "release": "1.16.10",
+    "date": "2019-10-22",
+    "endpoints": {
+        "total": 910,
+        "stable": 430,
+        "eligible": 861,
+        "eligibleStable": 395
+    },
+    "tested": {
+        "total": 222,
+        "stable": 172,
+        "eligible": 212,
+        "eligibleStable": 163
+    },
+    "confTested": {
+        "total": 146,
+        "stable": 118,
+        "eligible": 144,
+        "eligibleStable": 116
+    }
+}, {
+    "release": "1.17.6",
+    "date": "2019-12-09",
+    "endpoints": {
+        "total": 939,
+        "stable": 438,
+        "eligible": 890,
+        "eligibleStable": 403
+    },
+    "tested": {
+        "total": 217,
+        "stable": 173,
+        "eligible": 207,
+        "eligibleStable": 163
+    },
+    "confTested": {
+        "total": 156,
+        "stable": 131,
+        "eligible": 154,
+        "eligibleStable": 129
+    }
+}, {
+    "release": "1.18.1",
+    "date": "2020-03-24",
+    "endpoints": {
+        "total": 795,
+        "stable": 445,
+        "eligible": 746,
+        "eligibleStable": 410
+    },
+    "tested": {
+        "total": 229,
+        "stable": 181,
+        "eligible": 219,
+        "eligibleStable": 171
+    },
+    "confTested": {
+        "total": 165,
+        "stable": 140,
+        "eligible": 163,
+        "eligibleStable": 138
+    }
+}, {
+    "release": "1.19.0",
+    "date": "2020-05-19",
+    "endpoints": {
+        "total": 795,
+        "stable": 445,
+        "eligible": 746,
+        "eligibleStable": 410
+    },
+    "tested": {
+        "total": 238,
+        "stable": 190,
+        "eligible": 228,
+        "eligibleStable": 180
+    },
+    "confTested": {
+        "total": 168,
+        "stable": 144,
+        "eligible": 166,
+        "eligibleStable": 142
+    }
+}]
+
+  #+end_example
+
+ I then combined the two json arrays into a singble one called "release_stats.json", which I'll copy into our webapp  (you can also view it in this dir).
+
 * Conclusion
