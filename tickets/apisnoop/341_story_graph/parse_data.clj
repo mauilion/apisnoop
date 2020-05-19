@@ -115,6 +115,8 @@
 (def releases [["1.9"  "2017-12-15"]
                ["1.10" "2018-03-28"]
                ["1.11" "2018-07-03"]
-               ["1.12" "2018-09-27"]])
+               ["1.12" "2018-09-27"]
+               ["1.13" "2018-12-03"]
+               ["1.14" "2019-03-25"]])
 
-(println (json/generate-string (map generate-stats releases) {:pretty true}))
+(println (json/generate-string (map generate-stats releases){:pretty true}))
