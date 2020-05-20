@@ -1,0 +1,54 @@
+[
+  {
+    "event": "v1.9 release",
+    "date": "2017-12-15"
+  },
+  {"event": "TOC meeting in LA, where oomici points out tests/endpiont ratio.",
+   "date": "2017-12-20"
+  },
+  {"event": "Globant hired to write tests",
+   "date": "2018-02-01"
+  },
+  {"event": "v1.10 release",
+   "date": "2018-03-28"
+  },
+  {"event": "ii hired for APISnoop Tooling",
+   "date": "2018-04-01"
+  },
+  {"event": "v1.11 release",
+   "date": "2018-07-03"
+  },
+  {"event": "v1.12 release",
+   "date": "2018-09-27"
+  },
+  {"event": "v1.13 release",
+   "date": "2018-12-03"
+  },
+  {"event": "v1.14 release",
+   "date": "2019-03-25"
+  },
+  {"event": "v1.15 release",
+   "date": "2019-06-20"
+  },
+  {"event": "ii hired to write tests",
+   "date": "2019-07-01"
+  },
+  {"event": "v1.16 release",
+   "date": "2019-10-22"
+  },
+  {"event": "APISnoop expanded to an in-cluster testing tool",
+   "date": "2019-11-01"
+  },
+  {"event": "ii introduces org-mode driven test writing workflow",
+   "date": "2019-12-01"
+  },
+  {"event": "v1.17 release",
+   "date": "2019-12-09"
+  },
+  {"event": "v1.18 release",
+   "date": "2020-03-25"
+  },
+  {"event": "present",
+   "date": "2020-05-19"
+  }
+]
