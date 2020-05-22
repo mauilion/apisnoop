@@ -351,3 +351,8 @@ The timeline would start at k8s v.1.9 to today, v.1.19 and show However, it was 
  I then combined the two json arrays into a singble one called "release_stats.json", which I'll copy into our webapp  (you can also view it in this dir).
 
 * Conclusion
+  I gathered and setup a graph for this data, but it was not as clear as we'd like.  The goal iks to show the new test written for conformance endpoints.  What is hard to see ion this data is whether beta endpoints matured into stable conformant endpoints, and brought along their own tests.  This behaviour could make the number of new tests look higher than reality.
+
+  What would be good is to be able to see when tests were added to kubernetes, and what endpoints where around then.  This would let us better track maturing endpoints, and new tests.  Luckily, there is a yaml full of test information we can use so that we don't have to try to re-run the e2e suite on past releases.  i
+
+I will track this method in a separate ticket.
