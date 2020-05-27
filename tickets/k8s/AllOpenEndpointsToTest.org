@@ -239,3 +239,104 @@
   getAppsAPIGroup                                                |                  | /apis/apps/                                                                        | get information of a group                                       | 
   getApiregistrationAPIGroup                                     |                  | /apis/apiregistration.k8s.io/                                                      | get information of a group                                       | 
  (234 rows)
+
+ 
+
+
+
+ #+RESULTS: untested_stable_core_endpoints
+ #+begin_SRC example
+                      operation_id                      |         kind          
+ -------------------------------------------------------+-----------------------
+  createCoreV1NamespacedPodBinding                      | Binding
+  createCoreV1NamespacedBinding                         | Binding
+  readCoreV1ComponentStatus                             | ComponentStatus
+  listCoreV1ComponentStatus                             | ComponentStatus
+  replaceCoreV1NamespacedEvent                          | Event
+  readCoreV1NamespacedEvent                             | Event
+  patchCoreV1NamespacedEvent                            | Event
+  listCoreV1NamespacedEvent                             | Event
+  listCoreV1EventForAllNamespaces                       | Event
+  deleteCoreV1NamespacedEvent                           | Event
+  deleteCoreV1CollectionNamespacedEvent                 | Event
+  createCoreV1NamespacedEvent                           | Event
+  patchCoreV1NamespacedLimitRange                       | LimitRange
+  listCoreV1LimitRangeForAllNamespaces                  | LimitRange
+  deleteCoreV1CollectionNamespacedLimitRange            | LimitRange
+  replaceCoreV1NamespaceStatus                          | Namespace
+  replaceCoreV1NamespaceFinalize                        | Namespace
+  readCoreV1NamespaceStatus                             | Namespace
+  patchCoreV1NamespaceStatus                            | Namespace
+  patchCoreV1Namespace                                  | Namespace
+  replaceCoreV1NodeStatus                               | Node
+  readCoreV1NodeStatus                                  | Node
+  patchCoreV1NodeStatus                                 | Node
+  deleteCoreV1Node                                      | Node
+  deleteCoreV1CollectionNode                            | Node
+  createCoreV1Node                                      | Node
+  connectCoreV1PutNodeProxyWithPath                     | NodeProxyOptions
+  connectCoreV1PutNodeProxy                             | NodeProxyOptions
+  connectCoreV1PostNodeProxyWithPath                    | NodeProxyOptions
+  connectCoreV1PostNodeProxy                            | NodeProxyOptions
+  connectCoreV1PatchNodeProxyWithPath                   | NodeProxyOptions
+  connectCoreV1PatchNodeProxy                           | NodeProxyOptions
+  connectCoreV1OptionsNodeProxyWithPath                 | NodeProxyOptions
+  connectCoreV1OptionsNodeProxy                         | NodeProxyOptions
+  connectCoreV1HeadNodeProxyWithPath                    | NodeProxyOptions
+  connectCoreV1HeadNodeProxy                            | NodeProxyOptions
+  connectCoreV1GetNodeProxy                             | NodeProxyOptions
+  connectCoreV1DeleteNodeProxyWithPath                  | NodeProxyOptions
+  connectCoreV1DeleteNodeProxy                          | NodeProxyOptions
+  replaceCoreV1NamespacedPodStatus                      | Pod
+  readCoreV1NamespacedPodStatus                         | Pod
+  deleteCoreV1CollectionNamespacedPod                   | Pod
+  connectCoreV1PostNamespacedPodAttach                  | PodAttachOptions
+  connectCoreV1GetNamespacedPodAttach                   | PodAttachOptions
+  connectCoreV1PostNamespacedPodPortforward             | PodPortForwardOptions
+  connectCoreV1PutNamespacedPodProxyWithPath            | PodProxyOptions
+  connectCoreV1PutNamespacedPodProxy                    | PodProxyOptions
+  connectCoreV1PostNamespacedPodProxyWithPath           | PodProxyOptions
+  connectCoreV1PostNamespacedPodProxy                   | PodProxyOptions
+  connectCoreV1PatchNamespacedPodProxyWithPath          | PodProxyOptions
+  connectCoreV1PatchNamespacedPodProxy                  | PodProxyOptions
+  connectCoreV1OptionsNamespacedPodProxyWithPath        | PodProxyOptions
+  connectCoreV1OptionsNamespacedPodProxy                | PodProxyOptions
+  connectCoreV1HeadNamespacedPodProxyWithPath           | PodProxyOptions
+  connectCoreV1HeadNamespacedPodProxy                   | PodProxyOptions
+  connectCoreV1GetNamespacedPodProxy                    | PodProxyOptions
+  connectCoreV1DeleteNamespacedPodProxyWithPath         | PodProxyOptions
+  connectCoreV1DeleteNamespacedPodProxy                 | PodProxyOptions
+  replaceCoreV1NamespacedPodTemplate                    | PodTemplate
+  deleteCoreV1CollectionNamespacedPodTemplate           | PodTemplate
+  replaceCoreV1NamespacedReplicationControllerStatus    | ReplicationController
+  readCoreV1NamespacedReplicationControllerStatus       | ReplicationController
+  patchCoreV1NamespacedReplicationControllerStatus      | ReplicationController
+  patchCoreV1NamespacedReplicationController            | ReplicationController
+  listCoreV1ReplicationControllerForAllNamespaces       | ReplicationController
+  deleteCoreV1CollectionNamespacedReplicationController | ReplicationController
+  replaceCoreV1NamespacedResourceQuotaStatus            | ResourceQuota
+  readCoreV1NamespacedResourceQuotaStatus               | ResourceQuota
+  patchCoreV1NamespacedResourceQuotaStatus              | ResourceQuota
+  patchCoreV1NamespacedResourceQuota                    | ResourceQuota
+  listCoreV1ResourceQuotaForAllNamespaces               | ResourceQuota
+  deleteCoreV1CollectionNamespacedResourceQuota         | ResourceQuota
+  patchCoreV1NamespacedReplicationControllerScale       | Scale
+  replaceCoreV1NamespacedServiceStatus                  | Service
+  readCoreV1NamespacedServiceStatus                     | Service
+  patchCoreV1NamespacedServiceStatus                    | Service
+  patchCoreV1NamespacedService                          | Service
+  connectCoreV1PutNamespacedServiceProxyWithPath        | ServiceProxyOptions
+  connectCoreV1PutNamespacedServiceProxy                | ServiceProxyOptions
+  connectCoreV1PostNamespacedServiceProxyWithPath       | ServiceProxyOptions
+  connectCoreV1PostNamespacedServiceProxy               | ServiceProxyOptions
+  connectCoreV1PatchNamespacedServiceProxyWithPath      | ServiceProxyOptions
+  connectCoreV1PatchNamespacedServiceProxy              | ServiceProxyOptions
+  connectCoreV1OptionsNamespacedServiceProxyWithPath    | ServiceProxyOptions
+  connectCoreV1OptionsNamespacedServiceProxy            | ServiceProxyOptions
+  connectCoreV1HeadNamespacedServiceProxyWithPath       | ServiceProxyOptions
+  connectCoreV1HeadNamespacedServiceProxy               | ServiceProxyOptions
+  connectCoreV1GetNamespacedServiceProxy                | ServiceProxyOptions
+  connectCoreV1DeleteNamespacedServiceProxyWithPath     | ServiceProxyOptions
+  connectCoreV1DeleteNamespacedServiceProxy             | ServiceProxyOptions
+  createCoreV1NamespacedServiceAccountToken             | TokenRequest
+ (91 rows)
