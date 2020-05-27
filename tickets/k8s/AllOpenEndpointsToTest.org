@@ -339,4 +339,4 @@
   connectCoreV1DeleteNamespacedServiceProxyWithPath     | ServiceProxyOptions
   connectCoreV1DeleteNamespacedServiceProxy             | ServiceProxyOptions
   createCoreV1NamespacedServiceAccountToken             | TokenRequest
- (91 rows)
+  (91 rows)
