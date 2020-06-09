@@ -6,8 +6,8 @@
 #+EXPORT_SELECT_TAGS: export
 
 * TODO Progress [2/5]                                                :export:
-- [X] APISnoop org-flow : [[https://github.com/cncf/apisnoop/blob/master/tickets/k8s/][MyEndpoint.org]]
-- [X] test approval issue : [[https://github.com/kubernetes/kubernetes/issues/][kubernetes/kubernetes#]]
+- [ ] APISnoop org-flow : [[https://github.com/cncf/apisnoop/blob/master/tickets/k8s/][MyEndpoint.org]]
+- [ ] test approval issue : [[https://github.com/kubernetes/kubernetes/issues/][kubernetes/kubernetes#]]
 - [ ] test pr : kuberenetes/kubernetes#
 - [ ] two weeks soak start date : testgrid-link
 - [ ] two weeks soak end date :
@@ -73,17 +73,15 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
 
 * The mock test                                                      :export:
 ** Test outline
-1. Create a RESOURCENAME with a static label
+1.
 
-2. Patch the RESOURCENAME with a new label and updated data
+2. 
 
-3. Get the RESOURCENAME to ensure it's patched
+3. 
 
-4. List all RESOURCENAMEs in all Namespaces with a static label
-   find the RESOURCENAME
-   ensure that the RESOURCENAME is found and is patched
+4. 
 
-5. Delete Namespaced RESOURCENAME via a Collection with a LabelSelector
+5. 
 
 ** Test the functionality in Go
    #+NAME: Mock Test In Go
@@ -154,7 +152,7 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
                    }
 
 
-     //L213-222 Was Missing
+     //L213-222 Same as block 231 
 
 
                   //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
@@ -169,7 +167,7 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
 
                  // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
 
-                  if err != nil {
+                  if version != nil {
                      fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
                      return
                    }
@@ -184,25 +182,26 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
                   err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io").Do(context.TODO()).Into(group)
 
                   //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io")
-                  //framework.ExpectEqual(group.Name, v1.GroupName, "verifying API group name in /apis/apiextensions.k8s.io discovery document")
 
-                   if group != nil {
+                   if err != nil {
                       fmt.Println("fetching /apis/apiextensions.k8s.io", err)
                      return
                     }
 
 
-                   if group != nil {
+                  //framework.ExpectEqual(group.Name, v1.GroupName, "verifying API group name in /apis/apiextensions.k8s.io discovery document")
+
+                   if group.Name != v1.GroupName  {
                      fmt.Println("verifying API Group name in /apis/apiextensions.k8s.io discovery document", err)
                      return
                     }
 
-     //L231-240 Was Missing
+     //L231-240 Same as block 213
 
 
                   //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
                    fmt.Println("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
-                    var version *metav1.GroupVersionForDiscovery
+                   // var version *metav1.GroupVersionForDiscovery
                     for _, v := range group.Versions {
                     if v.Version == v1.SchemeGroupVersion.Version {
                      version = &v
@@ -212,7 +211,7 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
 
                  // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
 
-                  if err != nil {
+                  if version != nil {
                      fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
                      return
                    }
@@ -227,15 +226,15 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
               err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io/v1").Do(context.TODO()).Into(apiResourceList)
 
               //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io/v1")
-              //framework.ExpectEqual(apiResourceList.GroupVersion, v1.SchemeGroupVersion.String(), "verifying API group/version in /apis/apiextensions.k8s.io/v1 discovery document")
 
-
-                   if group != nil {
+                   if err != nil {
                      fmt.Println("fetching /apis/apiextensions.k8s.io/v1", err)
                      return
                     }
 
-                    if group != nil {
+              //framework.ExpectEqual(apiResourceList.GroupVersion, v1.SchemeGroupVersion.String(), "verifying API group/version in /apis/apiextensions.k8s.io/v1 discovery document")
+
+                   if err != nil {
                      fmt.Println("verifying API group/version in /apis/apiextensions.k8s.io discovery document", err)
                      return
                     }
@@ -252,7 +251,9 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
               }
 
               //framework.ExpectNotEqual(crdResource, nil, "customresourcedefinitions resource not found in /apis/apiextensions.k8s.io/v1 discovery document")
-                     fmt.Println("customresourcedefinitions resource not found in  /apis/apiextensions.k8s.io discovery document", err)
+
+                   if crdResource != nil {
+       fmt.Println("customresourcedefinitions resource not found in  /apis/apiextensions.k8s.io discovery document", err)
                      return
                     }
 
@@ -260,7 +261,7 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
        // TEST ENDS HERE
 
              fmt.Println("[status] complete")
-                    
+         }
    #+end_src
 
    #+RESULTS: Mock Test In Go
