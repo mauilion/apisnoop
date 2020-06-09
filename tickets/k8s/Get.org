@@ -21,51 +21,45 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
     SELECT
       operation_id,
       -- k8s_action,
-      -- path,
+       path,
       -- description,
       kind
-      FROM untested_stable_core_endpoints
-      -- FROM untested_stable_endpoints
+     -- FROM untested_stable_core_endpoints
+       FROM untested_stable_endpoints
       where path not like '%volume%'
       -- and kind like ''
-      -- and operation_id ilike '%%'
+       and operation_id ilike '%APIGroup%'
      ORDER BY kind,operation_id desc
      LIMIT 25
            ;
   #+end_src
 
- #+RESULTS: untested_stable_core_endpoints
- #+begin_SRC example
-                 operation_id                |      kind
- --------------------------------------------+-----------------
-  createCoreV1NamespacedPodBinding           | Binding
-  createCoreV1NamespacedBinding              | Binding
-  readCoreV1ComponentStatus                  | ComponentStatus
-  listCoreV1ComponentStatus                  | ComponentStatus
-  replaceCoreV1NamespacedEndpoints           | Endpoints
-  patchCoreV1NamespacedEndpoints             | Endpoints
-  listCoreV1EndpointsForAllNamespaces        | Endpoints
-  deleteCoreV1CollectionNamespacedEndpoints  | Endpoints
-  replaceCoreV1NamespacedEvent               | Event
-  readCoreV1NamespacedEvent                  | Event
-  patchCoreV1NamespacedEvent                 | Event
-  listCoreV1NamespacedEvent                  | Event
-  listCoreV1EventForAllNamespaces            | Event
-  deleteCoreV1NamespacedEvent                | Event
-  deleteCoreV1CollectionNamespacedEvent      | Event
-  createCoreV1NamespacedEvent                | Event
-  patchCoreV1NamespacedLimitRange            | LimitRange
-  listCoreV1LimitRangeForAllNamespaces       | LimitRange
-  deleteCoreV1CollectionNamespacedLimitRange | LimitRange
-  replaceCoreV1NamespaceStatus               | Namespace
-  replaceCoreV1NamespaceFinalize             | Namespace
-  readCoreV1NamespaceStatus                  | Namespace
-  patchCoreV1NamespaceStatus                 | Namespace
-  patchCoreV1Namespace                       | Namespace
-  listCoreV1Namespace                        | Namespace
- (25 rows)
+  #+RESULTS: untested_stable_core_endpoints
+  #+begin_SRC example
+            operation_id           |                path                 | kind 
+  ---------------------------------+-------------------------------------+------
+   getStorageAPIGroup              | /apis/storage.k8s.io/               | 
+   getSettingsAPIGroup             | /apis/settings.k8s.io/              | 
+   getSchedulingAPIGroup           | /apis/scheduling.k8s.io/            | 
+   getRbacAuthorizationAPIGroup    | /apis/rbac.authorization.k8s.io/    | 
+   getPolicyAPIGroup               | /apis/policy/                       | 
+   getNodeAPIGroup                 | /apis/node.k8s.io/                  | 
+   getNetworkingAPIGroup           | /apis/networking.k8s.io/            | 
+   getFlowcontrolApiserverAPIGroup | /apis/flowcontrol.apiserver.k8s.io/ | 
+   getExtensionsAPIGroup           | /apis/extensions/                   | 
+   getEventsAPIGroup               | /apis/events.k8s.io/                | 
+   getDiscoveryAPIGroup            | /apis/discovery.k8s.io/             | 
+   getCoordinationAPIGroup         | /apis/coordination.k8s.io/          | 
+   getBatchAPIGroup                | /apis/batch/                        | 
+   getAutoscalingAPIGroup          | /apis/autoscaling/                  | 
+   getAuthorizationAPIGroup        | /apis/authorization.k8s.io/         | 
+   getAuthenticationAPIGroup       | /apis/authentication.k8s.io/        | 
+   getAppsAPIGroup                 | /apis/apps/                         | 
+   getApiregistrationAPIGroup      | /apis/apiregistration.k8s.io/       | 
+  (18 rows)
 
- #+end_SRC
+  #+end_SRC
+
 
 * API Reference and feature documentation                            :export:
 - [[https://kubernetes.io/docs/reference/kubernetes-api/][Kubernetes API Reference Docs]]
