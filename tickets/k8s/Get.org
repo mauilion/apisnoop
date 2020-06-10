@@ -308,3 +308,23 @@ This test is also created with the goal of conformance promotion.
 /sig architecture
 
 /area conformance
+
+
+	config, err := framework.LoadConfig()
+			framework.ExpectNoError(err, "loading config")
+			apiExtensionClient, err := clientset.NewForConfig(config)
+			framework.ExpectNoError(err, "initializing apiExtensionClient")
+
+			randomDefinition := fixtures.NewRandomNameV1CustomResourceDefinition(v1.ClusterScoped)
+
+			// Create CRD and waits for the resource to be recognized and available.
+			randomDefinition, err = fixtures.CreateNewV1CustomResourceDefinitionWatchUnsafe(randomDefinition, apiExtensionClient)
+			framework.ExpectNoError(err, "creating CustomResourceDefinition")
+
+			defer func() {
+				err = fixtures.DeleteV1CustomResourceDefinition(randomDefinition, apiExtensionClient)
+				framework.ExpectNoError(err, "deleting CustomResourceDefinition")
+			}()
+
+
+
