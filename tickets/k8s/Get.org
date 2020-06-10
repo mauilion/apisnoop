@@ -80,182 +80,222 @@ According to this APIsnoop query, there are still some remaining RESOURCENAME en
 ** Test the functionality in Go
    #+NAME: Mock Test In Go
    #+begin_src go
-                 package main 
+                         package main 
 
-                 import (
-                   // "encoding/json"
-                   "fmt"
-                   "context"
-                   "flag"
-                   "os"
-                   v1 "k8s.io/api/core/v1"
-                   // "k8s.io/client-go/dynamic"
-                   // "k8s.io/apimachinery/pkg/runtime/schema"
-                   metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-                   "k8s.io/client-go/kubernetes"
-                   // "k8s.io/apimachinery/pkg/types"
-                   "k8s.io/client-go/tools/clientcmd"
-                 )
+                         import (
+                           // "encoding/json"
+                           "fmt"
+                           "context"
+                           "flag"
+                           "os"
+                           v1 "k8s.io/api/core/v1"
+                           // "k8s.io/client-go/dynamic"
+                           // "k8s.io/apimachinery/pkg/runtime/schema"
+                           metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+                           "k8s.io/client-go/kubernetes"
+                           // "k8s.io/apimachinery/pkg/types"
+                           "k8s.io/client-go/tools/clientcmd"
+                                  
+               )
 
-                 func main() {
-                   // uses the current context in kubeconfig
-                   kubeconfig := flag.String("kubeconfig", fmt.Sprintf("%v/%v/%v", os.Getenv("HOME"), ".kube", "config"), "(optional) absolute path to the kubeconfig file")
-                   flag.Parse()
-                   config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
-                   if err != nil {
-                       fmt.Println(err, "Could not build config from flags")
-                       return
-                   }
-                   // make our work easier to find in the audit_event queries
-                   config.UserAgent = "live-test-writing"
-                   // creates the clientset
-                   ClientSet, _ := kubernetes.NewForConfig(config)
-                   // DynamicClientSet, _ := dynamic.NewForConfig(config)
-                   // podResource := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "pods"}
+                         func main() {
+                           // uses the current context in kubeconfig
+                           kubeconfig := flag.String("kubeconfig", fmt.Sprintf("%v/%v/%v", os.Getenv("HOME"), ".kube", "config"), "(optional) absolute path to the kubeconfig file")
+                           flag.Parse()
+                           config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+                           if err != nil {
+                               fmt.Println(err, "Could not build config from flags")
+                               return
+                           }
+                           // make our work easier to find in the audit_event queries
+                           config.UserAgent = "live-test-writing"
+                           // creates the clientset
+                           ClientSet, _ := kubernetes.NewForConfig(config)
+                           // DynamicClientSet, _ := dynamic.NewForConfig(config)
+                           // podResource := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "pods"}
 
-                   // TEST BEGINS HERE
+                           // TEST BEGINS HERE
+        //L58-72
 
+     config, err := framework.LoadConfig()
 
-     //L196-201
-                   fmt.Println("fetching the /apis discovery document")
-                   apiGroupList := &metav1.APIGroupList{}
-                   err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis").Do(context.TODO()).Into(apiGroupList)
+       // framework.ExpectNoError(err, "loading config")*
+                           if err != nil {
+                           fmt.Println("loading config", err)
+                             return
+                              }
 
-                   //framework.ExpectNoError(err, "fetching /apis")
-                   if err != nil {
-                     fmt.Println("fetching /apis", err)
-                     return
-                   }
-
-     //L203-211
-                   // ginkgo.By("finding the apiextensions.k8s.io API group in the /apis discovery document")
-                   fmt.Println("finding the apiextensions.k8s.io API group in the /apis discovery document")
-                   var group *metav1.APIGroup
-                   for _, g := range apiGroupList.Groups {
-                     if g.Name == v1.GroupName {
-                       group = &g
-                       break
-                     }
-                   }
-
-                   // framework.ExpectNotEqual(group, nil, "apiextensions.k8s.io API group not found in /apis discovery document")
-
-                   if group != nil {
-                     fmt.Println("apiextensions.k8s.io API group not found in /apis discovery document", err)
-                     return
-                   }
+     apiExtensionClient, err := clientset.NewForConfig(config)
 
 
-     //L213-222 Same as block 231 
+           //	framework.ExpectNoError(err, "initializing apiExtensionClient")*
+                           if err != nil {
+                           fmt.Println("initializing apiExtensionClient", err)
+                             return
+                              }
+
+         randomDefinition := fixtures.NewRandomNameV1CustomResourceDefinition(v1.ClusterScoped)
+
+         // Create CRD and waits for the resource to be recognized and available.
+         randomDefinition, err = fixtures.CreateNewV1CustomResourceDefinitionWatchUnsafe(randomDefinition, apiExtensionClient)
+
+          //	framework.ExpectNoError(err, "creating CustomResourceDefinition")*
+                           if err != nil {
+                           fmt.Println("creating CustomResourceDefinition", err)
+                             return
+                              }
+
+         defer func() {
+           err = fixtures.DeleteV1CustomResourceDefinition(randomDefinition, apiExtensionClient)
+
+          //	framework.ExpectNoError(err, "deleting CustomResourceDefinition")
+                           if err != nil {
+                           fmt.Println("deleting CustomResourceDefinition", err)
+                             return
+                              }
+         }()
+
+os.Exit(0)
+             //L196-201
+                           fmt.Println("fetching the /apis discovery document")
+                           apiGroupList := &metav1.APIGroupList{}
+                           err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis").Do(context.TODO()).Into(apiGroupList)
+
+                           //framework.ExpectNoError(err, "fetching /apis")
+                           if err != nil {
+                             fmt.Println("fetching /apis", err)
+                             return
+                           }
+
+             //L203-211
+                           // ginkgo.By("finding the apiextensions.k8s.io API group in the /apis discovery document")
+                           fmt.Println("finding the apiextensions.k8s.io API group in the /apis discovery document")
+                           var group *metav1.APIGroup
+                           for _, g := range apiGroupList.Groups {
+                             if g.Name == v1.GroupName {
+                               group = &g
+                               break
+                             }
+                           }
+
+                           // framework.ExpectNotEqual(group, nil, "apiextensions.k8s.io API group not found in /apis discovery document")
+
+                           if group != nil {
+                             fmt.Println("apiextensions.k8s.io API group not found in /apis discovery document", err)
+                             return
+                           }
 
 
-                  //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
-                   fmt.Println("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
-                    var version *metav1.GroupVersionForDiscovery
-                    for _, v := range group.Versions {
-                    if v.Version == v1.SchemeGroupVersion.Version {
-                     version = &v
-                     break
-                   }
+             //L213-222 Same as block 231 
+
+
+                          //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
+                           fmt.Println("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
+                            var version *metav1.GroupVersionForDiscovery
+                            for _, v := range group.Versions {
+                            if v.Version == v1.SchemeGroupVersion.Version {
+                             version = &v
+                             break
+                           }
+                         }
+
+                         // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
+
+                          if version != nil {
+                             fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
+                             return
+                           }
+
+
+
+
+             //L225-229
+                          //ginkgo.By("fetching the /apis/apiextensions.k8s.io discovery document")
+                          fmt.Println("fetching the /apis/apiextensions.k8s.io discovery document")
+                          group = &metav1.APIGroup{}
+                          err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io").Do(context.TODO()).Into(group)
+
+                          //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io")
+
+                           if err != nil {
+                              fmt.Println("fetching /apis/apiextensions.k8s.io", err)
+                             return
+                            }
+
+
+                          //framework.ExpectEqual(group.Name, v1.GroupName, "verifying API group name in /apis/apiextensions.k8s.io discovery document")
+
+                           if group.Name != v1.GroupName  {
+                             fmt.Println("verifying API Group name in /apis/apiextensions.k8s.io discovery document", err)
+                             return
+                            }
+
+             //L231-240 Same as block 213
+
+
+                          //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
+                           fmt.Println("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
+                           // var version *metav1.GroupVersionForDiscovery
+                            for _, v := range group.Versions {
+                            if v.Version == v1.SchemeGroupVersion.Version {
+                             version = &v
+                             break
+                           }
+                         }
+
+                         // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
+
+                          if version != nil {
+                             fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
+                             return
+                           }
+
+
+
+
+             //243-247
+                   //ginkgo.By("fetching the /apis/apiextensions.k8s.io/v1 discovery document")
+                      fmt.Println("fetching the /apis/apiextensions.k8s.io/v1 discovery document")
+                      apiResourceList := &metav1.APIResourceList{}
+                      err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io/v1").Do(context.TODO()).Into(apiResourceList)
+
+                      //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io/v1")
+
+                           if err != nil {
+                             fmt.Println("fetching /apis/apiextensions.k8s.io/v1", err)
+                             return
+                            }
+
+                      //framework.ExpectEqual(apiResourceList.GroupVersion, v1.SchemeGroupVersion.String(), "verifying API group/version in /apis/apiextensions.k8s.io/v1 discovery document")
+
+                           if err != nil {
+                             fmt.Println("verifying API group/version in /apis/apiextensions.k8s.io discovery document", err)
+                             return
+                            }
+
+
+             //L249-258
+                     // ginkgo.By("finding customresourcedefinitions resources in the /apis/apiextensions.k8s.io/v1 discovery document")
+                      fmt.Println("finding customresourcedefinitions resources in the /apis/apiextensions.k8s.io/v1 discovery document")
+                       var crdResource *metav1.APIResource
+                      for i := range apiResourceList.APIResources {
+                        if apiResourceList.APIResources[i].Name == "customresourcedefinitions" {
+                          crdResource = &apiResourceList.APIResources[i]
+                        }
+                      }
+
+                      //framework.ExpectNotEqual(crdResource, nil, "customresourcedefinitions resource not found in /apis/apiextensions.k8s.io/v1 discovery document")
+
+                           if crdResource != nil {
+               fmt.Println("customresourcedefinitions resource not found in  /apis/apiextensions.k8s.io discovery document", err)
+                             return
+                            }
+
+
+               // TEST ENDS HERE
+
+                     fmt.Println("[status] complete")
                  }
-
-                 // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
-
-                  if version != nil {
-                     fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
-                     return
-                   }
-
-
-
-
-     //L225-229
-                  //ginkgo.By("fetching the /apis/apiextensions.k8s.io discovery document")
-                  fmt.Println("fetching the /apis/apiextensions.k8s.io discovery document")
-                  group = &metav1.APIGroup{}
-                  err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io").Do(context.TODO()).Into(group)
-
-                  //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io")
-
-                   if err != nil {
-                      fmt.Println("fetching /apis/apiextensions.k8s.io", err)
-                     return
-                    }
-
-
-                  //framework.ExpectEqual(group.Name, v1.GroupName, "verifying API group name in /apis/apiextensions.k8s.io discovery document")
-
-                   if group.Name != v1.GroupName  {
-                     fmt.Println("verifying API Group name in /apis/apiextensions.k8s.io discovery document", err)
-                     return
-                    }
-
-     //L231-240 Same as block 213
-
-
-                  //ginkgo.By("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
-                   fmt.Println("finding the apiextensions.k8s.io/v1 API group/version in the /apis discovery document")
-                   // var version *metav1.GroupVersionForDiscovery
-                    for _, v := range group.Versions {
-                    if v.Version == v1.SchemeGroupVersion.Version {
-                     version = &v
-                     break
-                   }
-                 }
-
-                 // framework.ExpectNotEqual(version, nil, "apiextensions.k8s.io/v1 API group version not found in /apis discovery document")
-
-                  if version != nil {
-                     fmt.Println("apiextensions.k8s.io/v1 API group version not found in /apis discovery document", err)
-                     return
-                   }
-
-
-
-
-     //243-247
-           //ginkgo.By("fetching the /apis/apiextensions.k8s.io/v1 discovery document")
-              fmt.Println("fetching the /apis/apiextensions.k8s.io/v1 discovery document")
-              apiResourceList := &metav1.APIResourceList{}
-              err = ClientSet.Discovery().RESTClient().Get().AbsPath("/apis/apiextensions.k8s.io/v1").Do(context.TODO()).Into(apiResourceList)
-
-              //framework.ExpectNoError(err, "fetching /apis/apiextensions.k8s.io/v1")
-
-                   if err != nil {
-                     fmt.Println("fetching /apis/apiextensions.k8s.io/v1", err)
-                     return
-                    }
-
-              //framework.ExpectEqual(apiResourceList.GroupVersion, v1.SchemeGroupVersion.String(), "verifying API group/version in /apis/apiextensions.k8s.io/v1 discovery document")
-
-                   if err != nil {
-                     fmt.Println("verifying API group/version in /apis/apiextensions.k8s.io discovery document", err)
-                     return
-                    }
-
-
-     //L249-258
-             // ginkgo.By("finding customresourcedefinitions resources in the /apis/apiextensions.k8s.io/v1 discovery document")
-              fmt.Println("finding customresourcedefinitions resources in the /apis/apiextensions.k8s.io/v1 discovery document")
-               var crdResource *metav1.APIResource
-              for i := range apiResourceList.APIResources {
-                if apiResourceList.APIResources[i].Name == "customresourcedefinitions" {
-                  crdResource = &apiResourceList.APIResources[i]
-                }
-              }
-
-              //framework.ExpectNotEqual(crdResource, nil, "customresourcedefinitions resource not found in /apis/apiextensions.k8s.io/v1 discovery document")
-
-                   if crdResource != nil {
-       fmt.Println("customresourcedefinitions resource not found in  /apis/apiextensions.k8s.io discovery document", err)
-                     return
-                    }
-
-
-       // TEST ENDS HERE
-
-             fmt.Println("[status] complete")
-         }
    #+end_src
 
    #+RESULTS: Mock Test In Go
@@ -308,23 +348,6 @@ This test is also created with the goal of conformance promotion.
 /sig architecture
 
 /area conformance
-
-
-	config, err := framework.LoadConfig()
-			framework.ExpectNoError(err, "loading config")
-			apiExtensionClient, err := clientset.NewForConfig(config)
-			framework.ExpectNoError(err, "initializing apiExtensionClient")
-
-			randomDefinition := fixtures.NewRandomNameV1CustomResourceDefinition(v1.ClusterScoped)
-
-			// Create CRD and waits for the resource to be recognized and available.
-			randomDefinition, err = fixtures.CreateNewV1CustomResourceDefinitionWatchUnsafe(randomDefinition, apiExtensionClient)
-			framework.ExpectNoError(err, "creating CustomResourceDefinition")
-
-			defer func() {
-				err = fixtures.DeleteV1CustomResourceDefinition(randomDefinition, apiExtensionClient)
-				framework.ExpectNoError(err, "deleting CustomResourceDefinition")
-			}()
 
 
 
