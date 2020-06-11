@@ -184,7 +184,7 @@ deleted text is added : (Work as cut function)
 ** Join lines separated by whitespace   =J=
 ** Show whitespace   =SPACE t w=
 ** Convert spaces to tabs   =SPACE :tabify=
-** Convert tabs to spaces   =SPACE :untabify=
+** Convert tabs to spaces   =SPACE :untabify= 
 * spacemacs commands I should probably know by heart
 **** Files manipulations key bindings
 Files manipulation commands (start with ~f~):
@@ -297,13 +297,16 @@ Git commands (start with ~g~):
 - New terminal block <s + TAB
 - Add Go to the block to for Golang: =#+begin_src GO=
 - Run the block with ,, in the block in command mode
+- insert code block is ,ibs
 * Basic Linux
 - List directories - =ls=
 - Launch Treemacs - =SPACE p t= , Quit out of Treemacs =q=
 - GIT commands ??
 * Tmate session
-- Type tmate display -p "#{tmate_ssh}'+ ENTER
+- Type: =$ tmate display -p "#{tmate_ssh}'+ ENTER=
+- Get Read Only link for tmate session: =$ tmate display -p '#{tmate_ssh_ro}'=
 - ssh code will be displayed on screen that can be shared for pairing.
+ 
 * Docker /Packet box tricks
 ** Running out of disk space on Packet box?
  - Show disk usage: =df -h=
@@ -320,7 +323,10 @@ Git commands (start with ~g~):
  - Example: Clean up unused volumes:  =docker volume prune=
 ** Lost connection to Kubemacs cluster:
 =kubectl exec -it kubemacs-0 -- attach=
-* Github Authentication issues
+** Flip between emacsclient Tilt, and Bachb 1 ..and then C-b and then 0=
+
+* Github
+Authentication issues
 Could be that the Git remote is not added. Use this command to add the repo for ssh.
 - =git remote add github git@github.com:cncf/apisnoop=
 To see avalible repo's:
@@ -335,11 +341,25 @@ github  git@github.com:cncf/apisnoop.git (fetch)
 To change Origin:
 =git remote set-url origin git@github.com:cncf/apisnoop.git= 
 * Git commands
-Git status: =spc gs=
-Get help in Magit =?=
-Check out a new branch =b c= Select master. At "Name for new branch:" add the new branch name =Enter=
-To move between branches: =b b= and select the branch to commit to =Enter=
-To commit: =c c= , =i= enter a discription of the commit, =Esc=, =, ,= to commit. To push the commit =P u=
-Further reading: [READ](https://gitlab.ii.coop/ii/org/blob/master/training/spacemacs-workflow/spacemacs-workflow.org)
-    
+- Git status: =spc gs=
+- Get help in Magit =?=
+- Check out a new branch =b c= Select master. At "Name for new branch:" add the new branch name =Enter=
+- To move between branches: =b b= and select the branch to commit to =Enter=
+- To commit: =c c= , =i= enter a discription of the commit, =Esc=, =, ,= to commit. To push the commit =P u= to create and push to the branch. 
+- Further reading: [READ](https://gitlab.ii.coop/ii/org/blob/master/training/spacemacs-workflow/spacemacs-workflow.org)
+* Toggle numbering for function blocks    
+- SPC n f Zoom on only function with numbering for the funtion only
+- SPC n w Zoom out to numbering for all documentation
+- SCP t n Toggle between number on and off
+- SPC t r Relative numbers, change back with SPC t n
+* Mattermost code blocks
+-Putting code blocks in Mattermost chat
+``` Followed by the code block, closing again with ```
+* Making presentations out of Org files with [reveal.js](reveal.js.com)
+- Start with the template file. ie. github.com/cncf/apisnoop/org/roadmap.org
+- Create the file content as per the example. the Footnotes contain the code to run the presentaion.
+- Once the file content is ready to present type: ,e e v b (Ctrl n allow to scroll down the screen to see the rest of the menu)
+- Changes can be made to the footnotes  by changing between REVEAL and NOREVEAL and ammending Options
   
+
+ 
