@@ -1,0 +1,148 @@
+metadata:
+  annotations:
+    fork-per-release: "true"
+    prow.k8s.io/job: pull-kubernetes-e2e-gce-ubuntu-containerd
+    testgrid-alert-stale-results-hours: "24"
+    testgrid-create-test-group: "true"
+    testgrid-dashboards: google-gce
+    testgrid-num-failures-to-alert: "10"
+  creationTimestamp: "2020-07-27T22:24:51Z"
+  generation: 9
+  labels:
+    created-by-prow: "true"
+    event-GUID: fc30a500-d057-11ea-9183-09c067b6e987
+    preset-bazel-remote-cache-enabled: "true"
+    preset-bazel-scratch-dir: "true"
+    preset-k8s-ssh: "true"
+    preset-pull-kubernetes-e2e: "true"
+    preset-pull-kubernetes-e2e-gce: "true"
+    preset-service-account: "true"
+    prow.k8s.io/job: pull-kubernetes-e2e-gce-ubuntu-containerd
+    prow.k8s.io/refs.org: kubernetes
+    prow.k8s.io/refs.pull: "93487"
+    prow.k8s.io/refs.repo: kubernetes
+    prow.k8s.io/type: presubmit
+  name: fd5a9e14-d057-11ea-b577-72bfdb0b5ee3
+  namespace: default
+  resourceVersion: "471790302"
+  selfLink: /apis/prow.k8s.io/v1/namespaces/default/prowjobs/fd5a9e14-d057-11ea-b577-72bfdb0b5ee3
+  uid: fd5afa31-d057-11ea-8379-42010a8000fc
+spec:
+  agent: kubernetes
+  cluster: default
+  context: pull-kubernetes-e2e-gce-ubuntu-containerd
+  job: pull-kubernetes-e2e-gce-ubuntu-containerd
+  namespace: test-pods
+  pod_spec:
+    containers:
+    - args:
+      - --root=/go/src
+      - --repo=k8s.io/kubernetes=$(PULL_REFS)
+      - --repo=k8s.io/release
+      - --upload=gs://kubernetes-jenkins/pr-logs
+      - --timeout=105
+      - --scenario=kubernetes_e2e
+      - --
+      - --build=bazel
+      - --cluster=
+      - --env=KUBE_CONTAINER_RUNTIME=containerd
+      - --env=KUBE_UBUNTU_INSTALL_CONTAINERD_VERSION=v1.4.0-beta.2
+      - --env=KUBE_UBUNTU_INSTALL_RUNC_VERSION=v1.0.0-rc91
+      - --env=LOG_DUMP_SYSTEMD_SERVICES=containerd
+      - --env=ENABLE_POD_SECURITY_POLICY=true
+      - --env=CONTAINER_RUNTIME_TEST_HANDLER=true
+      - --env=KUBE_MASTER_OS_DISTRIBUTION=ubuntu
+      - --env=KUBE_GCE_MASTER_IMAGE=ubuntu-2004-focal-v20200423
+      - --env=KUBE_GCE_MASTER_PROJECT=ubuntu-os-cloud
+      - --env=KUBE_NODE_OS_DISTRIBUTION=ubuntu
+      - --env=KUBE_GCE_NODE_IMAGE=ubuntu-2004-focal-v20200423
+      - --env=KUBE_GCE_NODE_PROJECT=ubuntu-os-cloud
+      - --extract=local
+      - --gcp-master-image=ubuntu
+      - --gcp-node-image=ubuntu
+      - --gcp-zone=us-west1-b
+      - --ginkgo-parallel=30
+      - --provider=gce
+      - --stage=gs://kubernetes-release-pull/ci/pull-kubernetes-e2e-gce-ubuntu-containerd
+      - --test_args=--ginkgo.skip=\[Slow\]|\[Serial\]|\[Disruptive\]|\[Flaky\]|\[Feature:.+\]
+        --minStartupPods=8
+      - --timeout=80m
+      env:
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/service-account/service-account.json
+      - name: E2E_GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/service-account/service-account.json
+      - name: GOOGLE_APPLICATION_CREDENTIALS_DEPRECATED
+        value: Migrate to workload identity, contact sig-testing
+      - name: USER
+        value: prow
+      - name: JENKINS_GCE_SSH_PRIVATE_KEY_FILE
+        value: /etc/ssh-key-secret/ssh-private
+      - name: JENKINS_GCE_SSH_PUBLIC_KEY_FILE
+        value: /etc/ssh-key-secret/ssh-public
+      - name: TEST_TMPDIR
+        value: /bazel-scratch/.cache/bazel
+      - name: BAZEL_REMOTE_CACHE_ENABLED
+        value: "true"
+      - name: GOPROXY
+        value: https://proxy.golang.org
+      - name: KUBE_GCS_UPDATE_LATEST
+        value: "n"
+      - name: ENABLE_POD_SECURITY_POLICY
+        value: "true"
+      - name: CREATE_CUSTOM_NETWORK
+        value: "true"
+      image: gcr.io/k8s-testimages/kubekins-e2e:v20200726-f8d6253-master
+      name: ""
+      resources:
+        requests:
+          memory: 6Gi
+      volumeMounts:
+      - mountPath: /etc/service-account
+        name: service
+        readOnly: true
+      - mountPath: /etc/ssh-key-secret
+        name: ssh
+        readOnly: true
+      - mountPath: /bazel-scratch/.cache
+        name: bazel-scratch
+    volumes:
+    - name: service
+      secret:
+        secretName: service-account
+    - name: ssh
+      secret:
+        defaultMode: 256
+        secretName: ssh-key-secret
+    - emptyDir: {}
+      name: bazel-scratch
+  refs:
+    base_link: https://github.com/kubernetes/kubernetes/commit/575c4925be8c39bfdef1dd407cb6515a54a2c131
+    base_ref: master
+    base_sha: 575c4925be8c39bfdef1dd407cb6515a54a2c131
+    org: kubernetes
+    pulls:
+    - author: Riaankl
+      author_link: https://github.com/Riaankl
+      commit_link: https://github.com/kubernetes/kubernetes/pull/93487/commits/1077a9e862e93af3b1b4dbfbb404bed366b64855
+      link: https://github.com/kubernetes/kubernetes/pull/93487
+      number: 93487
+      sha: 1077a9e862e93af3b1b4dbfbb404bed366b64855
+    repo: kubernetes
+    repo_link: https://github.com/kubernetes/kubernetes
+  report: true
+  rerun_command: /test pull-kubernetes-e2e-gce-ubuntu-containerd
+  type: presubmit
+status:
+  build_id: "1287876713920860161"
+  completionTime: "2020-07-27T23:10:10Z"
+  description: Job succeeded.
+  pendingTime: "2020-07-27T22:25:10Z"
+  pod_name: fd5a9e14-d057-11ea-b577-72bfdb0b5ee3
+  prev_report_states:
+    gcsk8sreporter: success
+    gcsreporter: success
+    github-reporter: success
+  startTime: "2020-07-27T22:24:51Z"
+  state: success
+  url: https://prow.k8s.io/view/gcs/kubernetes-jenkins/pr-logs/pull/93487/pull-kubernetes-e2e-gce-ubuntu-containerd/1287876713920860161/

@@ -1,0 +1,92 @@
+#+title: Explore Test Flakes for PR93458
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+
+
+* PR Background
+
+What is the test trying to do?
+
+- https://github.com/kubernetes/kubernetes/pull/93458
+
+Locate the link to the source code for this test
+
+- https://github.com/ii/kubernetes/blob/create-deployment-resource-lifecycle-test/test/e2e/apps/deployment.go
+
+Locate the ginkgo description
+
+- =ginkgo.It("should run the lifecycle of a Deployment", func() {=
+
+* Locate flakes
+
+Check the prow history for this PR, [[https://prow.k8s.io/pr-history/?org=kubernetes&repo=kubernetes&pr=93458][https://prow.k8s.io/pr-history/?org=kubernetes&repo=kubernetes&pr=93458]]
+
+Review the following tests run for;
+
+** =pull-kubernetes-e2e-gce=
+
+For the single test [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-gce/1288866075194167296][failure]], under JUnit there is no test failures listed for "should run the lifecycle of a Deployment"
+
+** =pull-kubernetes-e2e-kind=
+
+For this batch of tests, there are three test runs showing red 'test failures'.
+
+**** [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288919856531378176][93458/pull-kubernetes-e2e-kind/1288919856531378176]]
+
+Under JUnit there is no test failures for "should run the lifecycle of a Deployment"
+
+**** [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456][93458/pull-kubernetes-e2e-kind/1288909664666259456]]
+
+The only test failure here is for "[sig-apps] Deployment should run the lifecycle of a Deployment"
+
+#+begin_example
+test/e2e/apps/deployment.go:151
+Jul 30 19:13:02.922: failed to see replicas of test-deployment in namespace deployment-4577 scale to requested amount of 3
+Unexpected error:
+    <*errors.errorString | 0xc00026a1f0>: {
+        s: "timed out waiting for the condition",
+    }
+    timed out waiting for the condition
+occurred
+test/e2e/apps/deployment.go:233
+#+end_example
+
+**** [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881][93458/pull-kubernetes-e2e-kind/1288899169599098881]]
+
+The only test failure here is for "[sig-apps] Deployment should run the lifecycle of a Deployment"
+
+#+begin_example
+test/e2e/apps/deployment.go:151
+Jul 30 18:28:36.102: failed to see replicas of test-deployment in namespace deployment-1538 scale to requested amount of 3
+Unexpected error:
+    <*errors.errorString | 0xc0001fe200>: {
+        s: "timed out waiting for the condition",
+    }
+    timed out waiting for the condition
+occurred
+test/e2e/apps/deployment.go:365
+#+end_example
+
+Initial difference looks to be the line numbers at the bottom of the messages above.
+
+** =pull-kubernetes-e2e-gce-ubuntu-containerd=
+
+The pr-history shows that the results are all green (passed) or grey (internal failure?). So, no further action required here.
+
+* Replicate Test Flakes
+
+Using a kind cluster with the same resources limits as the prow jobs will hopefully create test flakes as shown above.
+
+- https://github.com/kubernetes-sigs/kind/pull/896#issue-323237552
+
+Running the test until failure will help locating a flake asap
+
+#+begin_example
+make test-e2e-node PARALLELISM=1 TEST_ARGS='--kubelet-flags=--fail-swap-on=false' FOCUS="should run the lifecycle of a Deployment" SKIP="\[Flaky\]|\[Serial\]" RUN_UNTIL_FAILURE=true
+#+end_example
+
+- https://github.com/kubernetes/kubernetes/pull/93086#issuecomment-662041136
+
+Reviewing the cluster logs may highlight some extra information about why the job is timing out
+
+- https://github.com/kubernetes-sigs/kind/blob/master/site/content/docs/user/quick-start.md#exporting-cluster-logs

@@ -1,0 +1,150 @@
+metadata:
+  annotations:
+    fork-per-release: "true"
+    prow.k8s.io/job: pull-kubernetes-e2e-kind
+    testgrid-alert-stale-results-hours: "24"
+    testgrid-create-test-group: "true"
+    testgrid-num-failures-to-alert: "10"
+  creationTimestamp: "2020-07-27T22:24:52Z"
+  generation: 9
+  labels:
+    created-by-prow: "true"
+    event-GUID: fc30a500-d057-11ea-9183-09c067b6e987
+    preset-bazel-remote-cache-enabled: "true"
+    preset-bazel-scratch-dir: "true"
+    preset-dind-enabled: "true"
+    preset-kind-volume-mounts: "true"
+    prow.k8s.io/job: pull-kubernetes-e2e-kind
+    prow.k8s.io/refs.org: kubernetes
+    prow.k8s.io/refs.pull: "93487"
+    prow.k8s.io/refs.repo: kubernetes
+    prow.k8s.io/type: presubmit
+  name: fd5ce43c-d057-11ea-b577-72bfdb0b5ee3
+  namespace: default
+  resourceVersion: "471784835"
+  selfLink: /apis/prow.k8s.io/v1/namespaces/default/prowjobs/fd5ce43c-d057-11ea-b577-72bfdb0b5ee3
+  uid: fd73c461-d057-11ea-8379-42010a8000fc
+spec:
+  agent: kubernetes
+  cluster: default
+  context: pull-kubernetes-e2e-kind
+  decoration_config:
+    gcs_configuration:
+      bucket: kubernetes-jenkins
+      default_org: kubernetes
+      default_repo: kubernetes
+      path_strategy: legacy
+    gcs_credentials_secret: service-account
+    grace_period: 15m0s
+    resources:
+      clonerefs:
+        requests:
+          cpu: 100m
+      initupload:
+        requests:
+          cpu: 100m
+      place_entrypoint:
+        requests:
+          cpu: 100m
+      sidecar:
+        requests:
+          cpu: 100m
+    timeout: 1h0m0s
+    utility_images:
+      clonerefs: gcr.io/k8s-prow/clonerefs:v20200724-b2cdf8399d
+      entrypoint: gcr.io/k8s-prow/entrypoint:v20200724-b2cdf8399d
+      initupload: gcr.io/k8s-prow/initupload:v20200724-b2cdf8399d
+      sidecar: gcr.io/k8s-prow/sidecar:v20200724-b2cdf8399d
+  job: pull-kubernetes-e2e-kind
+  namespace: test-pods
+  pod_spec:
+    containers:
+    - command:
+      - wrapper.sh
+      - bash
+      - -c
+      - curl -sSL https://kind.sigs.k8s.io/dl/latest/linux-amd64.tgz | tar xvfz -
+        -C "${PATH%%:*}/" && e2e-k8s.sh
+      env:
+      - name: FOCUS
+        value: .
+      - name: SKIP
+        value: \[Slow\]|\[Disruptive\]|\[Flaky\]|\[Feature:.+\]|PodSecurityPolicy|LoadBalancer|load.balancer|Simple.pod.should.support.exec.through.an.HTTP.proxy|subPath.should.support.existing|Conntrack|udp|UDP|NFS|nfs|inline.execution.and.attach|should.be.rejected.when.no.endpoints.exist
+      - name: PARALLEL
+        value: "true"
+      - name: BUILD_TYPE
+        value: bazel
+      - name: TEST_TMPDIR
+        value: /bazel-scratch/.cache/bazel
+      - name: BAZEL_REMOTE_CACHE_ENABLED
+        value: "true"
+      - name: DOCKER_IN_DOCKER_ENABLED
+        value: "true"
+      - name: GOPROXY
+        value: https://proxy.golang.org
+      image: gcr.io/k8s-testimages/krte:v20200726-f8d6253-master
+      name: ""
+      resources:
+        requests:
+          cpu: 7400m
+          memory: 9000Mi
+      securityContext:
+        privileged: true
+      volumeMounts:
+      - mountPath: /bazel-scratch/.cache
+        name: bazel-scratch
+      - mountPath: /docker-graph
+        name: docker-graph
+      - mountPath: /var/lib/docker
+        name: docker-root
+      - mountPath: /lib/modules
+        name: modules
+        readOnly: true
+      - mountPath: /sys/fs/cgroup
+        name: cgroup
+    volumes:
+    - emptyDir: {}
+      name: bazel-scratch
+    - emptyDir: {}
+      name: docker-graph
+    - emptyDir: {}
+      name: docker-root
+    - hostPath:
+        path: /lib/modules
+        type: Directory
+      name: modules
+    - hostPath:
+        path: /sys/fs/cgroup
+        type: Directory
+      name: cgroup
+  refs:
+    base_link: https://github.com/kubernetes/kubernetes/commit/575c4925be8c39bfdef1dd407cb6515a54a2c131
+    base_ref: master
+    base_sha: 575c4925be8c39bfdef1dd407cb6515a54a2c131
+    org: kubernetes
+    path_alias: k8s.io/kubernetes
+    pulls:
+    - author: Riaankl
+      author_link: https://github.com/Riaankl
+      commit_link: https://github.com/kubernetes/kubernetes/pull/93487/commits/1077a9e862e93af3b1b4dbfbb404bed366b64855
+      link: https://github.com/kubernetes/kubernetes/pull/93487
+      number: 93487
+      sha: 1077a9e862e93af3b1b4dbfbb404bed366b64855
+    repo: kubernetes
+    repo_link: https://github.com/kubernetes/kubernetes
+  report: true
+  rerun_command: /test pull-kubernetes-e2e-kind
+  type: presubmit
+status:
+  build_id: "1287876713971191809"
+  completionTime: "2020-07-27T22:58:10Z"
+  description: Job succeeded.
+  pendingTime: "2020-07-27T22:25:11Z"
+  pod_name: fd5ce43c-d057-11ea-b577-72bfdb0b5ee3
+  prev_report_states:
+    gcsk8sreporter: success
+    gcsreporter: success
+    github-reporter: success
+  startTime: "2020-07-27T22:24:51Z"
+  state: success
+  url: https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93487/pull-kubernetes-e2e-kind/1287876713971191809
