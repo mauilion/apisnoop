@@ -1,0 +1,239 @@
+# -*- ii: apisnoop; -*-
+#+TITLE: Exploring Pod Proxy
+#+AUTHOR: Stephen Heywood
+#+TODO: TODO(t) NEXT(n) IN-PROGRESS(i) BLOCKED(b) | DONE(d)
+#+OPTIONS: toc:nil tags:nil todo:nil
+#+EXPORT_SELECT_TAGS: export
+
+* TODO Progress [1/6]                                                :export:
+- [X] APISnoop org-flow : [[https://github.com/cncf/apisnoop/blob/master/tickets/k8s/exploring-pod-proxy.org][exploring-pod-proxy.org]]
+- [ ] test approval issue : [[https://github.com/kubernetes/kubernetes/issues/][kubernetes/kubernetes#]]
+- [ ] test pr : kuberenetes/kubernetes#
+- [ ] two weeks soak start date : testgrid-link
+- [ ] two weeks soak end date :
+- [ ] test promotion pr : kubernetes/kubernetes#?
+* Identifying an untested feature Using APISnoop                     :export:
+
+According to this APIsnoop query, there are still some remaining RESOURCENAME endpoints which are untested.
+
+  #+NAME: untested_stable_core_endpoints
+  #+begin_src sql-mode :eval never-export :exports both :session none
+    SELECT
+      operation_id,
+      -- k8s_action,
+      -- path,
+      -- description,
+      kind
+      FROM untested_stable_core_endpoints
+      -- FROM untested_stable_endpoints
+      where path not like '%volume%'
+      -- and kind like ''
+      and operation_id ilike '%PodProxy%'
+     ORDER BY kind,operation_id desc
+     LIMIT 25
+           ;
+  #+end_src
+
+  #+RESULTS: untested_stable_core_endpoints
+  #+begin_SRC example
+                    operation_id                  |      kind       
+  ------------------------------------------------+-----------------
+   connectCoreV1PutNamespacedPodProxyWithPath     | PodProxyOptions
+   connectCoreV1PutNamespacedPodProxy             | PodProxyOptions
+   connectCoreV1PostNamespacedPodProxyWithPath    | PodProxyOptions
+   connectCoreV1PostNamespacedPodProxy            | PodProxyOptions
+   connectCoreV1PatchNamespacedPodProxyWithPath   | PodProxyOptions
+   connectCoreV1PatchNamespacedPodProxy           | PodProxyOptions
+   connectCoreV1OptionsNamespacedPodProxyWithPath | PodProxyOptions
+   connectCoreV1OptionsNamespacedPodProxy         | PodProxyOptions
+   connectCoreV1HeadNamespacedPodProxyWithPath    | PodProxyOptions
+   connectCoreV1HeadNamespacedPodProxy            | PodProxyOptions
+   connectCoreV1GetNamespacedPodProxy             | PodProxyOptions
+   connectCoreV1DeleteNamespacedPodProxyWithPath  | PodProxyOptions
+   connectCoreV1DeleteNamespacedPodProxy          | PodProxyOptions
+  (13 rows)
+
+  #+end_SRC
+
+* API Reference and feature documentation                            :export:
+- [[https://kubernetes.io/docs/reference/kubernetes-api/][Kubernetes API Reference Docs]]
+- [[https://github.com/kubernetes/client-go/blob/master/kubernetes/typed/core/v1/RESOURCENAME.go][client-go - RESOURCENAME]]
+
+* The mock test                                                      :export:
+** Test outline
+1.
+
+2.
+
+3.
+
+4.
+
+5.
+
+** Test the functionality in Go
+   #+NAME: Mock Test In Go
+   #+begin_src go
+     package main
+
+     import (
+       // "encoding/json"
+       "context"
+       "flag"
+       "fmt"
+       "os"
+       "time"
+
+       v1 "k8s.io/api/core/v1"
+       // "k8s.io/client-go/dynamic"
+       // "k8s.io/apimachinery/pkg/runtime/schema"
+       metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+       "k8s.io/apimachinery/pkg/util/intstr"
+       "k8s.io/client-go/kubernetes"
+       testutils "k8s.io/kubernetes/test/utils"
+       // "k8s.io/apimachinery/pkg/types"
+       "k8s.io/client-go/tools/clientcmd"
+     )
+
+     // helper function that mirrors framework.ExpectNoError
+     func ExpectNoError(err error, msg string) {
+       if err != nil {
+         errMsg := msg + fmt.Sprintf(" %v\n", err)
+         os.Stderr.WriteString(errMsg)
+         os.Exit(1)
+       }
+     }
+
+     // helper function to inspect various interfaces
+     func inspect(level int, name string, i interface{}) {
+       fmt.Printf("Inspecting: %s\n", name)
+       fmt.Printf("Inspect level: %d   Type: %T\n", level, i)
+       switch level {
+       case 1:
+         fmt.Printf("%+v\n\n", i)
+       case 2:
+         fmt.Printf("%#v\n\n", i)
+       default:
+         fmt.Printf("%v\n\n", i)
+       }
+     }
+
+     func main() {
+       // uses the current context in kubeconfig
+       kubeconfig := flag.String("kubeconfig", fmt.Sprintf("%v/%v/%v", os.Getenv("HOME"), ".kube", "config"), "(optional) absolute path to the kubeconfig file")
+       flag.Parse()
+       config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+       if err != nil {
+         fmt.Println(err, "Could not build config from flags")
+         return
+       }
+       // make our work easier to find in the audit_event queries
+       config.UserAgent = "live-test-writing"
+       // creates the clientset
+       ClientSet, _ := kubernetes.NewForConfig(config)
+
+       // TEST BEGINS HERE
+
+
+       // TEST ENDS HERE
+
+       fmt.Println("[status] complete")
+     }
+   #+end_src
+
+* Verifying increase in coverage with APISnoop                       :export:
+
+** Discover useragents:
+  #+begin_src sql-mode :eval never-export :exports both :session none
+    select distinct useragent from audit_event where bucket='apisnoop' and useragent not like 'kube%' and useragent not like 'coredns%' and useragent not like 'kindnetd%' and useragent like 'live%';
+  #+end_src
+
+  #+RESULTS:
+  #+begin_SRC example
+   useragent 
+  -----------
+  (0 rows)
+
+  #+end_SRC
+
+** Initial endpoints hit by tests:
+#+begin_src sql-mode :exports both :session none
+select * from endpoints_hit_by_new_test where useragent like 'live%';
+#+end_src
+
+#+RESULTS:
+#+begin_SRC example
+ useragent | operation_id | hit_by_ete | hit_by_new_test 
+-----------+--------------+------------+-----------------
+(0 rows)
+
+#+end_SRC
+
+** setup pod vars
+
+   #+begin_src bash :eval never-export :exports both :session none
+   POD_NAME=$(kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+   echo $POD_NAME
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   rest-app-db4b7874d-cncgr
+   #+end_example
+
+** curl: get
+
+   #+begin_src bash :eval never-export :exports both :session none
+   POD_NAME=$(kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+   curl -X GET -s --user-agent "live-test-writing" http://localhost:8888/api/v1/namespaces/default/pods/$POD_NAME/proxy/all
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   [{"Id":"1","Title":"Hello","desc":"Article Description","content":"Article Content"},{"Id":"2","Title":"Hello 2","desc":"Article Description","content":"Article Content"}]
+   #+end_example
+
+** Current endpoints hit by tests
+#+begin_src sql-mode :exports both :session none
+select * from endpoints_hit_by_new_test where useragent like 'live%';
+#+end_src
+
+#+RESULTS:
+#+begin_SRC example
+     useragent     |                operation_id                | hit_by_ete | hit_by_new_test 
+-------------------+--------------------------------------------+------------+-----------------
+ live-test-writing | connectCoreV1GetNamespacedPodProxyWithPath | t          |               1
+(1 row)
+
+#+end_SRC
+
+** Display endpoint coverage change:
+  #+begin_src sql-mode :eval never-export :exports both :session none
+    select * from projected_change_in_coverage;
+  #+end_src
+
+  #+RESULTS:
+  #+begin_SRC example
+     category    | total_endpoints | old_coverage | new_coverage | change_in_number 
+  ---------------+-----------------+--------------+--------------+------------------
+   test_coverage |             485 |          251 |          251 |                0
+  (1 row)
+
+  #+end_SRC
+
+* Convert to Ginkgo Test
+** Ginkgo Test
+  :PROPERTIES:
+  :ID:       gt001z4ch1sc00l
+  :END:
+* Final notes                                                        :export:
+If a test with these calls gets merged, **test coverage will go up by N points**
+
+This test is also created with the goal of conformance promotion.
+
+-----
+/sig testing
+
+/sig architecture
+
+/area conformance
