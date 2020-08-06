@@ -1,0 +1,201 @@
+# -*- ii: apisnoop; -*-
+#+TITLE: Access Pod Proxy Endpoints
+#+AUTHOR: Stephen Heywood
+#+TODO: TODO(t) NEXT(n) IN-PROGRESS(i) BLOCKED(b) | DONE(d)
+#+OPTIONS: toc:nil tags:nil todo:nil
+#+EXPORT_SELECT_TAGS: export
+
+* Goal                                                               :export:
+
+To create a set of e2e tests for Pod Proxy endpoints as they are part of the [[https://apisnoop.cncf.io/conformance-progress/endpoints/1.5.0?filter=promotedWithoutTests][current technical debt shown on APIsnoop]].
+While investigating the API endpoints for Pod Proxy it looks like a REST server will be required so all HTTP verbs can be accessed.
+
+1. Is there already an image I could/should use for any HTTP verb without building it myself?
+2. Is this "pseudo test" heading in the right direction for a possible e2e set of tests?
+
+* Identifying Pod Proxy endpoints with APISnoop                      :export:
+
+The following APIsnoop query shows key details for Pod Proxy endpoints.
+
+  #+NAME: untested_stable_core_endpoints
+  #+begin_src sql-mode :eval never-export :exports both :session none
+    SELECT
+      operation_id,
+      path,
+      description
+      FROM untested_stable_core_endpoints
+      where operation_id ilike '%PodProxy%'
+     ORDER BY kind,operation_id desc
+     LIMIT 25
+     ;
+  #+end_src
+
+  #+RESULTS: untested_stable_core_endpoints
+  #+begin_SRC example
+                    operation_id                  |                          path                           |               description                
+  ------------------------------------------------+---------------------------------------------------------+------------------------------------------
+   connectCoreV1PutNamespacedPodProxyWithPath     | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect PUT requests to proxy of Pod
+   connectCoreV1PutNamespacedPodProxy             | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect PUT requests to proxy of Pod
+   connectCoreV1PostNamespacedPodProxyWithPath    | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect POST requests to proxy of Pod
+   connectCoreV1PostNamespacedPodProxy            | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect POST requests to proxy of Pod
+   connectCoreV1PatchNamespacedPodProxyWithPath   | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect PATCH requests to proxy of Pod
+   connectCoreV1PatchNamespacedPodProxy           | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect PATCH requests to proxy of Pod
+   connectCoreV1OptionsNamespacedPodProxyWithPath | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect OPTIONS requests to proxy of Pod
+   connectCoreV1OptionsNamespacedPodProxy         | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect OPTIONS requests to proxy of Pod
+   connectCoreV1HeadNamespacedPodProxyWithPath    | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect HEAD requests to proxy of Pod
+   connectCoreV1HeadNamespacedPodProxy            | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect HEAD requests to proxy of Pod
+   connectCoreV1GetNamespacedPodProxy             | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect GET requests to proxy of Pod
+   connectCoreV1DeleteNamespacedPodProxyWithPath  | /api/v1/namespaces/{namespace}/pods/{name}/proxy/{path} | connect DELETE requests to proxy of Pod
+   connectCoreV1DeleteNamespacedPodProxy          | /api/v1/namespaces/{namespace}/pods/{name}/proxy        | connect DELETE requests to proxy of Pod
+  (13 rows)
+
+  #+end_SRC
+
+* Exploring coverage increase with APISnoop                          :export:
+** =kubectl proxy=
+
+   In another terminal run =kubectl proxy --port=8888=
+
+** Deploy REST server
+
+   The REST server can provide method responses for GET, POST and DELETE so far.
+
+   #+begin_src bash :eval never-export :exports both :session none
+     kubectl create -n default deployment --image=heyste/rest-server rest-app
+     kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}'
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   deployment.apps/rest-app created
+   rest-app-db4b7874d-wldpr
+   #+end_example
+
+** Discover useragents:
+  #+begin_src sql-mode :eval never-export :exports both :session none
+    select distinct useragent from audit_event where bucket='apisnoop' and useragent not like 'kube%' and useragent not like 'coredns%' and useragent not like 'kindnetd%' and useragent like 'live%';
+  #+end_src
+
+  #+RESULTS:
+  #+begin_SRC example
+   useragent 
+  -----------
+  (0 rows)
+
+  #+end_SRC
+
+** Initial endpoints hit by tests:
+
+   #+begin_src sql-mode :exports both :session none
+     select * from endpoints_hit_by_new_test where useragent like 'live%';
+   #+end_src
+
+   #+RESULTS:
+   #+begin_SRC example
+    useragent | operation_id | hit_by_ete | hit_by_new_test 
+   -----------+--------------+------------+-----------------
+   (0 rows)
+
+   #+end_SRC
+
+** REST Method: GET
+
+   #+begin_src bash :eval never-export :exports both :session none
+     POD_NAME=$(kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+     UA="live-test-writing"
+     curl -X GET -s --user-agent $UA http://localhost:8888/api/v1/namespaces/default/pods/$POD_NAME/proxy/all
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   [{"Id":"1","Title":"Hello","desc":"Article Description","content":"Article Content"},{"Id":"2","Title":"Hello 2","desc":"Article Description","content":"Article Content"}]
+   #+end_example
+
+** Endpoints now hit by tests
+
+   #+begin_src sql-mode :exports both :session none
+     select * from endpoints_hit_by_new_test where useragent like 'live%';
+   #+end_src
+
+   #+RESULTS:
+   #+begin_SRC example
+        useragent     |                operation_id                | hit_by_ete | hit_by_new_test 
+   -------------------+--------------------------------------------+------------+-----------------
+    live-test-writing | connectCoreV1GetNamespacedPodProxyWithPath | t          |               1
+   (1 row)
+
+   #+end_SRC
+
+** Rest Method: POST
+
+   #+begin_src bash :eval never-export :exports both :session none
+     POD_NAME=$(kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+     UA="live-test-writing"
+     curl -d '{ "Id": "3", "Title": "created", "desc": "desc", "content": "content" }' -s --user-agent $UA http://localhost:8888/api/v1/namespaces/default/pods/$POD_NAME/proxy/article
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   {"Id":"3","Title":"created","desc":"desc","content":"content"}
+   #+end_example
+
+** Endpoints now hit by tests
+
+   #+begin_src sql-mode :exports both :session none
+     select * from endpoints_hit_by_new_test where useragent like 'live%';
+   #+end_src
+
+   #+RESULTS:
+   #+begin_SRC example
+        useragent     |                operation_id                 | hit_by_ete | hit_by_new_test 
+   -------------------+---------------------------------------------+------------+-----------------
+    live-test-writing | connectCoreV1GetNamespacedPodProxyWithPath  | t          |               1
+    live-test-writing | connectCoreV1PostNamespacedPodProxyWithPath | f          |               1
+   (2 rows)
+
+   #+end_SRC
+
+** REST Method: DELETE
+
+   #+begin_src bash :eval never-export :exports both :session none
+     POD_NAME=$(kubectl get -n default pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+     UA="live-test-writing"
+     curl -X DELETE -s --user-agent "live-test-writing" http://localhost:8888/api/v1/namespaces/default/pods/$POD_NAME/proxy/article/3
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   #+end_example
+
+** Endpoints now hit by tests
+
+   #+begin_src sql-mode :exports both :session none
+     select * from endpoints_hit_by_new_test where useragent like 'live%';
+   #+end_src
+
+   #+RESULTS:
+   #+begin_SRC example
+        useragent     |                 operation_id                  | hit_by_ete | hit_by_new_test 
+   -------------------+-----------------------------------------------+------------+-----------------
+    live-test-writing | connectCoreV1DeleteNamespacedPodProxyWithPath | f          |               1
+    live-test-writing | connectCoreV1GetNamespacedPodProxyWithPath    | t          |               1
+    live-test-writing | connectCoreV1PostNamespacedPodProxyWithPath   | f          |               1
+   (3 rows)
+
+   #+end_SRC
+
+** Display endpoint coverage change:
+
+   #+begin_src sql-mode :eval never-export :exports both :session none
+     select * from projected_change_in_coverage;
+   #+end_src
+
+   #+RESULTS:
+   #+begin_SRC example
+      category    | total_endpoints | old_coverage | new_coverage | change_in_number 
+   ---------------+-----------------+--------------+--------------+------------------
+    test_coverage |             485 |          251 |          253 |                2
+   (1 row)
+
+   #+end_SRC
+
