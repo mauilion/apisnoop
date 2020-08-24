@@ -1,0 +1,401 @@
+ [It] should run the lifecycle of a Deployment
+ test/e2e/apps/deployment.go:151
+ [1mSTEP[0m: creating a Deployment
+ [1mSTEP[0m: waiting for Deployment to be created
+ [1mSTEP[0m: waiting for all Replicas to be Ready
+ Jul 30 19:12:32.925: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 0 and labels map[test-deployment-static:true]
+ Jul 30 19:12:33.050: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 0 and labels map[test-deployment-static:true]
+ Jul 30 19:12:33.102: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 0 and labels map[test-deployment-static:true]
+ Jul 30 19:12:33.423: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 0 and labels map[test-deployment-static:true]
+ Jul 30 19:12:51.784: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 1 and labels map[test-deployment-static:true]
+ Jul 30 19:12:54.218: INFO: observed Deployment test-deployment in namespace deployment-4577 with ReadyReplicas 2 and labels map[test-deployment-static:true]
+ Jul 30 19:13:02.922: FAIL: failed to see replicas of test-deployment in namespace deployment-4577 scale to requested amount of 3
+ Unexpected error:
+ <*errors.errorString | 0xc00026a1f0>: {
+ s: "timed out waiting for the condition",
+ }
+ timed out waiting for the condition
+ occurred
+
+ Full Stack Trace
+ k8s.io/kubernetes/test/e2e/apps.glob..func4.12()
+ test/e2e/apps/deployment.go:233 +0x105b
+ k8s.io/kubernetes/test/e2e.RunE2ETests(0xc001619680)
+ test/e2e/e2e.go:130 +0x345
+ k8s.io/kubernetes/test/e2e.TestE2E(0xc001619680)
+ test/e2e/e2e_test.go:145 +0x2b
+ testing.tRunner(0xc001619680, 0x4de2b18)
+ GOROOT/src/testing/testing.go:1108 +0xef
+ created by testing.(*T).Run
+ GOROOT/src/testing/testing.go:1159 +0x386
+ [AfterEach] [sig-apps] Deployment
+ test/e2e/apps/deployment.go:78
+ Jul 30 19:13:02.939: INFO: Deployment "test-deployment":
+ &Deployment{ObjectMeta:{test-deployment deployment-4577 /apis/apps/v1/namespaces/deployment-4577/deployments/test-deployment 8415b547-6691-4a64-817a-8265b3a26812 15935 1 2020-07-30 19:12:32 +0000 UTC <nil> <nil> map[test-deployment-static:true] map[deployment.kubernetes.io/revision:1] [] [] [{e2e.test Update apps/v1 2020-07-30 19:12:32 +0000 UTC FieldsV1 {"f:metadata":{"f:labels":{".":{},"f:test-deployment-static":{}}},"f:spec":{"f:progressDeadlineSeconds":{},"f:replicas":{},"f:revisionHistoryLimit":{},"f:selector":{"f:matchLabels":{".":{},"f:test-deployment-static":{}}},"f:strategy":{"f:rollingUpdate":{".":{},"f:maxSurge":{},"f:maxUnavailable":{}},"f:type":{}},"f:template":{"f:metadata":{"f:labels":{".":{},"f:test-deployment-static":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"test-deployment\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}}}} {kube-controller-manager Update apps/v1 2020-07-30 19:12:54 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{".":{},"f:deployment.kubernetes.io/revision":{}}},"f:status":{"f:availableReplicas":{},"f:conditions":{".":{},"k:{\"type\":\"Available\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Progressing\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{},"f:unavailableReplicas":{},"f:updatedReplicas":{}}}}]},Spec:DeploymentSpec{Replicas:*3,Selector:&v1.LabelSelector{MatchLabels:map[string]string{test-deployment-static: true,},MatchExpressions:[]LabelSelectorRequirement{},},Template:{{ 0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[test-deployment-static:true] map[] [] [] []} {[] [] [{test-deployment k8s.gcr.io/e2e-test-images/agnhost:2.20 [] [] [] [] [] {map[] map[]} [] [] nil nil nil nil /dev/termination-log File IfNotPresent nil false false false}] [] Always 0xc0026bbae0 <nil> ClusterFirst map[] <nil> false false false <nil> PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[]Sysctl{},WindowsOptions:nil,FSGroupChangePolicy:nil,SeccompProfile:nil,} [] nil default-scheduler [] [] <nil> nil [] <nil> <nil> <nil> map[] [] <nil>}},Strategy:DeploymentStrategy{Type:RollingUpdate,RollingUpdate:&RollingUpdateDeployment{MaxUnavailable:25%!,(MISSING)MaxSurge:25%!,(MISSING)},},MinReadySeconds:0,RevisionHistoryLimit:*10,Paused:false,ProgressDeadlineSeconds:*600,},Status:DeploymentStatus{ObservedGeneration:1,Replicas:3,UpdatedReplicas:3,AvailableReplicas:2,UnavailableReplicas:1,Conditions:[]DeploymentCondition{DeploymentCondition{Type:Available,Status:False,Reason:MinimumReplicasUnavailable,Message:Deployment does not have minimum availability.,LastUpdateTime:2020-07-30 19:12:33 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,},DeploymentCondition{Type:Progressing,Status:True,Reason:ReplicaSetUpdated,Message:ReplicaSet "test-deployment-75444886b4" is progressing.,LastUpdateTime:2020-07-30 19:12:54 +0000 UTC,LastTransitionTime:2020-07-30 19:12:32 +0000 UTC,},},ReadyReplicas:2,CollisionCount:nil,},}
+
+ Jul 30 19:13:02.944: INFO: New ReplicaSet "test-deployment-75444886b4" of Deployment "test-deployment":
+ &ReplicaSet{ObjectMeta:{test-deployment-75444886b4 deployment-4577 /apis/apps/v1/namespaces/deployment-4577/replicasets/test-deployment-75444886b4 40772c40-edff-4487-86a8-518476082570 15933 1 2020-07-30 19:12:32 +0000 UTC <nil> <nil> map[pod-template-hash:75444886b4 test-deployment-static:true] map[deployment.kubernetes.io/desired-replicas:3 deployment.kubernetes.io/max-replicas:4 deployment.kubernetes.io/revision:1] [{apps/v1 Deployment test-deployment 8415b547-6691-4a64-817a-8265b3a26812 0xc0026bbeb7 0xc0026bbeb8}] [] [{kube-controller-manager Update apps/v1 2020-07-30 19:12:54 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{".":{},"f:deployment.kubernetes.io/desired-replicas":{},"f:deployment.kubernetes.io/max-replicas":{},"f:deployment.kubernetes.io/revision":{}},"f:labels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"8415b547-6691-4a64-817a-8265b3a26812\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:replicas":{},"f:selector":{"f:matchLabels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}}},"f:template":{"f:metadata":{"f:labels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"test-deployment\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}},"f:status":{"f:availableReplicas":{},"f:fullyLabeledReplicas":{},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{}}}}]},Spec:ReplicaSetSpec{Replicas:*3,Selector:&v1.LabelSelector{MatchLabels:map[string]string{pod-template-hash: 75444886b4,test-deployment-static: true,},MatchExpressions:[]LabelSelectorRequirement{},},Template:{{ 0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[pod-template-hash:75444886b4 test-deployment-static:true] map[] [] [] []} {[] [] [{test-deployment k8s.gcr.io/e2e-test-images/agnhost:2.20 [] [] [] [] [] {map[] map[]} [] [] nil nil nil nil /dev/termination-log File IfNotPresent nil false false false}] [] Always 0xc0026bbf20 <nil> ClusterFirst map[] <nil> false false false <nil> PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[]Sysctl{},WindowsOptions:nil,FSGroupChangePolicy:nil,SeccompProfile:nil,} [] nil default-scheduler [] [] <nil> nil [] <nil> <nil> <nil> map[] [] <nil>}},MinReadySeconds:0,},Status:ReplicaSetStatus{Replicas:3,FullyLabeledReplicas:3,ObservedGeneration:1,ReadyReplicas:2,AvailableReplicas:2,Conditions:[]ReplicaSetCondition{},},}
+ Jul 30 19:13:02.950: INFO: Pod "test-deployment-75444886b4-9r492" is not available:
+ &Pod{ObjectMeta:{test-deployment-75444886b4-9r492 test-deployment-75444886b4- deployment-4577 /api/v1/namespaces/deployment-4577/pods/test-deployment-75444886b4-9r492 8de47d11-a66d-4bbc-b6de-ab75d2e0825d 15423 0 2020-07-30 19:12:33 +0000 UTC <nil> <nil> map[pod-template-hash:75444886b4 test-deployment-static:true] map[] [{apps/v1 ReplicaSet test-deployment-75444886b4 40772c40-edff-4487-86a8-518476082570 0xc001c33407 0xc001c33408}] [] [{kube-controller-manager Update v1 2020-07-30 19:12:33 +0000 UTC FieldsV1 {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"40772c40-edff-4487-86a8-518476082570\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:containers":{"k:{\"name\":\"test-deployment\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}} {kubelet Update v1 2020-07-30 19:12:44 +0000 UTC FieldsV1 {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:startTime":{}}}}]},Spec:PodSpec{Volumes:[]Volume{Volume{Name:default-token-8cqkx,VolumeSource:VolumeSource{HostPath:nil,EmptyDir:nil,GCEPersistentDisk:nil,AWSElasticBlockStore:nil,GitRepo:nil,Secret:&SecretVolumeSource{SecretName:default-token-8cqkx,Items:[]KeyToPath{},DefaultMode:*420,Optional:nil,},NFS:nil,ISCSI:nil,Glusterfs:nil,PersistentVolumeClaim:nil,RBD:nil,FlexVolume:nil,Cinder:nil,CephFS:nil,Flocker:nil,DownwardAPI:nil,FC:nil,AzureFile:nil,ConfigMap:nil,VsphereVolume:nil,Quobyte:nil,AzureDisk:nil,PhotonPersistentDisk:nil,PortworxVolume:nil,ScaleIO:nil,Projected:nil,StorageOS:nil,CSI:nil,Ephemeral:nil,},},},Containers:[]Container{Container{Name:test-deployment,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,Command:[],Args:[],WorkingDir:,Ports:[]ContainerPort{},Env:[]EnvVar{},Resources:ResourceRequirements{Limits:ResourceList{},Requests:ResourceList{},},VolumeMounts:[]VolumeMount{VolumeMount{Name:default-token-8cqkx,ReadOnly:true,MountPath:/var/run/secrets/kubernetes.io/serviceaccount,SubPath:,MountPropagation:nil,SubPathExpr:,},},LivenessProbe:nil,ReadinessProbe:nil,Lifecycle:nil,TerminationMessagePath:/dev/termination-log,ImagePullPolicy:IfNotPresent,SecurityContext:nil,Stdin:false,StdinOnce:false,TTY:false,EnvFrom:[]EnvFromSource{},TerminationMessagePolicy:File,VolumeDevices:[]VolumeDevice{},StartupProbe:nil,},},RestartPolicy:Always,TerminationGracePeriodSeconds:*30,ActiveDeadlineSeconds:nil,DNSPolicy:ClusterFirst,NodeSelector:map[string]string{},ServiceAccountName:default,DeprecatedServiceAccount:default,NodeName:kind-worker2,HostNetwork:false,HostPID:false,HostIPC:false,SecurityContext:&PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[]Sysctl{},WindowsOptions:nil,FSGroupChangePolicy:nil,SeccompProfile:nil,},ImagePullSecrets:[]LocalObjectReference{},Hostname:,Subdomain:,Affinity:nil,SchedulerName:default-scheduler,InitContainers:[]Container{},AutomountServiceAccountToken:nil,Tolerations:[]Toleration{Toleration{Key:node.kubernetes.io/not-ready,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},Toleration{Key:node.kubernetes.io/unreachable,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},},HostAliases:[]HostAlias{},PriorityClassName:,Priority:*0,DNSConfig:nil,ShareProcessNamespace:nil,ReadinessGates:[]PodReadinessGate{},RuntimeClassName:nil,EnableServiceLinks:*true,PreemptionPolicy:*PreemptLowerPriority,Overhead:ResourceList{},TopologySpreadConstraints:[]TopologySpreadConstraint{},EphemeralContainers:[]EphemeralContainer{},SetHostnameAsFQDN:nil,},Status:PodStatus{Phase:Pending,Conditions:[]PodCondition{PodCondition{Type:Initialized,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},PodCondition{Type:Ready,Status:False,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:ContainersNotReady,Message:containers with unready status: [test-deployment],},PodCondition{Type:ContainersReady,Status:False,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:ContainersNotReady,Message:containers with unready status: [test-deployment],},PodCondition{Type:PodScheduled,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},},Message:,Reason:,HostIP:172.18.0.2,PodIP:,StartTime:2020-07-30 19:12:33 +0000 UTC,ContainerStatuses:[]ContainerStatus{ContainerStatus{Name:test-deployment,State:ContainerState{Waiting:&ContainerStateWaiting{Reason:ContainerCreating,Message:,},Running:nil,Terminated:nil,},LastTerminationState:ContainerState{Waiting:nil,Running:nil,Terminated:nil,},Ready:false,RestartCount:0,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,ImageID:,ContainerID:,Started:*false,},},QOSClass:BestEffort,InitContainerStatuses:[]ContainerStatus{},NominatedNodeName:,PodIPs:[]PodIP{},EphemeralContainerStatuses:[]ContainerStatus{},},}
+ Jul 30 19:13:02.950: INFO: Pod "test-deployment-75444886b4-dlg7k" is available:
+ &Pod{ObjectMeta:{test-deployment-75444886b4-dlg7k test-deployment-75444886b4- deployment-4577 /api/v1/namespaces/deployment-4577/pods/test-deployment-75444886b4-dlg7k 990148af-e834-4ce1-a2c6-5c8dd45b9dc0 15843 0 2020-07-30 19:12:33 +0000 UTC <nil> <nil> map[pod-template-hash:75444886b4 test-deployment-static:true] map[] [{apps/v1 ReplicaSet test-deployment-75444886b4 40772c40-edff-4487-86a8-518476082570 0xc001c33597 0xc001c33598}] [] [{kube-controller-manager Update v1 2020-07-30 19:12:33 +0000 UTC FieldsV1 {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"40772c40-edff-4487-86a8-518476082570\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:containers":{"k:{\"name\":\"test-deployment\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}} {kubelet Update v1 2020-07-30 19:12:51 +0000 UTC FieldsV1 {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"10.244.1.175\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}}]},Spec:PodSpec{Volumes:[]Volume{Volume{Name:default-token-8cqkx,VolumeSource:VolumeSource{HostPath:nil,EmptyDir:nil,GCEPersistentDisk:nil,AWSElasticBlockStore:nil,GitRepo:nil,Secret:&SecretVolumeSource{SecretName:default-token-8cqkx,Items:[]KeyToPath{},DefaultMode:*420,Optional:nil,},NFS:nil,ISCSI:nil,Glusterfs:nil,PersistentVolumeClaim:nil,RBD:nil,FlexVolume:nil,Cinder:nil,CephFS:nil,Flocker:nil,DownwardAPI:nil,FC:nil,AzureFile:nil,ConfigMap:nil,VsphereVolume:nil,Quobyte:nil,AzureDisk:nil,PhotonPersistentDisk:nil,PortworxVolume:nil,ScaleIO:nil,Projected:nil,StorageOS:nil,CSI:nil,Ephemeral:nil,},},},Containers:[]Container{Container{Name:test-deployment,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,Command:[],Args:[],WorkingDir:,Ports:[]ContainerPort{},Env:[]EnvVar{},Resources:ResourceRequirements{Limits:ResourceList{},Requests:ResourceList{},},VolumeMounts:[]VolumeMount{VolumeMount{Name:default-token-8cqkx,ReadOnly:true,MountPath:/var/run/secrets/kubernetes.io/serviceaccount,SubPath:,MountPropagation:nil,SubPathExpr:,},},LivenessProbe:nil,ReadinessProbe:nil,Lifecycle:nil,TerminationMessagePath:/dev/termination-log,ImagePullPolicy:IfNotPresent,SecurityContext:nil,Stdin:false,StdinOnce:false,TTY:false,EnvFrom:[]EnvFromSource{},TerminationMessagePolicy:File,VolumeDevices:[]VolumeDevice{},StartupProbe:nil,},},RestartPolicy:Always,TerminationGracePeriodSeconds:*30,ActiveDeadlineSeconds:nil,DNSPolicy:ClusterFirst,NodeSelector:map[string]string{},ServiceAccountName:default,DeprecatedServiceAccount:default,NodeName:kind-worker,HostNetwork:false,HostPID:false,HostIPC:false,SecurityContext:&PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[]Sysctl{},WindowsOptions:nil,FSGroupChangePolicy:nil,SeccompProfile:nil,},ImagePullSecrets:[]LocalObjectReference{},Hostname:,Subdomain:,Affinity:nil,SchedulerName:default-scheduler,InitContainers:[]Container{},AutomountServiceAccountToken:nil,Tolerations:[]Toleration{Toleration{Key:node.kubernetes.io/not-ready,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},Toleration{Key:node.kubernetes.io/unreachable,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},},HostAliases:[]HostAlias{},PriorityClassName:,Priority:*0,DNSConfig:nil,ShareProcessNamespace:nil,ReadinessGates:[]PodReadinessGate{},RuntimeClassName:nil,EnableServiceLinks:*true,PreemptionPolicy:*PreemptLowerPriority,Overhead:ResourceList{},TopologySpreadConstraints:[]TopologySpreadConstraint{},EphemeralContainers:[]EphemeralContainer{},SetHostnameAsFQDN:nil,},Status:PodStatus{Phase:Running,Conditions:[]PodCondition{PodCondition{Type:Initialized,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},PodCondition{Type:Ready,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:46 +0000 UTC,Reason:,Message:,},PodCondition{Type:ContainersReady,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:46 +0000 UTC,Reason:,Message:,},PodCondition{Type:PodScheduled,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},},Message:,Reason:,HostIP:172.18.0.3,PodIP:10.244.1.175,StartTime:2020-07-30 19:12:33 +0000 UTC,ContainerStatuses:[]ContainerStatus{ContainerStatus{Name:test-deployment,State:ContainerState{Waiting:nil,Running:&ContainerStateRunning{StartedAt:2020-07-30 19:12:46 +0000 UTC,},Terminated:nil,},LastTerminationState:ContainerState{Waiting:nil,Running:nil,Terminated:nil,},Ready:true,RestartCount:0,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,ImageID:k8s.gcr.io/e2e-test-images/agnhost@sha256:17e61a0b9e498b6c73ed97670906be3d5a3ae394739c1bd5b619e1a004885cf0,ContainerID:containerd://8475c8e12c5db7afa06be14e7ca05308889ff3c7abbd9c7ed2435ce630be9282,Started:*true,},},QOSClass:BestEffort,InitContainerStatuses:[]ContainerStatus{},NominatedNodeName:,PodIPs:[]PodIP{PodIP{IP:10.244.1.175,},},EphemeralContainerStatuses:[]ContainerStatus{},},}
+ Jul 30 19:13:02.951: INFO: Pod "test-deployment-75444886b4-j8bkj" is available:
+ &Pod{ObjectMeta:{test-deployment-75444886b4-j8bkj test-deployment-75444886b4- deployment-4577 /api/v1/namespaces/deployment-4577/pods/test-deployment-75444886b4-j8bkj 4ebca702-bf7c-4af7-b3fd-7bc783913bb5 15932 0 2020-07-30 19:12:33 +0000 UTC <nil> <nil> map[pod-template-hash:75444886b4 test-deployment-static:true] map[] [{apps/v1 ReplicaSet test-deployment-75444886b4 40772c40-edff-4487-86a8-518476082570 0xc001c33747 0xc001c33748}] [] [{kube-controller-manager Update v1 2020-07-30 19:12:32 +0000 UTC FieldsV1 {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:pod-template-hash":{},"f:test-deployment-static":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"40772c40-edff-4487-86a8-518476082570\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:containers":{"k:{\"name\":\"test-deployment\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}} {kubelet Update v1 2020-07-30 19:12:54 +0000 UTC FieldsV1 {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"10.244.1.176\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}}]},Spec:PodSpec{Volumes:[]Volume{Volume{Name:default-token-8cqkx,VolumeSource:VolumeSource{HostPath:nil,EmptyDir:nil,GCEPersistentDisk:nil,AWSElasticBlockStore:nil,GitRepo:nil,Secret:&SecretVolumeSource{SecretName:default-token-8cqkx,Items:[]KeyToPath{},DefaultMode:*420,Optional:nil,},NFS:nil,ISCSI:nil,Glusterfs:nil,PersistentVolumeClaim:nil,RBD:nil,FlexVolume:nil,Cinder:nil,CephFS:nil,Flocker:nil,DownwardAPI:nil,FC:nil,AzureFile:nil,ConfigMap:nil,VsphereVolume:nil,Quobyte:nil,AzureDisk:nil,PhotonPersistentDisk:nil,PortworxVolume:nil,ScaleIO:nil,Projected:nil,StorageOS:nil,CSI:nil,Ephemeral:nil,},},},Containers:[]Container{Container{Name:test-deployment,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,Command:[],Args:[],WorkingDir:,Ports:[]ContainerPort{},Env:[]EnvVar{},Resources:ResourceRequirements{Limits:ResourceList{},Requests:ResourceList{},},VolumeMounts:[]VolumeMount{VolumeMount{Name:default-token-8cqkx,ReadOnly:true,MountPath:/var/run/secrets/kubernetes.io/serviceaccount,SubPath:,MountPropagation:nil,SubPathExpr:,},},LivenessProbe:nil,ReadinessProbe:nil,Lifecycle:nil,TerminationMessagePath:/dev/termination-log,ImagePullPolicy:IfNotPresent,SecurityContext:nil,Stdin:false,StdinOnce:false,TTY:false,EnvFrom:[]EnvFromSource{},TerminationMessagePolicy:File,VolumeDevices:[]VolumeDevice{},StartupProbe:nil,},},RestartPolicy:Always,TerminationGracePeriodSeconds:*30,ActiveDeadlineSeconds:nil,DNSPolicy:ClusterFirst,NodeSelector:map[string]string{},ServiceAccountName:default,DeprecatedServiceAccount:default,NodeName:kind-worker,HostNetwork:false,HostPID:false,HostIPC:false,SecurityContext:&PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[]Sysctl{},WindowsOptions:nil,FSGroupChangePolicy:nil,SeccompProfile:nil,},ImagePullSecrets:[]LocalObjectReference{},Hostname:,Subdomain:,Affinity:nil,SchedulerName:default-scheduler,InitContainers:[]Container{},AutomountServiceAccountToken:nil,Tolerations:[]Toleration{Toleration{Key:node.kubernetes.io/not-ready,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},Toleration{Key:node.kubernetes.io/unreachable,Operator:Exists,Value:,Effect:NoExecute,TolerationSeconds:*300,},},HostAliases:[]HostAlias{},PriorityClassName:,Priority:*0,DNSConfig:nil,ShareProcessNamespace:nil,ReadinessGates:[]PodReadinessGate{},RuntimeClassName:nil,EnableServiceLinks:*true,PreemptionPolicy:*PreemptLowerPriority,Overhead:ResourceList{},TopologySpreadConstraints:[]TopologySpreadConstraint{},EphemeralContainers:[]EphemeralContainer{},SetHostnameAsFQDN:nil,},Status:PodStatus{Phase:Running,Conditions:[]PodCondition{PodCondition{Type:Initialized,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},PodCondition{Type:Ready,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:46 +0000 UTC,Reason:,Message:,},PodCondition{Type:ContainersReady,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:46 +0000 UTC,Reason:,Message:,},PodCondition{Type:PodScheduled,Status:True,LastProbeTime:0001-01-01 00:00:00 +0000 UTC,LastTransitionTime:2020-07-30 19:12:33 +0000 UTC,Reason:,Message:,},},Message:,Reason:,HostIP:172.18.0.3,PodIP:10.244.1.176,StartTime:2020-07-30 19:12:33 +0000 UTC,ContainerStatuses:[]ContainerStatus{ContainerStatus{Name:test-deployment,State:ContainerState{Waiting:nil,Running:&ContainerStateRunning{StartedAt:2020-07-30 19:12:46 +0000 UTC,},Terminated:nil,},LastTerminationState:ContainerState{Waiting:nil,Running:nil,Terminated:nil,},Ready:true,RestartCount:0,Image:k8s.gcr.io/e2e-test-images/agnhost:2.20,ImageID:k8s.gcr.io/e2e-test-images/agnhost@sha256:17e61a0b9e498b6c73ed97670906be3d5a3ae394739c1bd5b619e1a004885cf0,ContainerID:containerd://8a5ca2dd6d0c498dbc9a656a996a9e80b29377c781662064403fa5199c149550,Started:*true,},},QOSClass:BestEffort,InitContainerStatuses:[]ContainerStatus{},NominatedNodeName:,PodIPs:[]PodIP{PodIP{IP:10.244.1.176,},},EphemeralContainerStatuses:[]ContainerStatus{},},}
+ [AfterEach] [sig-apps] Deployment
+ test/e2e/framework/framework.go:175
+ [1mSTEP[0m: Collecting events from namespace "deployment-4577".
+ [1mSTEP[0m: Found 16 events.
+ Jul 30 19:13:02.956: INFO: At 2020-07-30 19:12:32 +0000 UTC - event for test-deployment: {deployment-controller } ScalingReplicaSet: Scaled up replica set test-deployment-75444886b4 to 3
+ Jul 30 19:13:02.956: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4: {replicaset-controller } SuccessfulCreate: Created pod: test-deployment-75444886b4-dlg7k
+ Jul 30 19:13:02.956: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4: {replicaset-controller } SuccessfulCreate: Created pod: test-deployment-75444886b4-9r492
+ Jul 30 19:13:02.956: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4: {replicaset-controller } SuccessfulCreate: Created pod: test-deployment-75444886b4-j8bkj
+ Jul 30 19:13:02.956: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4-9r492: {default-scheduler } Scheduled: Successfully assigned deployment-4577/test-deployment-75444886b4-9r492 to kind-worker2
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4-dlg7k: {default-scheduler } Scheduled: Successfully assigned deployment-4577/test-deployment-75444886b4-dlg7k to kind-worker
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:33 +0000 UTC - event for test-deployment-75444886b4-j8bkj: {default-scheduler } Scheduled: Successfully assigned deployment-4577/test-deployment-75444886b4-j8bkj to kind-worker
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:44 +0000 UTC - event for test-deployment-75444886b4-dlg7k: {kubelet kind-worker} Pulled: Container image "k8s.gcr.io/e2e-test-images/agnhost:2.20" already present on machine
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:44 +0000 UTC - event for test-deployment-75444886b4-dlg7k: {kubelet kind-worker} Created: Created container test-deployment
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:44 +0000 UTC - event for test-deployment-75444886b4-j8bkj: {kubelet kind-worker} Created: Created container test-deployment
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:44 +0000 UTC - event for test-deployment-75444886b4-j8bkj: {kubelet kind-worker} Pulled: Container image "k8s.gcr.io/e2e-test-images/agnhost:2.20" already present on machine
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:46 +0000 UTC - event for test-deployment-75444886b4-dlg7k: {kubelet kind-worker} Started: Started container test-deployment
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:46 +0000 UTC - event for test-deployment-75444886b4-j8bkj: {kubelet kind-worker} Started: Started container test-deployment
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:48 +0000 UTC - event for test-deployment-75444886b4-9r492: {kubelet kind-worker2} Created: Created container test-deployment
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:48 +0000 UTC - event for test-deployment-75444886b4-9r492: {kubelet kind-worker2} Pulled: Container image "k8s.gcr.io/e2e-test-images/agnhost:2.20" already present on machine
+ Jul 30 19:13:02.957: INFO: At 2020-07-30 19:12:53 +0000 UTC - event for test-deployment-75444886b4-9r492: {kubelet kind-worker2} Started: Started container test-deployment
+ Jul 30 19:13:02.971: INFO: POD NODE PHASE GRACE CONDITIONS
+ Jul 30 19:13:02.971: INFO: test-deployment-75444886b4-9r492 kind-worker2 Pending [{Initialized True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC } {Ready False 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC ContainersNotReady containers with unready status: [test-deployment]} {ContainersReady False 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC ContainersNotReady containers with unready status: [test-deployment]} {PodScheduled True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC }]
+ Jul 30 19:13:02.971: INFO: test-deployment-75444886b4-dlg7k kind-worker Running [{Initialized True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC } {Ready True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {ContainersReady True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {PodScheduled True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC }]
+ Jul 30 19:13:02.971: INFO: test-deployment-75444886b4-j8bkj kind-worker Running [{Initialized True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC } {Ready True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {ContainersReady True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {PodScheduled True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC }]
+ Jul 30 19:13:02.971: INFO:
+ Jul 30 19:13:02.982: INFO:
+ Logging node info for node kind-control-plane
+ Jul 30 19:13:02.990: INFO: Node Info: &Node{ObjectMeta:{kind-control-plane /api/v1/nodes/kind-control-plane 3586483e-4e41-430e-8adc-5b463a5a047a 10249 0 2020-07-30 19:04:56 +0000 UTC <nil> <nil> map[beta.kubernetes.io/arch:amd64 beta.kubernetes.io/os:linux kubernetes.io/arch:amd64 kubernetes.io/hostname:kind-control-plane kubernetes.io/os:linux node-role.kubernetes.io/master:] map[kubeadm.alpha.kubernetes.io/cri-socket:unix:///run/containerd/containerd.sock node.alpha.kubernetes.io/ttl:0 volumes.kubernetes.io/controller-managed-attach-detach:true] [] [] [{kubeadm Update v1 2020-07-30 19:04:59 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:kubeadm.alpha.kubernetes.io/cri-socket":{}},"f:labels":{"f:node-role.kubernetes.io/master":{}}}}} {kube-controller-manager Update v1 2020-07-30 19:05:36 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:node.alpha.kubernetes.io/ttl":{}},"f:labels":{"f:beta.kubernetes.io/arch":{},"f:beta.kubernetes.io/os":{}}},"f:spec":{"f:podCIDR":{},"f:podCIDRs":{".":{},"v:\"10.244.0.0/24\"":{}},"f:taints":{}}}} {kubelet Update v1 2020-07-30 19:10:37 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{".":{},"f:volumes.kubernetes.io/controller-managed-attach-detach":{}},"f:labels":{".":{},"f:kubernetes.io/arch":{},"f:kubernetes.io/hostname":{},"f:kubernetes.io/os":{}}},"f:status":{"f:addresses":{".":{},"k:{\"type\":\"Hostname\"}":{".":{},"f:address":{},"f:type":{}},"k:{\"type\":\"InternalIP\"}":{".":{},"f:address":{},"f:type":{}}},"f:allocatable":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:capacity":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:conditions":{".":{},"k:{\"type\":\"DiskPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"MemoryPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"PIDPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:daemonEndpoints":{"f:kubeletEndpoint":{"f:Port":{}}},"f:images":{},"f:nodeInfo":{"f:architecture":{},"f:bootID":{},"f:containerRuntimeVersion":{},"f:kernelVersion":{},"f:kubeProxyVersion":{},"f:kubeletVersion":{},"f:machineID":{},"f:operatingSystem":{},"f:osImage":{},"f:systemUUID":{}}}}}]},Spec:NodeSpec{PodCIDR:10.244.0.0/24,DoNotUseExternalID:,ProviderID:,Unschedulable:false,Taints:[]Taint{Taint{Key:node-role.kubernetes.io/master,Value:,Effect:NoSchedule,TimeAdded:<nil>,},},ConfigSource:nil,PodCIDRs:[10.244.0.0/24],},Status:NodeStatus{Capacity:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Allocatable:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Phase:,Conditions:[]NodeCondition{NodeCondition{Type:MemoryPressure,Status:False,LastHeartbeatTime:2020-07-30 19:10:37 +0000 UTC,LastTransitionTime:2020-07-30 19:04:48 +0000 UTC,Reason:KubeletHasSufficientMemory,Message:kubelet has sufficient memory available,},NodeCondition{Type:DiskPressure,Status:False,LastHeartbeatTime:2020-07-30 19:10:37 +0000 UTC,LastTransitionTime:2020-07-30 19:04:48 +0000 UTC,Reason:KubeletHasNoDiskPressure,Message:kubelet has no disk pressure,},NodeCondition{Type:PIDPressure,Status:False,LastHeartbeatTime:2020-07-30 19:10:37 +0000 UTC,LastTransitionTime:2020-07-30 19:04:48 +0000 UTC,Reason:KubeletHasSufficientPID,Message:kubelet has sufficient PID available,},NodeCondition{Type:Ready,Status:True,LastHeartbeatTime:2020-07-30 19:10:37 +0000 UTC,LastTransitionTime:2020-07-30 19:05:36 +0000 UTC,Reason:KubeletReady,Message:kubelet is posting ready status,},},Addresses:[]NodeAddress{NodeAddress{Type:InternalIP,Address:172.18.0.4,},NodeAddress{Type:Hostname,Address:kind-control-plane,},},DaemonEndpoints:NodeDaemonEndpoints{KubeletEndpoint:DaemonEndpoint{Port:10250,},},NodeInfo:NodeSystemInfo{MachineID:6c801d807c334b5091466fb4f4a80cf6,SystemUUID:ad7a69b4-0e4a-472f-a9b9-6b4e1114111e,BootID:e6119f85-4005-4bcf-a63c-b61c7dcb23a0,KernelVersion:4.15.0-1044-gke,OSImage:Ubuntu 20.04 LTS,ContainerRuntimeVersion:containerd://1.4.0-beta.2-43-gd184a0a3,KubeletVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,KubeProxyVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,OperatingSystem:linux,Architecture:amd64,},Images:[]ContainerImage{ContainerImage{Names:[k8s.gcr.io/etcd:3.4.9-1],SizeBytes:254610108,},ContainerImage{Names:[k8s.gcr.io/kube-apiserver:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:143759204,},ContainerImage{Names:[k8s.gcr.io/kube-controller-manager:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:131563373,},ContainerImage{Names:[k8s.gcr.io/kube-proxy:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:125767161,},ContainerImage{Names:[docker.io/kindest/kindnetd:v20200725-4d6bea59],SizeBytes:118720874,},ContainerImage{Names:[k8s.gcr.io/kube-scheduler:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:54046563,},ContainerImage{Names:[k8s.gcr.io/build-image/debian-base:v2.1.0],SizeBytes:53876619,},ContainerImage{Names:[k8s.gcr.io/coredns:1.7.0],SizeBytes:45355487,},ContainerImage{Names:[docker.io/rancher/local-path-provisioner:v0.0.14],SizeBytes:41982521,},ContainerImage{Names:[k8s.gcr.io/pause:3.2],SizeBytes:685724,},},VolumesInUse:[],VolumesAttached:[]AttachedVolume{},Config:nil,},}
+ Jul 30 19:13:02.991: INFO:
+ Logging kubelet events for node kind-control-plane
+ Jul 30 19:13:03.000: INFO:
+ Logging pods the kubelet thinks is on node kind-control-plane
+ Jul 30 19:13:03.021: INFO: etcd-kind-control-plane started at 2020-07-30 19:05:07 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container etcd ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: kube-scheduler-kind-control-plane started at 2020-07-30 19:05:07 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container kube-scheduler ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: kindnet-9mk2l started at 2020-07-30 19:05:16 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container kindnet-cni ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: coredns-f9fd979d6-6fnwz started at 2020-07-30 19:05:38 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container coredns ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: kube-apiserver-kind-control-plane started at 2020-07-30 19:05:07 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container kube-apiserver ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: kube-controller-manager-kind-control-plane started at 2020-07-30 19:05:07 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container kube-controller-manager ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: kube-proxy-sc9hr started at 2020-07-30 19:06:06 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container kube-proxy ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: coredns-f9fd979d6-t7q4w started at 2020-07-30 19:05:36 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container coredns ready: true, restart count 0
+ Jul 30 19:13:03.021: INFO: local-path-provisioner-78776bfc44-k8lwm started at 2020-07-30 19:05:36 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.021: INFO: Container local-path-provisioner ready: true, restart count 0
+ W0730 19:13:03.034888 11757 metrics_grabber.go:105] Did not receive an external client interface. Grabbing metrics from ClusterAutoscaler is disabled.
+ Jul 30 19:13:03.742: INFO:
+ Latency metrics for node kind-control-plane
+ Jul 30 19:13:03.742: INFO:
+ Logging node info for node kind-worker
+ Jul 30 19:13:03.749: INFO: Node Info: &Node{ObjectMeta:{kind-worker /api/v1/nodes/kind-worker 0e5d514b-4405-448b-a9d0-f6f954fad057 15308 0 2020-07-30 19:05:28 +0000 UTC <nil> <nil> map[beta.kubernetes.io/arch:amd64 beta.kubernetes.io/os:linux kubernetes.io/arch:amd64 kubernetes.io/hostname:kind-worker kubernetes.io/os:linux topology.hostpath.csi/node:kind-worker] map[csi.volume.kubernetes.io/nodeid:{"csi-hostpath-provisioning-3366":"kind-worker","csi-hostpath-volume-7909":"kind-worker","csi-hostpath-volume-expand-3199":"kind-worker","csi-hostpath-volumemode-3338":"kind-worker","csi-mock-csi-mock-volumes-590":"csi-mock-csi-mock-volumes-590","csi-mock-csi-mock-volumes-8787":"csi-mock-csi-mock-volumes-8787"} kubeadm.alpha.kubernetes.io/cri-socket:unix:///run/containerd/containerd.sock node.alpha.kubernetes.io/ttl:0 volumes.kubernetes.io/controller-managed-attach-detach:true] [] [] [{kubeadm Update v1 2020-07-30 19:05:29 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:kubeadm.alpha.kubernetes.io/cri-socket":{}}}}} {kube-controller-manager Update v1 2020-07-30 19:12:12 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:node.alpha.kubernetes.io/ttl":{}},"f:labels":{"f:beta.kubernetes.io/arch":{},"f:beta.kubernetes.io/os":{}}},"f:spec":{"f:podCIDR":{},"f:podCIDRs":{".":{},"v:\"10.244.1.0/24\"":{}}}}} {kubelet Update v1 2020-07-30 19:12:41 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{".":{},"f:csi.volume.kubernetes.io/nodeid":{},"f:volumes.kubernetes.io/controller-managed-attach-detach":{}},"f:labels":{".":{},"f:kubernetes.io/arch":{},"f:kubernetes.io/hostname":{},"f:kubernetes.io/os":{},"f:topology.hostpath.csi/node":{}}},"f:status":{"f:addresses":{".":{},"k:{\"type\":\"Hostname\"}":{".":{},"f:address":{},"f:type":{}},"k:{\"type\":\"InternalIP\"}":{".":{},"f:address":{},"f:type":{}}},"f:allocatable":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:capacity":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:conditions":{".":{},"k:{\"type\":\"DiskPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"MemoryPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"PIDPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:daemonEndpoints":{"f:kubeletEndpoint":{"f:Port":{}}},"f:images":{},"f:nodeInfo":{"f:architecture":{},"f:bootID":{},"f:containerRuntimeVersion":{},"f:kernelVersion":{},"f:kubeProxyVersion":{},"f:kubeletVersion":{},"f:machineID":{},"f:operatingSystem":{},"f:osImage":{},"f:systemUUID":{}}}}}]},Spec:NodeSpec{PodCIDR:10.244.1.0/24,DoNotUseExternalID:,ProviderID:,Unschedulable:false,Taints:[]Taint{},ConfigSource:nil,PodCIDRs:[10.244.1.0/24],},Status:NodeStatus{Capacity:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Allocatable:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Phase:,Conditions:[]NodeCondition{NodeCondition{Type:MemoryPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:41 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasSufficientMemory,Message:kubelet has sufficient memory available,},NodeCondition{Type:DiskPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:41 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasNoDiskPressure,Message:kubelet has no disk pressure,},NodeCondition{Type:PIDPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:41 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasSufficientPID,Message:kubelet has sufficient PID available,},NodeCondition{Type:Ready,Status:True,LastHeartbeatTime:2020-07-30 19:12:41 +0000 UTC,LastTransitionTime:2020-07-30 19:05:48 +0000 UTC,Reason:KubeletReady,Message:kubelet is posting ready status,},},Addresses:[]NodeAddress{NodeAddress{Type:InternalIP,Address:172.18.0.3,},NodeAddress{Type:Hostname,Address:kind-worker,},},DaemonEndpoints:NodeDaemonEndpoints{KubeletEndpoint:DaemonEndpoint{Port:10250,},},NodeInfo:NodeSystemInfo{MachineID:975b27af50394d3d9fe4371547a0b93a,SystemUUID:7d76780a-7be3-4019-b374-713ed7318586,BootID:e6119f85-4005-4bcf-a63c-b61c7dcb23a0,KernelVersion:4.15.0-1044-gke,OSImage:Ubuntu 20.04 LTS,ContainerRuntimeVersion:containerd://1.4.0-beta.2-43-gd184a0a3,KubeletVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,KubeProxyVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,OperatingSystem:linux,Architecture:amd64,},Images:[]ContainerImage{ContainerImage{Names:[k8s.gcr.io/etcd:3.4.9-1],SizeBytes:254610108,},ContainerImage{Names:[k8s.gcr.io/kube-apiserver:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:143759204,},ContainerImage{Names:[k8s.gcr.io/kube-controller-manager:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:131563373,},ContainerImage{Names:[k8s.gcr.io/kube-proxy:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:125767161,},ContainerImage{Names:[docker.io/kindest/kindnetd:v20200725-4d6bea59],SizeBytes:118720874,},ContainerImage{Names:[gcr.io/kubernetes-e2e-test-images/jessie-dnsutils@sha256:ad583e33cb284f7ef046673809b146ec4053cda19b54a85d2b180a86169715eb gcr.io/kubernetes-e2e-test-images/jessie-dnsutils:1.0],SizeBytes:85425365,},ContainerImage{Names:[k8s.gcr.io/kube-scheduler:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:54046563,},ContainerImage{Names:[k8s.gcr.io/build-image/debian-base:v2.1.0],SizeBytes:53876619,},ContainerImage{Names:[k8s.gcr.io/e2e-test-images/agnhost@sha256:17e61a0b9e498b6c73ed97670906be3d5a3ae394739c1bd5b619e1a004885cf0 k8s.gcr.io/e2e-test-images/agnhost:2.20],SizeBytes:46251412,},ContainerImage{Names:[k8s.gcr.io/coredns:1.7.0],SizeBytes:45355487,},ContainerImage{Names:[docker.io/rancher/local-path-provisioner:v0.0.14],SizeBytes:41982521,},ContainerImage{Names:[docker.io/library/httpd@sha256:addd70e4ee83f3bc9a4c1c7c41e37927ba47faf639312fc936df3afad7926f5a docker.io/library/httpd:2.4.39-alpine],SizeBytes:41901429,},ContainerImage{Names:[docker.io/library/httpd@sha256:eb8ccf084cf3e80eece1add239effefd171eb39adbc154d33c14260d905d4060 docker.io/library/httpd:2.4.38-alpine],SizeBytes:40765017,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-provisioner@sha256:b3f13b7636b1da131aef57c8b3a78b6e26c15cde74bfb8973ddb84dd724ea31b gcr.io/k8s-staging-csi/csi-provisioner:v2.0.0-rc1],SizeBytes:19415418,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-provisioner@sha256:78e3393f5fd5ff6c1e5dada2478cfa456fb7164929e573cf9a87bf6532730679 gcr.io/k8s-staging-csi/csi-provisioner:v1.6.0],SizeBytes:19408504,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-attacher@sha256:8fcb9472310dd424c4da8ee06ff200b5e6f091dff39a079e470599e4d0dcf328 gcr.io/k8s-staging-csi/csi-attacher:v3.0.0-rc1],SizeBytes:18637792,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-snapshotter@sha256:35ead85dd09aa8cc612fdb598d4e0e2f048bef816f1b74df5eeab67cd21b10aa gcr.io/k8s-staging-csi/csi-snapshotter:v2.1.0],SizeBytes:18487038,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-attacher@sha256:2ffa647e8107cfd39e5f464e738dce014c9f5e51b108da36c3ab621048d0bbab gcr.io/k8s-staging-csi/csi-attacher:v2.2.0],SizeBytes:18451536,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-resizer@sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a gcr.io/k8s-staging-csi/csi-resizer:v0.4.0],SizeBytes:18422462,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-resizer@sha256:6c6a0332693a7c456378f6abd2bb40611826c1e1a733cadbdae2daab3125b71c gcr.io/k8s-staging-csi/csi-resizer:v0.5.0],SizeBytes:18412631,},ContainerImage{Names:[gcr.io/k8s-staging-csi/hostpathplugin@sha256:aa223f9df8c1d477a9f2a4a2a7d104561e6d365e54671aacbc770dffcc0683ad gcr.io/k8s-staging-csi/hostpathplugin:v1.4.0-rc2],SizeBytes:13210408,},ContainerImage{Names:[gcr.io/k8s-staging-csi/mock-driver@sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3 gcr.io/k8s-staging-csi/mock-driver:v3.1.0],SizeBytes:8761232,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-node-driver-registrar@sha256:9622c6a6dac7499a055a382930f4de82905a3c5735c0753f7094115c9c871309 gcr.io/k8s-staging-csi/csi-node-driver-registrar:v1.3.0],SizeBytes:7717137,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-node-driver-registrar@sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571 gcr.io/k8s-staging-csi/csi-node-driver-registrar:v1.2.0],SizeBytes:7676865,},ContainerImage{Names:[docker.io/library/nginx@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a47f6d108dc7 docker.io/library/nginx:1.14-alpine],SizeBytes:6978806,},ContainerImage{Names:[gcr.io/k8s-staging-csi/livenessprobe@sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7 gcr.io/k8s-staging-csi/livenessprobe:v1.1.0],SizeBytes:6691212,},ContainerImage{Names:[gcr.io/kubernetes-e2e-test-images/nautilus@sha256:33a732d4c42a266912a5091598a0f07653c9134db4b8d571690d8afd509e0bfc gcr.io/kubernetes-e2e-test-images/nautilus:1.0],SizeBytes:1804628,},ContainerImage{Names:[docker.io/library/busybox@sha256:8ccbac733d19c0dd4d70b4f0c1e12245b5fa3ad24758a11035ee505c629c0796 docker.io/library/busybox:1.29],SizeBytes:732685,},ContainerImage{Names:[k8s.gcr.io/pause:3.2],SizeBytes:685724,},},VolumesInUse:[],VolumesAttached:[]AttachedVolume{},Config:nil,},}
+ Jul 30 19:13:03.750: INFO:
+ Logging kubelet events for node kind-worker
+ Jul 30 19:13:03.774: INFO:
+ Logging pods the kubelet thinks is on node kind-worker
+ Jul 30 19:13:03.805: INFO: hostexec-kind-worker-nhwxh started at 2020-07-30 19:12:50 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: hostexec-kind-worker-h2pwt started at 2020-07-30 19:12:17 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: simpletest.rc-prrgt started at 2020-07-30 19:11:32 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container nginx ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: test-deployment-75444886b4-dlg7k started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container test-deployment ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: kube-proxy-cqg7d started at 2020-07-30 19:05:46 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container kube-proxy ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: pod-projected-secrets-37a01bb4-a714-44ad-b0d7-473a6a77de12 started at 2020-07-30 19:12:51 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container projected-secret-volume-test ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: httpd started at 2020-07-30 19:10:40 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container httpd ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: local-injector started at 2020-07-30 19:12:48 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container local-injector ready: false, restart count 0
+ Jul 30 19:13:03.805: INFO: liveness-e346ad01-e31f-4d00-8381-2859c4ffaabf started at 2020-07-30 19:11:02 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container liveness ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: kindnet-d7c9q started at 2020-07-30 19:05:28 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.805: INFO: Container kindnet-cni ready: true, restart count 0
+ Jul 30 19:13:03.805: INFO: pod-61ccf859-a4a6-499d-bda6-1c3f6cc64408 started at <nil> (0+0 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: success started at 2020-07-30 19:11:10 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container success ready: false, restart count 0
+ Jul 30 19:13:03.806: INFO: pod-f56da749-c1c4-44ee-bebc-f661906fe517 started at 2020-07-30 19:12:36 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container test-container ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: hostexec-kind-worker-nt4n8 started at 2020-07-30 19:12:56 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container agnhost ready: false, restart count 0
+ Jul 30 19:13:03.806: INFO: csi-mockplugin-attacher-0 started at 2020-07-30 19:11:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container csi-attacher ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: csi-mockplugin-0 started at 2020-07-30 19:11:33 +0000 UTC (0+3 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container csi-provisioner ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: Container driver-registrar ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: Container mock ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: csi-mockplugin-resizer-0 started at 2020-07-30 19:11:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container csi-resizer ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: pod-c9f6fc81-565a-4dc1-9a4d-c4c6ea26f0bf started at 2020-07-30 19:12:31 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container write-pod ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: test-deployment-75444886b4-j8bkj started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container test-deployment ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: create-pvc-6b71c8cc-c3b0-4d00-a509-9ed5e1193120 started at 2020-07-30 19:12:52 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container local-path-create ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: pod-projected-configmaps-66dc9061-b611-4c01-9dd7-ebab92a26fba started at 2020-07-30 19:11:01 +0000 UTC (0+3 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container createcm-volume-test ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: Container delcm-volume-test ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: Container updcm-volume-test ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: hostexec-kind-worker-8k7dv started at 2020-07-30 19:12:09 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: kube-proxy-mode-detector started at 2020-07-30 19:12:34 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container detector ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: hostexec-kind-worker-gvlmv started at 2020-07-30 19:12:34 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: ss2-0 started at 2020-07-30 19:12:21 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container webserver ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: pod-configmaps-adfab082-ded6-4322-8e80-9a475fa889ce started at 2020-07-30 19:12:45 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container configmap-volume-test ready: true, restart count 0
+ Jul 30 19:13:03.806: INFO: ss-0 started at 2020-07-30 19:12:04 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:03.806: INFO: Container webserver ready: true, restart count 0
+ W0730 19:13:03.908051 11757 metrics_grabber.go:105] Did not receive an external client interface. Grabbing metrics from ClusterAutoscaler is disabled.
+ Jul 30 19:13:05.992: INFO:
+ Latency metrics for node kind-worker
+ Jul 30 19:13:05.992: INFO:
+ Logging node info for node kind-worker2
+ Jul 30 19:13:05.997: INFO: Node Info: &Node{ObjectMeta:{kind-worker2 /api/v1/nodes/kind-worker2 3431fe47-2625-4368-a64f-d0f170b30661 16159 0 2020-07-30 19:05:28 +0000 UTC <nil> <nil> map[beta.kubernetes.io/arch:amd64 beta.kubernetes.io/os:linux kubernetes.io/arch:amd64 kubernetes.io/hostname:kind-worker2 kubernetes.io/os:linux topology.hostpath.csi/node:kind-worker2] map[csi.volume.kubernetes.io/nodeid:{"csi-hostpath-ephemeral-6559":"kind-worker2","csi-hostpath-volumemode-7708":"kind-worker2","csi-mock-csi-mock-volumes-1489":"csi-mock-csi-mock-volumes-1489","csi-mock-csi-mock-volumes-4767":"csi-mock-csi-mock-volumes-4767"} kubeadm.alpha.kubernetes.io/cri-socket:unix:///run/containerd/containerd.sock node.alpha.kubernetes.io/ttl:0 volumes.kubernetes.io/controller-managed-attach-detach:true] [] [] [{kubeadm Update v1 2020-07-30 19:05:28 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:kubeadm.alpha.kubernetes.io/cri-socket":{}}}}} {kubelet Update v1 2020-07-30 19:13:00 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{".":{},"f:csi.volume.kubernetes.io/nodeid":{},"f:volumes.kubernetes.io/controller-managed-attach-detach":{}},"f:labels":{".":{},"f:kubernetes.io/arch":{},"f:kubernetes.io/hostname":{},"f:kubernetes.io/os":{},"f:topology.hostpath.csi/node":{}}},"f:status":{"f:addresses":{".":{},"k:{\"type\":\"Hostname\"}":{".":{},"f:address":{},"f:type":{}},"k:{\"type\":\"InternalIP\"}":{".":{},"f:address":{},"f:type":{}}},"f:allocatable":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:capacity":{".":{},"f:cpu":{},"f:ephemeral-storage":{},"f:hugepages-1Gi":{},"f:hugepages-2Mi":{},"f:memory":{},"f:pods":{}},"f:conditions":{".":{},"k:{\"type\":\"DiskPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"MemoryPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"PIDPressure\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastHeartbeatTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:daemonEndpoints":{"f:kubeletEndpoint":{"f:Port":{}}},"f:images":{},"f:nodeInfo":{"f:architecture":{},"f:bootID":{},"f:containerRuntimeVersion":{},"f:kernelVersion":{},"f:kubeProxyVersion":{},"f:kubeletVersion":{},"f:machineID":{},"f:operatingSystem":{},"f:osImage":{},"f:systemUUID":{}}}}} {kube-controller-manager Update v1 2020-07-30 19:13:02 +0000 UTC FieldsV1 {"f:metadata":{"f:annotations":{"f:node.alpha.kubernetes.io/ttl":{}},"f:labels":{"f:beta.kubernetes.io/arch":{},"f:beta.kubernetes.io/os":{}}},"f:spec":{"f:podCIDR":{},"f:podCIDRs":{".":{},"v:\"10.244.2.0/24\"":{}}},"f:status":{"f:volumesAttached":{}}}}]},Spec:NodeSpec{PodCIDR:10.244.2.0/24,DoNotUseExternalID:,ProviderID:,Unschedulable:false,Taints:[]Taint{},ConfigSource:nil,PodCIDRs:[10.244.2.0/24],},Status:NodeStatus{Capacity:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Allocatable:ResourceList{cpu: {{8 0} {<nil>} 8 DecimalSI},ephemeral-storage: {{259975987200 0} {<nil>} BinarySI},hugepages-1Gi: {{0 0} {<nil>} 0 DecimalSI},hugepages-2Mi: {{0 0} {<nil>} 0 DecimalSI},memory: {{54868963328 0} {<nil>} 53582972Ki BinarySI},pods: {{110 0} {<nil>} 110 DecimalSI},},Phase:,Conditions:[]NodeCondition{NodeCondition{Type:MemoryPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:01 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasSufficientMemory,Message:kubelet has sufficient memory available,},NodeCondition{Type:DiskPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:01 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasNoDiskPressure,Message:kubelet has no disk pressure,},NodeCondition{Type:PIDPressure,Status:False,LastHeartbeatTime:2020-07-30 19:12:01 +0000 UTC,LastTransitionTime:2020-07-30 19:05:28 +0000 UTC,Reason:KubeletHasSufficientPID,Message:kubelet has sufficient PID available,},NodeCondition{Type:Ready,Status:True,LastHeartbeatTime:2020-07-30 19:12:01 +0000 UTC,LastTransitionTime:2020-07-30 19:05:48 +0000 UTC,Reason:KubeletReady,Message:kubelet is posting ready status,},},Addresses:[]NodeAddress{NodeAddress{Type:InternalIP,Address:172.18.0.2,},NodeAddress{Type:Hostname,Address:kind-worker2,},},DaemonEndpoints:NodeDaemonEndpoints{KubeletEndpoint:DaemonEndpoint{Port:10250,},},NodeInfo:NodeSystemInfo{MachineID:c718b2c68bd54bb4bf855f96c657532d,SystemUUID:b9f7ffbd-5e8c-4c98-9bd9-19de13b24c8e,BootID:e6119f85-4005-4bcf-a63c-b61c7dcb23a0,KernelVersion:4.15.0-1044-gke,OSImage:Ubuntu 20.04 LTS,ContainerRuntimeVersion:containerd://1.4.0-beta.2-43-gd184a0a3,KubeletVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,KubeProxyVersion:v1.20.0-alpha.0.429+4e40765c0d46c0,OperatingSystem:linux,Architecture:amd64,},Images:[]ContainerImage{ContainerImage{Names:[k8s.gcr.io/etcd:3.4.9-1],SizeBytes:254610108,},ContainerImage{Names:[k8s.gcr.io/kube-apiserver:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:143759204,},ContainerImage{Names:[k8s.gcr.io/kube-controller-manager:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:131563373,},ContainerImage{Names:[k8s.gcr.io/kube-proxy:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:125767161,},ContainerImage{Names:[docker.io/kindest/kindnetd:v20200725-4d6bea59],SizeBytes:118720874,},ContainerImage{Names:[gcr.io/kubernetes-e2e-test-images/jessie-dnsutils@sha256:ad583e33cb284f7ef046673809b146ec4053cda19b54a85d2b180a86169715eb gcr.io/kubernetes-e2e-test-images/jessie-dnsutils:1.0],SizeBytes:85425365,},ContainerImage{Names:[k8s.gcr.io/kube-scheduler:v1.20.0-alpha.0.429_4e40765c0d46c0],SizeBytes:54046563,},ContainerImage{Names:[k8s.gcr.io/build-image/debian-base:v2.1.0],SizeBytes:53876619,},ContainerImage{Names:[k8s.gcr.io/e2e-test-images/agnhost@sha256:17e61a0b9e498b6c73ed97670906be3d5a3ae394739c1bd5b619e1a004885cf0 k8s.gcr.io/e2e-test-images/agnhost:2.20],SizeBytes:46251412,},ContainerImage{Names:[k8s.gcr.io/coredns:1.7.0],SizeBytes:45355487,},ContainerImage{Names:[docker.io/rancher/local-path-provisioner:v0.0.14],SizeBytes:41982521,},ContainerImage{Names:[docker.io/library/httpd@sha256:addd70e4ee83f3bc9a4c1c7c41e37927ba47faf639312fc936df3afad7926f5a docker.io/library/httpd:2.4.39-alpine],SizeBytes:41901429,},ContainerImage{Names:[docker.io/library/httpd@sha256:eb8ccf084cf3e80eece1add239effefd171eb39adbc154d33c14260d905d4060 docker.io/library/httpd:2.4.38-alpine],SizeBytes:40765017,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-provisioner@sha256:b3f13b7636b1da131aef57c8b3a78b6e26c15cde74bfb8973ddb84dd724ea31b gcr.io/k8s-staging-csi/csi-provisioner:v2.0.0-rc1],SizeBytes:19415418,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-provisioner@sha256:78e3393f5fd5ff6c1e5dada2478cfa456fb7164929e573cf9a87bf6532730679 gcr.io/k8s-staging-csi/csi-provisioner:v1.6.0],SizeBytes:19408504,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-attacher@sha256:8fcb9472310dd424c4da8ee06ff200b5e6f091dff39a079e470599e4d0dcf328 gcr.io/k8s-staging-csi/csi-attacher:v3.0.0-rc1],SizeBytes:18637792,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-snapshotter@sha256:35ead85dd09aa8cc612fdb598d4e0e2f048bef816f1b74df5eeab67cd21b10aa gcr.io/k8s-staging-csi/csi-snapshotter:v2.1.0],SizeBytes:18487038,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-attacher@sha256:2ffa647e8107cfd39e5f464e738dce014c9f5e51b108da36c3ab621048d0bbab gcr.io/k8s-staging-csi/csi-attacher:v2.2.0],SizeBytes:18451536,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-resizer@sha256:6c6a0332693a7c456378f6abd2bb40611826c1e1a733cadbdae2daab3125b71c gcr.io/k8s-staging-csi/csi-resizer:v0.5.0],SizeBytes:18412631,},ContainerImage{Names:[gcr.io/k8s-staging-csi/hostpathplugin@sha256:aa223f9df8c1d477a9f2a4a2a7d104561e6d365e54671aacbc770dffcc0683ad gcr.io/k8s-staging-csi/hostpathplugin:v1.4.0-rc2],SizeBytes:13210408,},ContainerImage{Names:[gcr.io/k8s-staging-csi/mock-driver@sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3 gcr.io/k8s-staging-csi/mock-driver:v3.1.0],SizeBytes:8761232,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-node-driver-registrar@sha256:9622c6a6dac7499a055a382930f4de82905a3c5735c0753f7094115c9c871309 gcr.io/k8s-staging-csi/csi-node-driver-registrar:v1.3.0],SizeBytes:7717137,},ContainerImage{Names:[gcr.io/k8s-staging-csi/csi-node-driver-registrar@sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571 gcr.io/k8s-staging-csi/csi-node-driver-registrar:v1.2.0],SizeBytes:7676865,},ContainerImage{Names:[docker.io/library/nginx@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a47f6d108dc7 docker.io/library/nginx:1.14-alpine],SizeBytes:6978806,},ContainerImage{Names:[gcr.io/k8s-staging-csi/livenessprobe@sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7 gcr.io/k8s-staging-csi/livenessprobe:v1.1.0],SizeBytes:6691212,},ContainerImage{Names:[gcr.io/kubernetes-e2e-test-images/nonewprivs@sha256:10066e9039219449fe3c81f38fe01928f87914150768ab81b62a468e51fa7411 gcr.io/kubernetes-e2e-test-images/nonewprivs:1.0],SizeBytes:3054649,},ContainerImage{Names:[gcr.io/kubernetes-e2e-test-images/nautilus@sha256:33a732d4c42a266912a5091598a0f07653c9134db4b8d571690d8afd509e0bfc gcr.io/kubernetes-e2e-test-images/nautilus:1.0],SizeBytes:1804628,},ContainerImage{Names:[docker.io/library/busybox@sha256:4f47c01fa91355af2865ac10fef5bf6ec9c7f42ad2321377c21e844427972977 docker.io/library/busybox:latest],SizeBytes:767890,},ContainerImage{Names:[docker.io/library/busybox@sha256:8ccbac733d19c0dd4d70b4f0c1e12245b5fa3ad24758a11035ee505c629c0796 docker.io/library/busybox:1.29],SizeBytes:732685,},ContainerImage{Names:[k8s.gcr.io/pause:3.2],SizeBytes:685724,},},VolumesInUse:[],VolumesAttached:[]AttachedVolume{AttachedVolume{Name:kubernetes.io/csi/csi-mock-csi-mock-volumes-1489^4,DevicePath:,},},Config:nil,},}
+ Jul 30 19:13:05.997: INFO:
+ Logging kubelet events for node kind-worker2
+ Jul 30 19:13:06.005: INFO:
+ Logging pods the kubelet thinks is on node kind-worker2
+ Jul 30 19:13:06.023: INFO: ss2-1 started at 2020-07-30 19:12:30 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container webserver ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pvc-volume-tester-rgz79 started at <nil> (0+0 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: csi-mockplugin-0 started at 2020-07-30 19:12:46 +0000 UTC (0+3 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container csi-provisioner ready: false, restart count 0
+ Jul 30 19:13:06.023: INFO: Container driver-registrar ready: false, restart count 0
+ Jul 30 19:13:06.023: INFO: Container mock ready: false, restart count 0
+ Jul 30 19:13:06.023: INFO: kube-proxy-66szz started at 2020-07-30 19:05:51 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container kube-proxy ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: hostexec-kind-worker2-l5ms9 started at 2020-07-30 19:12:12 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: hostexec-kind-worker2-zlb6b started at 2020-07-30 19:12:13 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container agnhost ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-submit-status-2-3 started at <nil> (0+0 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: ss2-2 started at 2020-07-30 19:12:58 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container webserver ready: false, restart count 0
+ Jul 30 19:13:06.023: INFO: failure-3 started at 2020-07-30 19:12:36 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container failure-3 ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: simpletest.rc-q4xmk started at 2020-07-30 19:11:32 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container nginx ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-subpath-test-configmap-76zv started at 2020-07-30 19:11:25 +0000 UTC (1+2 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Init container init-volume-configmap-76zv ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: Container test-container-subpath-configmap-76zv ready: true, restart count 3
+ Jul 30 19:13:06.023: INFO: Container test-container-volume-configmap-76zv ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-configmaps-e8d17475-ccbf-4b3d-babe-d433ffe985ec started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container configmap-volume-test ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-5e205334-0016-46a8-8af2-2013f6a5bcf7 started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container write-pod ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-submit-status-0-2 started at <nil> (0+0 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: local-injector started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container local-injector ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-secrets-bd535447-e707-406e-a6da-cb23d6533dd3 started at 2020-07-30 19:12:46 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container secret-volume-test ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: pod-submit-status-1-3 started at <nil> (0+0 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: failure-1 started at 2020-07-30 19:11:23 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container failure-1 ready: false, restart count 0
+ Jul 30 19:13:06.023: INFO: ss-1 started at 2020-07-30 19:12:32 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container webserver ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: failure-2 started at 2020-07-30 19:11:27 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container failure-2 ready: true, restart count 1
+ Jul 30 19:13:06.023: INFO: csi-mockplugin-attacher-0 started at 2020-07-30 19:12:46 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container csi-attacher ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: test-deployment-75444886b4-9r492 started at 2020-07-30 19:12:33 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container test-deployment ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: configmap-client started at 2020-07-30 19:12:35 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container configmap-client ready: true, restart count 0
+ Jul 30 19:13:06.023: INFO: kindnet-fk9rx started at 2020-07-30 19:05:29 +0000 UTC (0+1 container statuses recorded)
+ Jul 30 19:13:06.023: INFO: Container kindnet-cni ready: true, restart count 0
+ W0730 19:13:06.061802 11757 metrics_grabber.go:105] Did not receive an external client interface. Grabbing metrics from ClusterAutoscaler is disabled.
+ Jul 30 19:13:07.638: INFO:
+ Latency metrics for node kind-worker2
+ Jul 30 19:13:07.638: INFO: Waiting up to 3m0s for all (but 0) nodes to be ready
+ [1mSTEP[0m: Destroying namespace "deployment-4577" for this suite.
+
+
+ [91m[1m• Failure [35.209 seconds][0m
+ [sig-apps] Deployment
+ [90mtest/e2e/apps/framework.go:23[0m
+ [91m[1mshould run the lifecycle of a Deployment [It][0m
+ [90mtest/e2e/apps/deployment.go:151[0m
+
+ [91mJul 30 19:13:02.922: failed to see replicas of test-deployment in namespace deployment-4577 scale to requested amount of 3
+ Unexpected error:
+ <*errors.errorString | 0xc00026a1f0>: {
+ s: "timed out waiting for the condition",
+ }
+ timed out waiting for the condition
+ occurred[0m
+
+ test/e2e/apps/deployment.go:233
+ [90m------------------------------[0m
+ {"msg":"FAILED [sig-apps] Deployment should run the lifecycle of a Deployment","total":-1,"completed":6,"skipped":66,"failed":1,"failures":["[sig-apps] Deployment should run the lifecycle of a Deployment"]}
+ [BeforeEach] [Testpattern: Inline-volume (default fs)] subPath
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.760: INFO: Driver local doesn't support InlineVolume -- skipping
+ [AfterEach] [Testpattern: Inline-volume (default fs)] subPath
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.001 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: local][LocalVolumeType: tmpfs]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Inline-volume (default fs)] subPath
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould be able to unmount after the subpath directory is deleted [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/subpath.go:439[0m
+
+ [36mDriver local doesn't support InlineVolume -- skipping[0m
+
+ test/e2e/storage/testsuites/base.go:180
+ [90m------------------------------[0m
+ [36mS[0m
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Pre-provisioned PV (default fs)] subPath
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.765: INFO: Driver supports dynamic provisioning, skipping PreprovisionedPV pattern
+ [AfterEach] [Testpattern: Pre-provisioned PV (default fs)] subPath
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.001 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: aws]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Pre-provisioned PV (default fs)] subPath
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould support readOnly file specified in the volumeMount [LinuxOnly] [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/subpath.go:376[0m
+
+ [36mDriver supports dynamic provisioning, skipping PreprovisionedPV pattern[0m
+
+ test/e2e/storage/testsuites/base.go:793
+ [90m------------------------------[0m
+ [36mS[0m
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.770: INFO: Driver hostPath doesn't support DynamicPV -- skipping
+ [AfterEach] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.001 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: hostPath]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mVerify if offline PVC expansion works [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/volume_expand.go:162[0m
+
+ [36mDriver hostPath doesn't support DynamicPV -- skipping[0m
+
+ test/e2e/storage/testsuites/base.go:180
+ [90m------------------------------[0m
+ [36mS[0m[36mS[0m[36mS[0m[36mS[0m[36mS[0m[36mS[0m[36mS[0m
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Dynamic PV (default fs)] provisioning
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.793: INFO: Driver gluster doesn't support snapshot type DynamicSnapshot -- skipping
+ [AfterEach] [Testpattern: Dynamic PV (default fs)] provisioning
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.001 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: gluster]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Dynamic PV (default fs)] provisioning
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould provision storage with mount options [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/provisioning.go:180[0m
+
+ [36mDriver gluster doesn't support snapshot type DynamicSnapshot -- skipping[0m
+
+ test/e2e/storage/testsuites/base.go:162
+ [90m------------------------------[0m
+ [36mS[0m[36mS[0m[36mS[0m[36mS[0m[36mS[0m[36mS[0m
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Dynamic PV (default fs)] subPath
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.804: INFO: Driver local doesn't support snapshot type DynamicSnapshot -- skipping
+ [AfterEach] [Testpattern: Dynamic PV (default fs)] subPath
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.002 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: local][LocalVolumeType: dir]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Dynamic PV (default fs)] subPath
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould support readOnly directory specified in the volumeMount [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/subpath.go:361[0m
+
+ [36mDriver local doesn't support snapshot type DynamicSnapshot -- skipping[0m
+
+ test/e2e/storage/testsuites/base.go:162
+ [90m------------------------------[0m
+ [36mS[0m[36mS[0m[36mS[0m
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Dynamic PV (ntfs)][sig-windows] subPath
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.820: INFO: Driver cinder doesn't support ntfs -- skipping
+ [AfterEach] [Testpattern: Dynamic PV (ntfs)][sig-windows] subPath
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.010 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: cinder]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Dynamic PV (ntfs)][sig-windows] subPath
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould be able to unmount after the subpath directory is deleted [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/subpath.go:439[0m
+
+ [36mDriver cinder doesn't support ntfs -- skipping[0m
+
+ test/e2e/storage/testsuites/base.go:185
+ [90m------------------------------[0m
+ [BeforeEach] [Testpattern: Pre-provisioned PV (block volmode)] volumes
+ test/e2e/storage/testsuites/base.go:127
+ Jul 30 19:13:07.831: INFO: Only supported for providers [azure] (not skeleton)
+ [AfterEach] [Testpattern: Pre-provisioned PV (block volmode)] volumes
+ test/e2e/framework/framework.go:175
+
+
+ [36m[1mS [SKIPPING] in Spec Setup (BeforeEach) [0.001 seconds][0m
+ [sig-storage] In-tree Volumes
+ [90mtest/e2e/storage/utils/framework.go:23[0m
+ [Driver: azure-disk]
+ [90mtest/e2e/storage/in_tree_volumes.go:56[0m
+ [Testpattern: Pre-provisioned PV (block volmode)] volumes
+ [90mtest/e2e/storage/testsuites/base.go:126[0m
+ [36m[1mshould store data [BeforeEach][0m
+ [90mtest/e2e/storage/testsuites/volumes.go:151[0m
+
+ [36mOnly supported for providers [azure] (not skeleton)[0m
+
+ test/e2e/storage/drivers/in_tree.go:1531
+ [90m------------------------------[0m
+ [36mS[0m
+ [90m------------------------------[0m

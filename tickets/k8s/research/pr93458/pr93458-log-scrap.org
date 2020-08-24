@@ -1,0 +1,109 @@
+#+title: PR93458 Log Scrap
+
+
+* Summary
+
+- https://github.com/cncf/apisnoop/blob/explore-test-flakes/tickets/k8s/prow/explore-flakes-pr93458.org
+
+* Prow History
+
+- https://prow.k8s.io/pr-history/?org=kubernetes&repo=kubernetes&pr=93458
+
+* Download build-log.txt
+** Failed Job #1
+
+- [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456][https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456]]
+- [[https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456/build-log.txt][https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456/build-log.txt]]
+
+*** findings
+
+#+begin_example
+ Jul 30 19:13:02.971: INFO: POD NODE PHASE GRACE CONDITIONS
+ Jul 30 19:13:02.971: INFO: test-deployment-75444886b4-9r492 kind-worker2 Pending [{Initialized True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC } {Ready Fal
+se 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC ContainersNotReady containers with unready status: [test-deployment]} {ContainersReady False 0001-01-01 00:00:
+00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC ContainersNotReady containers with unready status: [test-deployment]} {PodScheduled True 0001-01-01 00:00:00 +0000 UTC 2020-07-30
+19:12:33 +0000 UTC }]
+ Jul 30 19:13:02.971: INFO: test-deployment-75444886b4-dlg7k kind-worker Running [{Initialized True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC } {Ready True
+ 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {ContainersReady True 0001-01-01 00:00:00 +0000 UTC 2020-07-30 19:12:46 +0000 UTC } {PodScheduled True 0001-01
+-01 00:00:00 +0000 UTC 2020-07-30 19:12:33 +0000 UTC }]
+#+end_example
+
+*** download
+
+#+name: block-1
+#+begin_src bash
+  wget https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288909664666259456/build-log.txt
+  build_log=pr93458-pull-kubernetes-e2e-kind-1288909664666259456.txt
+  mv build-log.txt $build_log
+  echo $build_log
+#+end_src
+
+** Failed Job #2
+
+- [[https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881][https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881]]
+- [[https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881/build-log.txt][https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881/build-log.txt]]
+
+*** findings
+
+#+begin_example
+ Jul 30 18:28:36.179: INFO: At 2020-07-30 18:28:15 +0000 UTC - event for test-deployment-744ffc5c46-qrkfg: {kubelet kind-worker} Failed: Error: failed to create containerd task: OCI runtime create failed: container_linux.go:367: starting container process caused: exec: "/bin/sleep": stat /bin/sleep: no such file or directory: unknown
+#+end_example
+
+*** download
+
+#+name: block-2
+#+begin_src bash
+  wget https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind/1288899169599098881/build-log.txt
+  build_log=pr93458-pull-kubernetes-e2e-kind-1288899169599098881.txt
+  mv build-log.txt $build_log
+  echo $build_log
+#+end_src
+
+** Failed Job #3
+
+- https://prow.k8s.io/view/gs/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind-ipv6/1288245896345030657
+- https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind-ipv6/1288245896345030657/build-log.txt
+
+*** findings
+
+#+begin_example
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:27 +0000 UTC - event for test-deployment-744ffc5c46-8txc5: {kubelet kind-worker} Failed: Error: failed to create containerd task: OCI runtime create failed: container_linux.go:367: starting container process caused: exec: "/bin/sleep": stat /bin/sleep: no such file or directory: unknown
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:27 +0000 UTC - event for test-deployment-744ffc5c46-s2qhh: {kubelet kind-worker2} Created: Created container test-deployment
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:27 +0000 UTC - event for test-deployment-744ffc5c46-s2qhh: {kubelet kind-worker2} Pulled: Container image "k8s.gcr.io/pause:3.2" already present on machine
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:27 +0000 UTC - event for test-deployment-79b575658-zw7vg: {kubelet kind-worker} Pulled: Container image "docker.io/library/httpd:2.4.38-alpine" already present on machine
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:27 +0000 UTC - event for test-deployment-79b575658-zw7vg: {kubelet kind-worker} Created: Created container test-deployment
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:28 +0000 UTC - event for test-deployment-744ffc5c46-8txc5: {kubelet kind-worker} BackOff: Back-off restarting failed container
+ Jul 28 23:12:53.346: INFO: At 2020-07-28 23:12:28 +0000 UTC - event for test-deployment-744ffc5c46-s2qhh: {kubelet kind-worker2} Failed: Error: failed to create containerd task: OCI runtime create failed: container_linux.go:367: starting container process caused: exec: "/bin/sleep": stat /bin/sleep: no such file or directory: unknown
+#+end_example
+
+*** download
+
+#+name: block-3
+#+begin_src bash
+  wget https://storage.googleapis.com/kubernetes-jenkins/pr-logs/pull/93458/pull-kubernetes-e2e-kind-ipv6/1288245896345030657/build-log.txt
+  build_log=pr93458-pull-kubernetes-e2e-kind-ipv6-1288245896345030657.txt
+  mv build-log.txt $build_log
+  echo $build_log
+#+end_src
+
+#+RESULTS: block-3
+#+begin_src bash
+pr93458-pull-kubernetes-e2e-kind-ipv6-1288245896345030657.txt
+#+end_src
+
+* Extract PR Details from build_log
+
+#+begin_src bash :var build_log=block-3
+  output=$(echo ${build_log} | sed 's/txt$/log/g')
+  start_msg="\[It\] should run the lifecycle of a Deployment"
+  start=$(cat ${build_log} | nl -ba |  grep "${start_msg}" | head -1 | awk '{print $1}')
+  echo "PR Log start: ${start}"
+  cat ${build-log} | head -$start | tail -1
+  end=$(echo $start  | awk '{print $1 + 400}')
+  cat ${build_log} | nl -ba | awk 'NR >= '$start' && NR <= '$end |  awk '{$1=""}1' > ${output}
+#+end_src
+
+#+RESULTS:
+#+begin_src bash
+PR Log start: 38760
+#+end_src

@@ -1,0 +1,2051 @@
+Starting Time Test for PR93458
+Test Run #1
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:05:36.463: INFO: Current test duration: 4.727621ms
+Aug 23 18:05:36.463: INFO: Stage duration: 4.742208ms
+STEP: waiting for Deployment to be created
+Aug 23 18:05:36.464: INFO: Current test duration: 6.444689ms
+Aug 23 18:05:36.464: INFO: Stage duration: 1.70764ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:05:38.656: INFO: Current test duration: 2.197618739s
+Aug 23 18:05:38.656: INFO: Stage duration: 2.191181184s
+STEP: patching the Deployment
+Aug 23 18:05:38.669: INFO: Current test duration: 2.211330948s
+Aug 23 18:05:38.669: INFO: Stage duration: 13.697301ms
+STEP: waiting for Replicas to scale
+Aug 23 18:05:38.718: INFO: Current test duration: 2.259988899s
+Aug 23 18:05:38.718: INFO: Stage duration: 48.658112ms
+STEP: listing Deployments
+Aug 23 18:05:38.723: INFO: Current test duration: 2.265251562s
+Aug 23 18:05:38.723: INFO: Stage duration: 5.260729ms
+STEP: updating the Deployment
+Aug 23 18:05:38.736: INFO: Current test duration: 2.277534492s
+Aug 23 18:05:38.736: INFO: Stage duration: 12.27784ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:05:41.833: INFO: Current test duration: 5.375402466s
+Aug 23 18:05:41.833: INFO: Stage duration: 3.097880437s
+STEP: patching the DeploymentStatus
+Aug 23 18:05:41.929: INFO: Current test duration: 5.470972707s
+Aug 23 18:05:41.929: INFO: Stage duration: 95.552488ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:05:41.941: INFO: Current test duration: 5.482797498s
+Aug 23 18:05:41.941: INFO: Stage duration: 11.821234ms
+STEP: deleting the Deployment
+Aug 23 18:05:41.960: INFO: Current test duration: 5.502199801s
+Aug 23 18:05:41.960: INFO: Stage duration: 19.394087ms
+STEP: Destroying namespace "deployment-9927" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.668 seconds
+Test Run #2
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:06:12.028: INFO: Current test duration: 3.751711ms
+Aug 23 18:06:12.028: INFO: Stage duration: 3.773262ms
+STEP: waiting for Deployment to be created
+Aug 23 18:06:12.032: INFO: Current test duration: 7.358862ms
+Aug 23 18:06:12.032: INFO: Stage duration: 3.594346ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:06:13.663: INFO: Current test duration: 1.639275224s
+Aug 23 18:06:13.663: INFO: Stage duration: 1.631921503s
+STEP: patching the Deployment
+Aug 23 18:06:13.672: INFO: Current test duration: 1.647880762s
+Aug 23 18:06:13.672: INFO: Stage duration: 8.585991ms
+STEP: waiting for Replicas to scale
+Aug 23 18:06:13.714: INFO: Current test duration: 1.689608866s
+Aug 23 18:06:13.714: INFO: Stage duration: 41.73122ms
+STEP: listing Deployments
+Aug 23 18:06:13.727: INFO: Current test duration: 1.702410839s
+Aug 23 18:06:13.727: INFO: Stage duration: 12.795169ms
+STEP: updating the Deployment
+Aug 23 18:06:13.735: INFO: Current test duration: 1.710775635s
+Aug 23 18:06:13.735: INFO: Stage duration: 8.359858ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:06:16.588: INFO: Current test duration: 4.564098602s
+Aug 23 18:06:16.588: INFO: Stage duration: 2.853333717s
+STEP: patching the DeploymentStatus
+Aug 23 18:06:16.599: INFO: Current test duration: 4.57483858s
+Aug 23 18:06:16.599: INFO: Stage duration: 10.727324ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:06:16.614: INFO: Current test duration: 4.589641563s
+Aug 23 18:06:16.614: INFO: Stage duration: 14.799056ms
+STEP: deleting the Deployment
+Aug 23 18:06:16.676: INFO: Current test duration: 4.651479485s
+Aug 23 18:06:16.676: INFO: Stage duration: 61.829316ms
+STEP: Destroying namespace "deployment-784" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.811 seconds
+Test Run #3
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:06:46.702: INFO: Current test duration: 4.206814ms
+Aug 23 18:06:46.702: INFO: Stage duration: 4.222714ms
+STEP: waiting for Deployment to be created
+Aug 23 18:06:46.703: INFO: Current test duration: 5.180068ms
+Aug 23 18:06:46.703: INFO: Stage duration: 964.778µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:06:48.321: INFO: Current test duration: 1.623222252s
+Aug 23 18:06:48.321: INFO: Stage duration: 1.618047394s
+STEP: patching the Deployment
+Aug 23 18:06:48.328: INFO: Current test duration: 1.629807963s
+Aug 23 18:06:48.328: INFO: Stage duration: 6.568029ms
+STEP: waiting for Replicas to scale
+Aug 23 18:06:48.369: INFO: Current test duration: 1.67089673s
+Aug 23 18:06:48.369: INFO: Stage duration: 41.094517ms
+STEP: listing Deployments
+Aug 23 18:06:48.372: INFO: Current test duration: 1.674215279s
+Aug 23 18:06:48.372: INFO: Stage duration: 3.306336ms
+STEP: updating the Deployment
+Aug 23 18:06:48.379: INFO: Current test duration: 1.680893475s
+Aug 23 18:06:48.379: INFO: Stage duration: 6.676974ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:06:51.005: INFO: Current test duration: 4.30720026s
+Aug 23 18:06:51.005: INFO: Stage duration: 2.626311334s
+STEP: patching the DeploymentStatus
+Aug 23 18:06:51.016: INFO: Current test duration: 4.317653051s
+Aug 23 18:06:51.016: INFO: Stage duration: 10.439525ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:06:51.039: INFO: Current test duration: 4.341014563s
+Aug 23 18:06:51.039: INFO: Stage duration: 23.353156ms
+STEP: deleting the Deployment
+Aug 23 18:06:51.076: INFO: Current test duration: 4.377574611s
+Aug 23 18:06:51.076: INFO: Stage duration: 36.556101ms
+STEP: Destroying namespace "deployment-9125" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.536 seconds
+Test Run #4
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:07:21.169: INFO: Current test duration: 4.117407ms
+Aug 23 18:07:21.169: INFO: Stage duration: 4.128548ms
+STEP: waiting for Deployment to be created
+Aug 23 18:07:21.170: INFO: Current test duration: 5.071095ms
+Aug 23 18:07:21.170: INFO: Stage duration: 954.238µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:07:22.451: INFO: Current test duration: 1.285748021s
+Aug 23 18:07:22.451: INFO: Stage duration: 1.28068381s
+STEP: patching the Deployment
+Aug 23 18:07:22.459: INFO: Current test duration: 1.293818035s
+Aug 23 18:07:22.459: INFO: Stage duration: 8.04655ms
+STEP: waiting for Replicas to scale
+Aug 23 18:07:22.514: INFO: Current test duration: 1.348762178s
+Aug 23 18:07:22.514: INFO: Stage duration: 54.940737ms
+STEP: listing Deployments
+Aug 23 18:07:22.516: INFO: Current test duration: 1.350937395s
+Aug 23 18:07:22.516: INFO: Stage duration: 2.169216ms
+STEP: updating the Deployment
+Aug 23 18:07:22.523: INFO: Current test duration: 1.357573872s
+Aug 23 18:07:22.523: INFO: Stage duration: 6.633231ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:07:25.518: INFO: Current test duration: 4.353123645s
+Aug 23 18:07:25.518: INFO: Stage duration: 2.995564801s
+STEP: patching the DeploymentStatus
+Aug 23 18:07:25.530: INFO: Current test duration: 4.364672149s
+Aug 23 18:07:25.530: INFO: Stage duration: 11.528086ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:07:25.548: INFO: Current test duration: 4.382577415s
+Aug 23 18:07:25.548: INFO: Stage duration: 17.898543ms
+STEP: deleting the Deployment
+Aug 23 18:07:25.619: INFO: Current test duration: 4.453619678s
+Aug 23 18:07:25.619: INFO: Stage duration: 71.041431ms
+STEP: Destroying namespace "deployment-2060" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.607 seconds
+Test Run #5
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:07:55.573: INFO: Current test duration: 3.866957ms
+Aug 23 18:07:55.573: INFO: Stage duration: 3.881264ms
+STEP: waiting for Deployment to be created
+Aug 23 18:07:55.574: INFO: Current test duration: 4.88773ms
+Aug 23 18:07:55.574: INFO: Stage duration: 1.015604ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:07:57.410: INFO: Current test duration: 1.841151839s
+Aug 23 18:07:57.410: INFO: Stage duration: 1.83627044s
+STEP: patching the Deployment
+Aug 23 18:07:57.417: INFO: Current test duration: 1.848139283s
+Aug 23 18:07:57.417: INFO: Stage duration: 6.968889ms
+STEP: waiting for Replicas to scale
+Aug 23 18:07:57.478: INFO: Current test duration: 1.908988834s
+Aug 23 18:07:57.478: INFO: Stage duration: 60.848859ms
+STEP: listing Deployments
+Aug 23 18:07:57.480: INFO: Current test duration: 1.911349508s
+Aug 23 18:07:57.480: INFO: Stage duration: 2.357949ms
+STEP: updating the Deployment
+Aug 23 18:07:57.487: INFO: Current test duration: 1.918347052s
+Aug 23 18:07:57.487: INFO: Stage duration: 6.992915ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:07:59.687: INFO: Current test duration: 4.118327117s
+Aug 23 18:07:59.687: INFO: Stage duration: 2.199988732s
+STEP: patching the DeploymentStatus
+Aug 23 18:07:59.705: INFO: Current test duration: 4.135722909s
+Aug 23 18:07:59.705: INFO: Stage duration: 17.386976ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:07:59.731: INFO: Current test duration: 4.162377493s
+Aug 23 18:07:59.731: INFO: Stage duration: 26.64138ms
+STEP: deleting the Deployment
+Aug 23 18:07:59.769: INFO: Current test duration: 4.199941994s
+Aug 23 18:07:59.769: INFO: Stage duration: 37.564ms
+STEP: Destroying namespace "deployment-8942" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.363 seconds
+Test Run #6
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:08:29.831: INFO: Current test duration: 12.970769ms
+Aug 23 18:08:29.831: INFO: Stage duration: 12.98719ms
+STEP: waiting for Deployment to be created
+Aug 23 18:08:29.832: INFO: Current test duration: 13.999206ms
+Aug 23 18:08:29.832: INFO: Stage duration: 1.027847ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:08:32.915: INFO: Current test duration: 3.097549514s
+Aug 23 18:08:32.915: INFO: Stage duration: 3.083552902s
+STEP: patching the Deployment
+Aug 23 18:08:32.924: INFO: Current test duration: 3.106696848s
+Aug 23 18:08:32.924: INFO: Stage duration: 9.13466ms
+STEP: waiting for Replicas to scale
+Aug 23 18:08:32.972: INFO: Current test duration: 3.154311584s
+Aug 23 18:08:32.972: INFO: Stage duration: 47.613283ms
+STEP: listing Deployments
+Aug 23 18:08:32.978: INFO: Current test duration: 3.160103118s
+Aug 23 18:08:32.978: INFO: Stage duration: 5.771697ms
+STEP: updating the Deployment
+Aug 23 18:08:32.984: INFO: Current test duration: 3.166176821s
+Aug 23 18:08:32.984: INFO: Stage duration: 6.069786ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:08:34.732: INFO: Current test duration: 4.914309046s
+Aug 23 18:08:34.732: INFO: Stage duration: 1.748140851s
+STEP: patching the DeploymentStatus
+Aug 23 18:08:34.747: INFO: Current test duration: 4.929367627s
+Aug 23 18:08:34.747: INFO: Stage duration: 15.042382ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:08:34.777: INFO: Current test duration: 4.959101132s
+Aug 23 18:08:34.777: INFO: Stage duration: 29.729758ms
+STEP: deleting the Deployment
+Aug 23 18:08:34.808: INFO: Current test duration: 4.989996133s
+Aug 23 18:08:34.808: INFO: Stage duration: 30.891154ms
+STEP: Destroying namespace "deployment-6565" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.150 seconds
+Test Run #7
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:09:04.809: INFO: Current test duration: 7.625441ms
+Aug 23 18:09:04.809: INFO: Stage duration: 7.64608ms
+STEP: waiting for Deployment to be created
+Aug 23 18:09:04.810: INFO: Current test duration: 8.892857ms
+Aug 23 18:09:04.810: INFO: Stage duration: 1.25934ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:09:07.976: INFO: Current test duration: 3.175106959s
+Aug 23 18:09:07.976: INFO: Stage duration: 3.166216086s
+STEP: patching the Deployment
+Aug 23 18:09:07.988: INFO: Current test duration: 3.18684628s
+Aug 23 18:09:07.988: INFO: Stage duration: 11.718121ms
+STEP: waiting for Replicas to scale
+Aug 23 18:09:08.045: INFO: Current test duration: 3.243885188s
+Aug 23 18:09:08.045: INFO: Stage duration: 57.038318ms
+STEP: listing Deployments
+Aug 23 18:09:08.050: INFO: Current test duration: 3.248964848s
+Aug 23 18:09:08.050: INFO: Stage duration: 5.083908ms
+STEP: updating the Deployment
+Aug 23 18:09:08.059: INFO: Current test duration: 3.257916374s
+Aug 23 18:09:08.059: INFO: Stage duration: 8.949933ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:09:11.140: INFO: Current test duration: 6.338996103s
+Aug 23 18:09:11.140: INFO: Stage duration: 3.081070922s
+STEP: patching the DeploymentStatus
+Aug 23 18:09:11.180: INFO: Current test duration: 6.378536637s
+Aug 23 18:09:11.180: INFO: Stage duration: 39.536977ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:09:11.199: INFO: Current test duration: 6.397872184s
+Aug 23 18:09:11.199: INFO: Stage duration: 19.334224ms
+STEP: deleting the Deployment
+Aug 23 18:09:11.226: INFO: Current test duration: 6.424956925s
+Aug 23 18:09:11.226: INFO: Stage duration: 27.066446ms
+STEP: Destroying namespace "deployment-4459" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.587 seconds
+Test Run #8
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:09:41.520: INFO: Current test duration: 4.048939ms
+Aug 23 18:09:41.520: INFO: Stage duration: 4.064939ms
+STEP: waiting for Deployment to be created
+Aug 23 18:09:41.522: INFO: Current test duration: 6.734181ms
+Aug 23 18:09:41.522: INFO: Stage duration: 2.675304ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:09:43.268: INFO: Current test duration: 1.752137651s
+Aug 23 18:09:43.268: INFO: Stage duration: 1.745403871s
+STEP: patching the Deployment
+Aug 23 18:09:43.283: INFO: Current test duration: 1.767147571s
+Aug 23 18:09:43.283: INFO: Stage duration: 14.998378ms
+STEP: waiting for Replicas to scale
+Aug 23 18:09:43.318: INFO: Current test duration: 1.80277385s
+Aug 23 18:09:43.318: INFO: Stage duration: 35.626559ms
+STEP: listing Deployments
+Aug 23 18:09:43.321: INFO: Current test duration: 1.805868309s
+Aug 23 18:09:43.321: INFO: Stage duration: 3.091884ms
+STEP: updating the Deployment
+Aug 23 18:09:43.328: INFO: Current test duration: 1.812460704s
+Aug 23 18:09:43.328: INFO: Stage duration: 6.59985ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:09:45.196: INFO: Current test duration: 3.680527448s
+Aug 23 18:09:45.196: INFO: Stage duration: 1.868067024s
+STEP: patching the DeploymentStatus
+Aug 23 18:09:45.221: INFO: Current test duration: 3.705736222s
+Aug 23 18:09:45.221: INFO: Stage duration: 25.198896ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:09:45.253: INFO: Current test duration: 3.737409752s
+Aug 23 18:09:45.253: INFO: Stage duration: 31.660205ms
+STEP: deleting the Deployment
+Aug 23 18:09:45.299: INFO: Current test duration: 3.783162929s
+Aug 23 18:09:45.299: INFO: Stage duration: 45.751494ms
+STEP: Destroying namespace "deployment-3278" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 3.941 seconds
+Test Run #9
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:10:15.175: INFO: Current test duration: 4.516295ms
+Aug 23 18:10:15.175: INFO: Stage duration: 4.526955ms
+STEP: waiting for Deployment to be created
+Aug 23 18:10:15.177: INFO: Current test duration: 7.037139ms
+Aug 23 18:10:15.177: INFO: Stage duration: 2.515153ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:10:16.401: INFO: Current test duration: 1.230993196s
+Aug 23 18:10:16.401: INFO: Stage duration: 1.223957529s
+STEP: patching the Deployment
+Aug 23 18:10:16.409: INFO: Current test duration: 1.238663922s
+Aug 23 18:10:16.409: INFO: Stage duration: 7.6618ms
+STEP: waiting for Replicas to scale
+Aug 23 18:10:16.500: INFO: Current test duration: 1.329824578s
+Aug 23 18:10:16.500: INFO: Stage duration: 91.161177ms
+STEP: listing Deployments
+Aug 23 18:10:16.504: INFO: Current test duration: 1.334079753s
+Aug 23 18:10:16.504: INFO: Stage duration: 4.250947ms
+STEP: updating the Deployment
+Aug 23 18:10:16.512: INFO: Current test duration: 1.341822754s
+Aug 23 18:10:16.512: INFO: Stage duration: 7.739896ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:10:19.449: INFO: Current test duration: 4.278867754s
+Aug 23 18:10:19.449: INFO: Stage duration: 2.937045591s
+STEP: patching the DeploymentStatus
+Aug 23 18:10:19.461: INFO: Current test duration: 4.290715828s
+Aug 23 18:10:19.461: INFO: Stage duration: 11.853465ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:10:19.477: INFO: Current test duration: 4.307210661s
+Aug 23 18:10:19.477: INFO: Stage duration: 16.478943ms
+STEP: deleting the Deployment
+Aug 23 18:10:19.519: INFO: Current test duration: 4.349010129s
+Aug 23 18:10:19.519: INFO: Stage duration: 41.791062ms
+STEP: Destroying namespace "deployment-9833" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.503 seconds
+Test Run #10
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:10:49.364: INFO: Current test duration: 4.081189ms
+Aug 23 18:10:49.364: INFO: Stage duration: 4.094614ms
+STEP: waiting for Deployment to be created
+Aug 23 18:10:49.365: INFO: Current test duration: 5.34092ms
+Aug 23 18:10:49.365: INFO: Stage duration: 1.255023ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:10:50.593: INFO: Current test duration: 1.233153965s
+Aug 23 18:10:50.593: INFO: Stage duration: 1.227809849s
+STEP: patching the Deployment
+Aug 23 18:10:50.601: INFO: Current test duration: 1.240431423s
+Aug 23 18:10:50.601: INFO: Stage duration: 7.268812ms
+STEP: waiting for Replicas to scale
+Aug 23 18:10:50.645: INFO: Current test duration: 1.285312887s
+Aug 23 18:10:50.645: INFO: Stage duration: 44.880713ms
+STEP: listing Deployments
+Aug 23 18:10:50.649: INFO: Current test duration: 1.288854434s
+Aug 23 18:10:50.649: INFO: Stage duration: 3.544562ms
+STEP: updating the Deployment
+Aug 23 18:10:50.658: INFO: Current test duration: 1.297652382s
+Aug 23 18:10:50.658: INFO: Stage duration: 8.789002ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:10:53.617: INFO: Current test duration: 4.257080435s
+Aug 23 18:10:53.617: INFO: Stage duration: 2.959478267s
+STEP: patching the DeploymentStatus
+Aug 23 18:10:53.622: INFO: Current test duration: 4.262220087s
+Aug 23 18:10:53.622: INFO: Stage duration: 5.09013ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:10:53.633: INFO: Current test duration: 4.272426355s
+Aug 23 18:10:53.633: INFO: Stage duration: 10.197001ms
+STEP: deleting the Deployment
+Aug 23 18:10:53.675: INFO: Current test duration: 4.314552454s
+Aug 23 18:10:53.675: INFO: Stage duration: 42.116692ms
+STEP: Destroying namespace "deployment-9608" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.525 seconds
+Test Run #11
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:11:23.506: INFO: Current test duration: 5.80556ms
+Aug 23 18:11:23.506: INFO: Stage duration: 5.820258ms
+STEP: waiting for Deployment to be created
+Aug 23 18:11:23.508: INFO: Current test duration: 7.836767ms
+Aug 23 18:11:23.508: INFO: Stage duration: 2.022039ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:11:26.757: INFO: Current test duration: 3.256432394s
+Aug 23 18:11:26.757: INFO: Stage duration: 3.248607099s
+STEP: patching the Deployment
+Aug 23 18:11:26.762: INFO: Current test duration: 3.26127548s
+Aug 23 18:11:26.762: INFO: Stage duration: 4.824141ms
+STEP: waiting for Replicas to scale
+Aug 23 18:11:26.804: INFO: Current test duration: 3.303010366s
+Aug 23 18:11:26.804: INFO: Stage duration: 41.735106ms
+STEP: listing Deployments
+Aug 23 18:11:26.817: INFO: Current test duration: 3.316056297s
+Aug 23 18:11:26.817: INFO: Stage duration: 13.043576ms
+STEP: updating the Deployment
+Aug 23 18:11:26.825: INFO: Current test duration: 3.324706708s
+Aug 23 18:11:26.825: INFO: Stage duration: 8.645882ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:11:28.793: INFO: Current test duration: 5.29229451s
+Aug 23 18:11:28.793: INFO: Stage duration: 1.967597199s
+STEP: patching the DeploymentStatus
+Aug 23 18:11:28.817: INFO: Current test duration: 5.316430914s
+Aug 23 18:11:28.817: INFO: Stage duration: 24.131996ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:11:28.831: INFO: Current test duration: 5.330132162s
+Aug 23 18:11:28.831: INFO: Stage duration: 13.685137ms
+STEP: deleting the Deployment
+Aug 23 18:11:28.883: INFO: Current test duration: 5.382139199s
+Aug 23 18:11:28.883: INFO: Stage duration: 51.999233ms
+STEP: Destroying namespace "deployment-6363" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.542 seconds
+Test Run #12
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:11:58.786: INFO: Current test duration: 4.963312ms
+Aug 23 18:11:58.786: INFO: Stage duration: 4.988389ms
+STEP: waiting for Deployment to be created
+Aug 23 18:11:58.792: INFO: Current test duration: 10.526759ms
+Aug 23 18:11:58.792: INFO: Stage duration: 5.555322ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:12:02.123: INFO: Current test duration: 3.341756159s
+Aug 23 18:12:02.123: INFO: Stage duration: 3.331222527s
+STEP: patching the Deployment
+Aug 23 18:12:02.128: INFO: Current test duration: 3.346822825s
+Aug 23 18:12:02.128: INFO: Stage duration: 5.048372ms
+STEP: waiting for Replicas to scale
+Aug 23 18:12:02.179: INFO: Current test duration: 3.397850638s
+Aug 23 18:12:02.179: INFO: Stage duration: 51.037982ms
+STEP: listing Deployments
+Aug 23 18:12:02.183: INFO: Current test duration: 3.401404979s
+Aug 23 18:12:02.183: INFO: Stage duration: 3.544733ms
+STEP: updating the Deployment
+Aug 23 18:12:02.191: INFO: Current test duration: 3.409223051s
+Aug 23 18:12:02.191: INFO: Stage duration: 7.813042ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:12:05.068: INFO: Current test duration: 6.28666385s
+Aug 23 18:12:05.068: INFO: Stage duration: 2.87745189s
+STEP: patching the DeploymentStatus
+Aug 23 18:12:05.082: INFO: Current test duration: 6.300935538s
+Aug 23 18:12:05.082: INFO: Stage duration: 14.259655ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:12:05.115: INFO: Current test duration: 6.333948347s
+Aug 23 18:12:05.115: INFO: Stage duration: 33.000317ms
+STEP: deleting the Deployment
+Aug 23 18:12:05.165: INFO: Current test duration: 6.383118669s
+Aug 23 18:12:05.165: INFO: Stage duration: 49.160894ms
+STEP: Destroying namespace "deployment-3246" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.537 seconds
+Test Run #13
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:12:35.239: INFO: Current test duration: 3.641635ms
+Aug 23 18:12:35.239: INFO: Stage duration: 3.652305ms
+STEP: waiting for Deployment to be created
+Aug 23 18:12:35.240: INFO: Current test duration: 4.719836ms
+Aug 23 18:12:35.240: INFO: Stage duration: 1.075396ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:12:36.362: INFO: Current test duration: 1.126447949s
+Aug 23 18:12:36.362: INFO: Stage duration: 1.121727772s
+STEP: patching the Deployment
+Aug 23 18:12:36.369: INFO: Current test duration: 1.133361265s
+Aug 23 18:12:36.369: INFO: Stage duration: 6.903919ms
+STEP: waiting for Replicas to scale
+Aug 23 18:12:36.428: INFO: Current test duration: 1.19225021s
+Aug 23 18:12:36.428: INFO: Stage duration: 58.887622ms
+STEP: listing Deployments
+Aug 23 18:12:36.430: INFO: Current test duration: 1.194308677s
+Aug 23 18:12:36.430: INFO: Stage duration: 2.055072ms
+STEP: updating the Deployment
+Aug 23 18:12:36.438: INFO: Current test duration: 1.203004865s
+Aug 23 18:12:36.438: INFO: Stage duration: 8.692732ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:12:39.219: INFO: Current test duration: 3.983940623s
+Aug 23 18:12:39.219: INFO: Stage duration: 2.780939785s
+STEP: patching the DeploymentStatus
+Aug 23 18:12:39.232: INFO: Current test duration: 3.996672253s
+Aug 23 18:12:39.232: INFO: Stage duration: 12.726641ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:12:39.254: INFO: Current test duration: 4.018198195s
+Aug 23 18:12:39.254: INFO: Stage duration: 21.515743ms
+STEP: deleting the Deployment
+Aug 23 18:12:39.306: INFO: Current test duration: 4.070818582s
+Aug 23 18:12:39.306: INFO: Stage duration: 52.614235ms
+STEP: Destroying namespace "deployment-2922" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.225 seconds
+Test Run #14
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:13:09.382: INFO: Current test duration: 4.643362ms
+Aug 23 18:13:09.382: INFO: Stage duration: 4.664361ms
+STEP: waiting for Deployment to be created
+Aug 23 18:13:09.384: INFO: Current test duration: 6.818298ms
+Aug 23 18:13:09.384: INFO: Stage duration: 2.163434ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:13:10.582: INFO: Current test duration: 1.204226003s
+Aug 23 18:13:10.582: INFO: Stage duration: 1.197413787s
+STEP: patching the Deployment
+Aug 23 18:13:10.590: INFO: Current test duration: 1.211896438s
+Aug 23 18:13:10.590: INFO: Stage duration: 7.650969ms
+STEP: waiting for Replicas to scale
+Aug 23 18:13:10.650: INFO: Current test duration: 1.272422641s
+Aug 23 18:13:10.650: INFO: Stage duration: 60.532766ms
+STEP: listing Deployments
+Aug 23 18:13:10.653: INFO: Current test duration: 1.275183175s
+Aug 23 18:13:10.653: INFO: Stage duration: 2.752318ms
+STEP: updating the Deployment
+Aug 23 18:13:10.661: INFO: Current test duration: 1.283132954s
+Aug 23 18:13:10.661: INFO: Stage duration: 7.946302ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:13:13.450: INFO: Current test duration: 4.072731606s
+Aug 23 18:13:13.450: INFO: Stage duration: 2.789606817s
+STEP: patching the DeploymentStatus
+Aug 23 18:13:13.466: INFO: Current test duration: 4.088483507s
+Aug 23 18:13:13.466: INFO: Stage duration: 15.738707ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:13:13.492: INFO: Current test duration: 4.114641209s
+Aug 23 18:13:13.492: INFO: Stage duration: 26.150949ms
+STEP: deleting the Deployment
+Aug 23 18:13:13.534: INFO: Current test duration: 4.156422573s
+Aug 23 18:13:13.534: INFO: Stage duration: 41.77463ms
+STEP: Destroying namespace "deployment-1350" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.312 seconds
+Test Run #15
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:13:43.508: INFO: Current test duration: 3.965311ms
+Aug 23 18:13:43.508: INFO: Stage duration: 3.983245ms
+STEP: waiting for Deployment to be created
+Aug 23 18:13:43.510: INFO: Current test duration: 6.094271ms
+Aug 23 18:13:43.510: INFO: Stage duration: 2.121857ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:13:44.778: INFO: Current test duration: 1.274429261s
+Aug 23 18:13:44.778: INFO: Stage duration: 1.268331283s
+STEP: patching the Deployment
+Aug 23 18:13:44.784: INFO: Current test duration: 1.280301446s
+Aug 23 18:13:44.784: INFO: Stage duration: 5.860823ms
+STEP: waiting for Replicas to scale
+Aug 23 18:13:44.830: INFO: Current test duration: 1.326128652s
+Aug 23 18:13:44.830: INFO: Stage duration: 45.828208ms
+STEP: listing Deployments
+Aug 23 18:13:44.835: INFO: Current test duration: 1.331147908s
+Aug 23 18:13:44.835: INFO: Stage duration: 5.018675ms
+STEP: updating the Deployment
+Aug 23 18:13:44.844: INFO: Current test duration: 1.340434903s
+Aug 23 18:13:44.844: INFO: Stage duration: 9.28957ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:13:47.623: INFO: Current test duration: 4.119631196s
+Aug 23 18:13:47.623: INFO: Stage duration: 2.779195732s
+STEP: patching the DeploymentStatus
+Aug 23 18:13:47.632: INFO: Current test duration: 4.127973711s
+Aug 23 18:13:47.632: INFO: Stage duration: 8.341413ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:13:47.636: INFO: Current test duration: 4.13255667s
+Aug 23 18:13:47.636: INFO: Stage duration: 4.561738ms
+STEP: deleting the Deployment
+Aug 23 18:13:47.661: INFO: Current test duration: 4.157500047s
+Aug 23 18:13:47.661: INFO: Stage duration: 24.940252ms
+STEP: Destroying namespace "deployment-3962" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.353 seconds
+Test Run #16
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:14:17.619: INFO: Current test duration: 4.480286ms
+Aug 23 18:14:17.619: INFO: Stage duration: 4.505644ms
+STEP: waiting for Deployment to be created
+Aug 23 18:14:17.621: INFO: Current test duration: 6.090064ms
+Aug 23 18:14:17.621: INFO: Stage duration: 1.596913ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:14:18.977: INFO: Current test duration: 1.362590422s
+Aug 23 18:14:18.977: INFO: Stage duration: 1.356500028s
+STEP: patching the Deployment
+Aug 23 18:14:18.984: INFO: Current test duration: 1.369129227s
+Aug 23 18:14:18.984: INFO: Stage duration: 6.520861ms
+STEP: waiting for Replicas to scale
+Aug 23 18:14:19.040: INFO: Current test duration: 1.425613595s
+Aug 23 18:14:19.040: INFO: Stage duration: 56.484549ms
+STEP: listing Deployments
+Aug 23 18:14:19.043: INFO: Current test duration: 1.428318344s
+Aug 23 18:14:19.043: INFO: Stage duration: 2.702404ms
+STEP: updating the Deployment
+Aug 23 18:14:19.056: INFO: Current test duration: 1.441288421s
+Aug 23 18:14:19.056: INFO: Stage duration: 12.967763ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:14:22.023: INFO: Current test duration: 4.408156345s
+Aug 23 18:14:22.023: INFO: Stage duration: 2.9668658s
+STEP: patching the DeploymentStatus
+Aug 23 18:14:22.031: INFO: Current test duration: 4.416582598s
+Aug 23 18:14:22.031: INFO: Stage duration: 8.441451ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:14:22.038: INFO: Current test duration: 4.423263057s
+Aug 23 18:14:22.038: INFO: Stage duration: 6.651726ms
+STEP: deleting the Deployment
+Aug 23 18:14:22.093: INFO: Current test duration: 4.478456867s
+Aug 23 18:14:22.093: INFO: Stage duration: 55.194331ms
+STEP: Destroying namespace "deployment-1445" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.632 seconds
+Test Run #17
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:14:52.087: INFO: Current test duration: 6.558482ms
+Aug 23 18:14:52.087: INFO: Stage duration: 6.5787ms
+STEP: waiting for Deployment to be created
+Aug 23 18:14:52.088: INFO: Current test duration: 7.626343ms
+Aug 23 18:14:52.088: INFO: Stage duration: 1.051931ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:14:55.239: INFO: Current test duration: 3.1583897s
+Aug 23 18:14:55.239: INFO: Stage duration: 3.15077528s
+STEP: patching the Deployment
+Aug 23 18:14:55.245: INFO: Current test duration: 3.164731676s
+Aug 23 18:14:55.245: INFO: Stage duration: 6.323562ms
+STEP: waiting for Replicas to scale
+Aug 23 18:14:55.309: INFO: Current test duration: 3.229264567s
+Aug 23 18:14:55.309: INFO: Stage duration: 64.546466ms
+STEP: listing Deployments
+Aug 23 18:14:55.316: INFO: Current test duration: 3.236026701s
+Aug 23 18:14:55.316: INFO: Stage duration: 6.74415ms
+STEP: updating the Deployment
+Aug 23 18:14:55.324: INFO: Current test duration: 3.243414296s
+Aug 23 18:14:55.324: INFO: Stage duration: 7.392174ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:14:58.315: INFO: Current test duration: 6.234375837s
+Aug 23 18:14:58.315: INFO: Stage duration: 2.990964907s
+STEP: patching the DeploymentStatus
+Aug 23 18:14:58.324: INFO: Current test duration: 6.243762939s
+Aug 23 18:14:58.324: INFO: Stage duration: 9.380109ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:14:58.333: INFO: Current test duration: 6.252698355s
+Aug 23 18:14:58.333: INFO: Stage duration: 8.923403ms
+STEP: deleting the Deployment
+Aug 23 18:14:58.388: INFO: Current test duration: 6.30800684s
+Aug 23 18:14:58.388: INFO: Stage duration: 55.308665ms
+STEP: Destroying namespace "deployment-3169" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.470 seconds
+Test Run #18
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:15:28.302: INFO: Current test duration: 4.216232ms
+Aug 23 18:15:28.302: INFO: Stage duration: 4.229968ms
+STEP: waiting for Deployment to be created
+Aug 23 18:15:28.304: INFO: Current test duration: 5.544381ms
+Aug 23 18:15:28.304: INFO: Stage duration: 1.319143ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:15:31.552: INFO: Current test duration: 3.253593599s
+Aug 23 18:15:31.552: INFO: Stage duration: 3.248060318s
+STEP: patching the Deployment
+Aug 23 18:15:31.557: INFO: Current test duration: 3.258995742s
+Aug 23 18:15:31.557: INFO: Stage duration: 5.402054ms
+STEP: waiting for Replicas to scale
+Aug 23 18:15:31.605: INFO: Current test duration: 3.306805484s
+Aug 23 18:15:31.605: INFO: Stage duration: 47.795545ms
+STEP: listing Deployments
+Aug 23 18:15:31.611: INFO: Current test duration: 3.312684151s
+Aug 23 18:15:31.611: INFO: Stage duration: 5.878687ms
+STEP: updating the Deployment
+Aug 23 18:15:31.619: INFO: Current test duration: 3.321312792s
+Aug 23 18:15:31.619: INFO: Stage duration: 8.614765ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:15:34.523: INFO: Current test duration: 6.224910367s
+Aug 23 18:15:34.523: INFO: Stage duration: 2.903608416s
+STEP: patching the DeploymentStatus
+Aug 23 18:15:34.536: INFO: Current test duration: 6.237880946s
+Aug 23 18:15:34.536: INFO: Stage duration: 12.972091ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:15:34.548: INFO: Current test duration: 6.249677534s
+Aug 23 18:15:34.548: INFO: Stage duration: 11.769227ms
+STEP: deleting the Deployment
+Aug 23 18:15:34.611: INFO: Current test duration: 6.313257791s
+Aug 23 18:15:34.611: INFO: Stage duration: 63.573153ms
+STEP: Destroying namespace "deployment-526" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.471 seconds
+Test Run #19
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:16:04.639: INFO: Current test duration: 6.343508ms
+Aug 23 18:16:04.639: INFO: Stage duration: 6.367744ms
+STEP: waiting for Deployment to be created
+Aug 23 18:16:04.640: INFO: Current test duration: 7.464008ms
+Aug 23 18:16:04.640: INFO: Stage duration: 1.101805ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:16:05.768: INFO: Current test duration: 1.13601822s
+Aug 23 18:16:05.768: INFO: Stage duration: 1.128565654s
+STEP: patching the Deployment
+Aug 23 18:16:05.782: INFO: Current test duration: 1.149643907s
+Aug 23 18:16:05.782: INFO: Stage duration: 13.606751ms
+STEP: waiting for Replicas to scale
+Aug 23 18:16:05.827: INFO: Current test duration: 1.194576034s
+Aug 23 18:16:05.827: INFO: Stage duration: 44.929042ms
+STEP: listing Deployments
+Aug 23 18:16:05.833: INFO: Current test duration: 1.200572262s
+Aug 23 18:16:05.833: INFO: Stage duration: 5.991198ms
+STEP: updating the Deployment
+Aug 23 18:16:05.842: INFO: Current test duration: 1.209393204s
+Aug 23 18:16:05.842: INFO: Stage duration: 8.819238ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:16:08.691: INFO: Current test duration: 4.058328131s
+Aug 23 18:16:08.691: INFO: Stage duration: 2.848951348s
+STEP: patching the DeploymentStatus
+Aug 23 18:16:08.700: INFO: Current test duration: 4.067159272s
+Aug 23 18:16:08.700: INFO: Stage duration: 8.815512ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:16:08.710: INFO: Current test duration: 4.077119779s
+Aug 23 18:16:08.710: INFO: Stage duration: 9.959606ms
+STEP: deleting the Deployment
+Aug 23 18:16:08.760: INFO: Current test duration: 4.127098945s
+Aug 23 18:16:08.760: INFO: Stage duration: 49.96526ms
+STEP: Destroying namespace "deployment-4931" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.287 seconds
+Test Run #20
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:16:38.543: INFO: Current test duration: 3.762292ms
+Aug 23 18:16:38.543: INFO: Stage duration: 3.782139ms
+STEP: waiting for Deployment to be created
+Aug 23 18:16:38.544: INFO: Current test duration: 4.723413ms
+Aug 23 18:16:38.544: INFO: Stage duration: 944.951µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:16:40.178: INFO: Current test duration: 1.639545341s
+Aug 23 18:16:40.178: INFO: Stage duration: 1.634822018s
+STEP: patching the Deployment
+Aug 23 18:16:40.186: INFO: Current test duration: 1.647510829s
+Aug 23 18:16:40.186: INFO: Stage duration: 7.95639ms
+STEP: waiting for Replicas to scale
+Aug 23 18:16:40.243: INFO: Current test duration: 1.704026906s
+Aug 23 18:16:40.243: INFO: Stage duration: 56.513993ms
+STEP: listing Deployments
+Aug 23 18:16:40.246: INFO: Current test duration: 1.70678208s
+Aug 23 18:16:40.246: INFO: Stage duration: 2.764912ms
+STEP: updating the Deployment
+Aug 23 18:16:40.253: INFO: Current test duration: 1.714220189s
+Aug 23 18:16:40.253: INFO: Stage duration: 7.421178ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:16:42.971: INFO: Current test duration: 4.431795013s
+Aug 23 18:16:42.971: INFO: Stage duration: 2.717582858s
+STEP: patching the DeploymentStatus
+Aug 23 18:16:42.977: INFO: Current test duration: 4.438176141s
+Aug 23 18:16:42.977: INFO: Stage duration: 6.37699ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:16:42.994: INFO: Current test duration: 4.455264036s
+Aug 23 18:16:42.994: INFO: Stage duration: 17.06933ms
+STEP: deleting the Deployment
+Aug 23 18:16:43.035: INFO: Current test duration: 4.495862372s
+Aug 23 18:16:43.035: INFO: Stage duration: 40.597995ms
+STEP: Destroying namespace "deployment-6164" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.652 seconds
+Test Run #21
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:17:13.155: INFO: Current test duration: 40.151168ms
+Aug 23 18:17:13.155: INFO: Stage duration: 40.175804ms
+STEP: waiting for Deployment to be created
+Aug 23 18:17:13.156: INFO: Current test duration: 41.18733ms
+Aug 23 18:17:13.156: INFO: Stage duration: 1.016776ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:17:14.385: INFO: Current test duration: 1.270495761s
+Aug 23 18:17:14.385: INFO: Stage duration: 1.229322738s
+STEP: patching the Deployment
+Aug 23 18:17:14.392: INFO: Current test duration: 1.276863956s
+Aug 23 18:17:14.392: INFO: Stage duration: 6.345031ms
+STEP: waiting for Replicas to scale
+Aug 23 18:17:14.436: INFO: Current test duration: 1.32112775s
+Aug 23 18:17:14.436: INFO: Stage duration: 44.26125ms
+STEP: listing Deployments
+Aug 23 18:17:14.439: INFO: Current test duration: 1.324437073s
+Aug 23 18:17:14.439: INFO: Stage duration: 3.309573ms
+STEP: updating the Deployment
+Aug 23 18:17:14.447: INFO: Current test duration: 1.331833515s
+Aug 23 18:17:14.447: INFO: Stage duration: 7.40076ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:17:17.208: INFO: Current test duration: 4.092983849s
+Aug 23 18:17:17.208: INFO: Stage duration: 2.761174259s
+STEP: patching the DeploymentStatus
+Aug 23 18:17:17.219: INFO: Current test duration: 4.104616841s
+Aug 23 18:17:17.219: INFO: Stage duration: 11.602254ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:17:17.232: INFO: Current test duration: 4.117137726s
+Aug 23 18:17:17.232: INFO: Stage duration: 12.50214ms
+STEP: deleting the Deployment
+Aug 23 18:17:17.279: INFO: Current test duration: 4.164071446s
+Aug 23 18:17:17.279: INFO: Stage duration: 46.933719ms
+STEP: Destroying namespace "deployment-5239" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.309 seconds
+Test Run #22
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:17:47.436: INFO: Current test duration: 6.303123ms
+Aug 23 18:17:47.436: INFO: Stage duration: 6.329302ms
+STEP: waiting for Deployment to be created
+Aug 23 18:17:47.438: INFO: Current test duration: 7.620912ms
+Aug 23 18:17:47.438: INFO: Stage duration: 1.306068ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:17:48.595: INFO: Current test duration: 1.164494121s
+Aug 23 18:17:48.595: INFO: Stage duration: 1.156863871s
+STEP: patching the Deployment
+Aug 23 18:17:48.601: INFO: Current test duration: 1.171101925s
+Aug 23 18:17:48.601: INFO: Stage duration: 6.599318ms
+STEP: waiting for Replicas to scale
+Aug 23 18:17:48.678: INFO: Current test duration: 1.247696321s
+Aug 23 18:17:48.678: INFO: Stage duration: 76.604946ms
+STEP: listing Deployments
+Aug 23 18:17:48.684: INFO: Current test duration: 1.253857698s
+Aug 23 18:17:48.684: INFO: Stage duration: 6.140067ms
+STEP: updating the Deployment
+Aug 23 18:17:48.691: INFO: Current test duration: 1.261156136s
+Aug 23 18:17:48.691: INFO: Stage duration: 7.303507ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:17:51.586: INFO: Current test duration: 4.156402006s
+Aug 23 18:17:51.586: INFO: Stage duration: 2.895253965s
+STEP: patching the DeploymentStatus
+Aug 23 18:17:51.601: INFO: Current test duration: 4.171270621s
+Aug 23 18:17:51.601: INFO: Stage duration: 14.846194ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:17:51.621: INFO: Current test duration: 4.190938251s
+Aug 23 18:17:51.621: INFO: Stage duration: 19.666968ms
+STEP: deleting the Deployment
+Aug 23 18:17:51.669: INFO: Current test duration: 4.239352544s
+Aug 23 18:17:51.669: INFO: Stage duration: 48.40197ms
+STEP: Destroying namespace "deployment-3117" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.402 seconds
+Test Run #23
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:18:21.634: INFO: Current test duration: 5.412764ms
+Aug 23 18:18:21.634: INFO: Stage duration: 5.430186ms
+STEP: waiting for Deployment to be created
+Aug 23 18:18:21.635: INFO: Current test duration: 6.381219ms
+Aug 23 18:18:21.635: INFO: Stage duration: 955.551µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:18:24.802: INFO: Current test duration: 3.173831341s
+Aug 23 18:18:24.802: INFO: Stage duration: 3.167470189s
+STEP: patching the Deployment
+Aug 23 18:18:24.807: INFO: Current test duration: 3.179048749s
+Aug 23 18:18:24.807: INFO: Stage duration: 5.18675ms
+STEP: waiting for Replicas to scale
+Aug 23 18:18:24.865: INFO: Current test duration: 3.236297905s
+Aug 23 18:18:24.865: INFO: Stage duration: 57.266118ms
+STEP: listing Deployments
+Aug 23 18:18:24.870: INFO: Current test duration: 3.242103285s
+Aug 23 18:18:24.870: INFO: Stage duration: 5.788328ms
+STEP: updating the Deployment
+Aug 23 18:18:24.878: INFO: Current test duration: 3.249177273s
+Aug 23 18:18:24.878: INFO: Stage duration: 7.068267ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:18:26.859: INFO: Current test duration: 5.230650388s
+Aug 23 18:18:26.859: INFO: Stage duration: 1.981473275s
+STEP: patching the DeploymentStatus
+Aug 23 18:18:26.876: INFO: Current test duration: 5.247929513s
+Aug 23 18:18:26.876: INFO: Stage duration: 17.280236ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:18:26.900: INFO: Current test duration: 5.271993193s
+Aug 23 18:18:26.900: INFO: Stage duration: 24.051156ms
+STEP: deleting the Deployment
+Aug 23 18:18:26.943: INFO: Current test duration: 5.314899948s
+Aug 23 18:18:26.943: INFO: Stage duration: 42.90397ms
+STEP: Destroying namespace "deployment-6039" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.484 seconds
+Test Run #24
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:18:56.911: INFO: Current test duration: 4.994961ms
+Aug 23 18:18:56.911: INFO: Stage duration: 5.017644ms
+STEP: waiting for Deployment to be created
+Aug 23 18:18:56.914: INFO: Current test duration: 7.975678ms
+Aug 23 18:18:56.914: INFO: Stage duration: 2.971429ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:18:58.000: INFO: Current test duration: 1.094634717s
+Aug 23 18:18:58.000: INFO: Stage duration: 1.086660491s
+STEP: patching the Deployment
+Aug 23 18:18:58.006: INFO: Current test duration: 1.099938928s
+Aug 23 18:18:58.006: INFO: Stage duration: 5.284514ms
+STEP: waiting for Replicas to scale
+Aug 23 18:18:58.071: INFO: Current test duration: 1.164891s
+Aug 23 18:18:58.071: INFO: Stage duration: 64.950249ms
+STEP: listing Deployments
+Aug 23 18:18:58.076: INFO: Current test duration: 1.169799208s
+Aug 23 18:18:58.076: INFO: Stage duration: 4.911445ms
+STEP: updating the Deployment
+Aug 23 18:18:58.087: INFO: Current test duration: 1.181339597s
+Aug 23 18:18:58.087: INFO: Stage duration: 11.530541ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:19:00.993: INFO: Current test duration: 4.087544466s
+Aug 23 18:19:00.993: INFO: Stage duration: 2.906213725s
+STEP: patching the DeploymentStatus
+Aug 23 18:19:01.008: INFO: Current test duration: 4.102268812s
+Aug 23 18:19:01.008: INFO: Stage duration: 14.721069ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:19:01.059: INFO: Current test duration: 4.153113234s
+Aug 23 18:19:01.059: INFO: Stage duration: 50.826678ms
+STEP: deleting the Deployment
+Aug 23 18:19:01.081: INFO: Current test duration: 4.175519758s
+Aug 23 18:19:01.081: INFO: Stage duration: 22.405853ms
+STEP: Destroying namespace "deployment-760" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.338 seconds
+Test Run #25
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:19:31.002: INFO: Current test duration: 4.772955ms
+Aug 23 18:19:31.002: INFO: Stage duration: 4.79694ms
+STEP: waiting for Deployment to be created
+Aug 23 18:19:31.003: INFO: Current test duration: 5.986559ms
+Aug 23 18:19:31.003: INFO: Stage duration: 1.197183ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:19:33.198: INFO: Current test duration: 2.200767797s
+Aug 23 18:19:33.198: INFO: Stage duration: 2.194781669s
+STEP: patching the Deployment
+Aug 23 18:19:33.203: INFO: Current test duration: 2.206296008s
+Aug 23 18:19:33.203: INFO: Stage duration: 5.513233ms
+STEP: waiting for Replicas to scale
+Aug 23 18:19:33.240: INFO: Current test duration: 2.243337641s
+Aug 23 18:19:33.240: INFO: Stage duration: 37.052544ms
+STEP: listing Deployments
+Aug 23 18:19:33.245: INFO: Current test duration: 2.24766397s
+Aug 23 18:19:33.245: INFO: Stage duration: 4.314326ms
+STEP: updating the Deployment
+Aug 23 18:19:33.256: INFO: Current test duration: 2.259169593s
+Aug 23 18:19:33.256: INFO: Stage duration: 11.508199ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:19:36.197: INFO: Current test duration: 5.199493135s
+Aug 23 18:19:36.197: INFO: Stage duration: 2.94032267s
+STEP: patching the DeploymentStatus
+Aug 23 18:19:36.217: INFO: Current test duration: 5.219891505s
+Aug 23 18:19:36.217: INFO: Stage duration: 20.401445ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:19:36.248: INFO: Current test duration: 5.25123603s
+Aug 23 18:19:36.248: INFO: Stage duration: 31.324798ms
+STEP: deleting the Deployment
+Aug 23 18:19:36.286: INFO: Current test duration: 5.289447125s
+Aug 23 18:19:36.287: INFO: Stage duration: 38.201978ms
+STEP: Destroying namespace "deployment-5536" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.440 seconds
+Test Run #26
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:20:06.658: INFO: Current test duration: 3.771919ms
+Aug 23 18:20:06.658: INFO: Stage duration: 3.783371ms
+STEP: waiting for Deployment to be created
+Aug 23 18:20:06.659: INFO: Current test duration: 4.848788ms
+Aug 23 18:20:06.659: INFO: Stage duration: 1.070717ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:20:08.462: INFO: Current test duration: 1.807969121s
+Aug 23 18:20:08.462: INFO: Stage duration: 1.803128519s
+STEP: patching the Deployment
+Aug 23 18:20:08.467: INFO: Current test duration: 1.812987206s
+Aug 23 18:20:08.467: INFO: Stage duration: 4.998498ms
+STEP: waiting for Replicas to scale
+Aug 23 18:20:08.515: INFO: Current test duration: 1.861288351s
+Aug 23 18:20:08.516: INFO: Stage duration: 48.301636ms
+STEP: listing Deployments
+Aug 23 18:20:08.521: INFO: Current test duration: 1.866915527s
+Aug 23 18:20:08.521: INFO: Stage duration: 5.624582ms
+STEP: updating the Deployment
+Aug 23 18:20:08.528: INFO: Current test duration: 1.873400711s
+Aug 23 18:20:08.528: INFO: Stage duration: 6.481417ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:20:10.463: INFO: Current test duration: 3.80912672s
+Aug 23 18:20:10.463: INFO: Stage duration: 1.935735406s
+STEP: patching the DeploymentStatus
+Aug 23 18:20:10.483: INFO: Current test duration: 3.828930205s
+Aug 23 18:20:10.483: INFO: Stage duration: 19.798255ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:20:10.504: INFO: Current test duration: 3.849618589s
+Aug 23 18:20:10.504: INFO: Stage duration: 20.668887ms
+STEP: deleting the Deployment
+Aug 23 18:20:10.538: INFO: Current test duration: 3.883442171s
+Aug 23 18:20:10.538: INFO: Stage duration: 33.819524ms
+STEP: Destroying namespace "deployment-3333" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.356 seconds
+Test Run #27
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:20:40.483: INFO: Current test duration: 4.192418ms
+Aug 23 18:20:40.483: INFO: Stage duration: 4.206154ms
+STEP: waiting for Deployment to be created
+Aug 23 18:20:40.484: INFO: Current test duration: 5.808627ms
+Aug 23 18:20:40.484: INFO: Stage duration: 1.607232ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:20:41.662: INFO: Current test duration: 1.183454165s
+Aug 23 18:20:41.662: INFO: Stage duration: 1.17764634s
+STEP: patching the Deployment
+Aug 23 18:20:41.670: INFO: Current test duration: 1.191787593s
+Aug 23 18:20:41.670: INFO: Stage duration: 8.325122ms
+STEP: waiting for Replicas to scale
+Aug 23 18:20:41.717: INFO: Current test duration: 1.23864385s
+Aug 23 18:20:41.717: INFO: Stage duration: 46.854253ms
+STEP: listing Deployments
+Aug 23 18:20:41.719: INFO: Current test duration: 1.240923973s
+Aug 23 18:20:41.719: INFO: Stage duration: 2.284942ms
+STEP: updating the Deployment
+Aug 23 18:20:41.727: INFO: Current test duration: 1.249009216s
+Aug 23 18:20:41.727: INFO: Stage duration: 8.07272ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:20:44.617: INFO: Current test duration: 4.139033606s
+Aug 23 18:20:44.617: INFO: Stage duration: 2.890032174s
+STEP: patching the DeploymentStatus
+Aug 23 18:20:44.635: INFO: Current test duration: 4.156169381s
+Aug 23 18:20:44.635: INFO: Stage duration: 17.124915ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:20:44.673: INFO: Current test duration: 4.194836762s
+Aug 23 18:20:44.673: INFO: Stage duration: 38.673472ms
+STEP: deleting the Deployment
+Aug 23 18:20:44.693: INFO: Current test duration: 4.214762576s
+Aug 23 18:20:44.693: INFO: Stage duration: 19.911217ms
+STEP: Destroying namespace "deployment-6373" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.372 seconds
+Test Run #28
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:21:14.746: INFO: Current test duration: 5.301696ms
+Aug 23 18:21:14.746: INFO: Stage duration: 5.324569ms
+STEP: waiting for Deployment to be created
+Aug 23 18:21:14.748: INFO: Current test duration: 7.606205ms
+Aug 23 18:21:14.748: INFO: Stage duration: 2.292847ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:21:15.882: INFO: Current test duration: 1.14084227s
+Aug 23 18:21:15.882: INFO: Stage duration: 1.1332383s
+STEP: patching the Deployment
+Aug 23 18:21:15.888: INFO: Current test duration: 1.147118383s
+Aug 23 18:21:15.888: INFO: Stage duration: 6.257688ms
+STEP: waiting for Replicas to scale
+Aug 23 18:21:15.950: INFO: Current test duration: 1.209541134s
+Aug 23 18:21:15.950: INFO: Stage duration: 62.443811ms
+STEP: listing Deployments
+Aug 23 18:21:15.953: INFO: Current test duration: 1.212359777s
+Aug 23 18:21:15.953: INFO: Stage duration: 2.796631ms
+STEP: updating the Deployment
+Aug 23 18:21:15.964: INFO: Current test duration: 1.223459329s
+Aug 23 18:21:15.964: INFO: Stage duration: 11.10343ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:21:18.766: INFO: Current test duration: 4.024976186s
+Aug 23 18:21:18.766: INFO: Stage duration: 2.801528689s
+STEP: patching the DeploymentStatus
+Aug 23 18:21:18.779: INFO: Current test duration: 4.037779291s
+Aug 23 18:21:18.779: INFO: Stage duration: 12.780323ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:21:18.787: INFO: Current test duration: 4.046101479s
+Aug 23 18:21:18.787: INFO: Stage duration: 8.306097ms
+STEP: deleting the Deployment
+Aug 23 18:21:18.850: INFO: Current test duration: 4.109395192s
+Aug 23 18:21:18.850: INFO: Stage duration: 63.293263ms
+STEP: Destroying namespace "deployment-5843" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.268 seconds
+Test Run #29
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:21:48.877: INFO: Current test duration: 4.888112ms
+Aug 23 18:21:48.877: INFO: Stage duration: 4.912698ms
+STEP: waiting for Deployment to be created
+Aug 23 18:21:48.880: INFO: Current test duration: 7.811501ms
+Aug 23 18:21:48.880: INFO: Stage duration: 2.911567ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:21:50.123: INFO: Current test duration: 1.25059258s
+Aug 23 18:21:50.123: INFO: Stage duration: 1.242778635s
+STEP: patching the Deployment
+Aug 23 18:21:50.128: INFO: Current test duration: 1.255379201s
+Aug 23 18:21:50.128: INFO: Stage duration: 4.767575ms
+STEP: waiting for Replicas to scale
+Aug 23 18:21:50.187: INFO: Current test duration: 1.314603468s
+Aug 23 18:21:50.187: INFO: Stage duration: 59.240297ms
+STEP: listing Deployments
+Aug 23 18:21:50.190: INFO: Current test duration: 1.317728404s
+Aug 23 18:21:50.190: INFO: Stage duration: 3.110129ms
+STEP: updating the Deployment
+Aug 23 18:21:50.197: INFO: Current test duration: 1.325003329s
+Aug 23 18:21:50.197: INFO: Stage duration: 7.286757ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:21:53.145: INFO: Current test duration: 4.272577895s
+Aug 23 18:21:53.145: INFO: Stage duration: 2.947572763s
+STEP: patching the DeploymentStatus
+Aug 23 18:21:53.169: INFO: Current test duration: 4.296354365s
+Aug 23 18:21:53.169: INFO: Stage duration: 23.763356ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:21:53.183: INFO: Current test duration: 4.31122197s
+Aug 23 18:21:53.183: INFO: Stage duration: 14.855022ms
+STEP: deleting the Deployment
+Aug 23 18:21:53.238: INFO: Current test duration: 4.365966421s
+Aug 23 18:21:53.238: INFO: Stage duration: 54.746565ms
+STEP: Destroying namespace "deployment-1984" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.534 seconds
+Test Run #30
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:22:23.635: INFO: Current test duration: 3.990318ms
+Aug 23 18:22:23.635: INFO: Stage duration: 4.001198ms
+STEP: waiting for Deployment to be created
+Aug 23 18:22:23.636: INFO: Current test duration: 5.056857ms
+Aug 23 18:22:23.636: INFO: Stage duration: 1.060408ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:22:25.437: INFO: Current test duration: 1.80627285s
+Aug 23 18:22:25.437: INFO: Stage duration: 1.801226554s
+STEP: patching the Deployment
+Aug 23 18:22:25.444: INFO: Current test duration: 1.813053058s
+Aug 23 18:22:25.444: INFO: Stage duration: 6.765149ms
+STEP: waiting for Replicas to scale
+Aug 23 18:22:25.483: INFO: Current test duration: 1.852082115s
+Aug 23 18:22:25.483: INFO: Stage duration: 39.028727ms
+STEP: listing Deployments
+Aug 23 18:22:25.491: INFO: Current test duration: 1.859444453s
+Aug 23 18:22:25.491: INFO: Stage duration: 7.354594ms
+STEP: updating the Deployment
+Aug 23 18:22:25.497: INFO: Current test duration: 1.866062688s
+Aug 23 18:22:25.497: INFO: Stage duration: 6.614738ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:22:29.304: INFO: Current test duration: 5.673161026s
+Aug 23 18:22:29.304: INFO: Stage duration: 3.807101083s
+STEP: patching the DeploymentStatus
+Aug 23 18:22:29.310: INFO: Current test duration: 5.678961777s
+Aug 23 18:22:29.310: INFO: Stage duration: 5.795522ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:22:29.325: INFO: Current test duration: 5.693541432s
+Aug 23 18:22:29.325: INFO: Stage duration: 14.571038ms
+STEP: deleting the Deployment
+Aug 23 18:22:29.375: INFO: Current test duration: 5.744018154s
+Aug 23 18:22:29.375: INFO: Stage duration: 50.468677ms
+STEP: Destroying namespace "deployment-8010" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.893 seconds
+Test Run #31
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:22:59.338: INFO: Current test duration: 3.530387ms
+Aug 23 18:22:59.338: INFO: Stage duration: 3.551326ms
+STEP: waiting for Deployment to be created
+Aug 23 18:22:59.344: INFO: Current test duration: 10.161494ms
+Aug 23 18:22:59.344: INFO: Stage duration: 6.616129ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:23:00.640: INFO: Current test duration: 1.305559143s
+Aug 23 18:23:00.640: INFO: Stage duration: 1.295396977s
+STEP: patching the Deployment
+Aug 23 18:23:00.645: INFO: Current test duration: 1.310891827s
+Aug 23 18:23:00.645: INFO: Stage duration: 5.325972ms
+STEP: waiting for Replicas to scale
+Aug 23 18:23:00.681: INFO: Current test duration: 1.347262752s
+Aug 23 18:23:00.681: INFO: Stage duration: 36.367629ms
+STEP: listing Deployments
+Aug 23 18:23:00.685: INFO: Current test duration: 1.350883659s
+Aug 23 18:23:00.685: INFO: Stage duration: 3.618291ms
+STEP: updating the Deployment
+Aug 23 18:23:00.699: INFO: Current test duration: 1.36436774s
+Aug 23 18:23:00.699: INFO: Stage duration: 13.482849ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:23:03.557: INFO: Current test duration: 4.22237227s
+Aug 23 18:23:03.557: INFO: Stage duration: 2.858008086s
+STEP: patching the DeploymentStatus
+Aug 23 18:23:03.570: INFO: Current test duration: 4.235673358s
+Aug 23 18:23:03.570: INFO: Stage duration: 13.295889ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:23:03.579: INFO: Current test duration: 4.244999327s
+Aug 23 18:23:03.579: INFO: Stage duration: 9.31638ms
+STEP: deleting the Deployment
+Aug 23 18:23:03.627: INFO: Current test duration: 4.293079507s
+Aug 23 18:23:03.627: INFO: Stage duration: 48.073308ms
+STEP: Destroying namespace "deployment-3778" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.439 seconds
+Test Run #32
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:23:33.531: INFO: Current test duration: 5.887804ms
+Aug 23 18:23:33.531: INFO: Stage duration: 5.90715ms
+STEP: waiting for Deployment to be created
+Aug 23 18:23:33.532: INFO: Current test duration: 7.055553ms
+Aug 23 18:23:33.532: INFO: Stage duration: 1.154905ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:23:35.722: INFO: Current test duration: 2.196898412s
+Aug 23 18:23:35.722: INFO: Stage duration: 2.18984897s
+STEP: patching the Deployment
+Aug 23 18:23:35.728: INFO: Current test duration: 2.203469117s
+Aug 23 18:23:35.728: INFO: Stage duration: 6.551459ms
+STEP: waiting for Replicas to scale
+Aug 23 18:23:35.791: INFO: Current test duration: 2.266276439s
+Aug 23 18:23:35.791: INFO: Stage duration: 62.8121ms
+STEP: listing Deployments
+Aug 23 18:23:35.794: INFO: Current test duration: 2.269427935s
+Aug 23 18:23:35.794: INFO: Stage duration: 3.145355ms
+STEP: updating the Deployment
+Aug 23 18:23:35.802: INFO: Current test duration: 2.27743448s
+Aug 23 18:23:35.802: INFO: Stage duration: 8.002598ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:23:38.752: INFO: Current test duration: 5.227575046s
+Aug 23 18:23:38.752: INFO: Stage duration: 2.950139864s
+STEP: patching the DeploymentStatus
+Aug 23 18:23:38.764: INFO: Current test duration: 5.239542676s
+Aug 23 18:23:38.764: INFO: Stage duration: 12.006943ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:23:38.785: INFO: Current test duration: 5.259722526s
+Aug 23 18:23:38.785: INFO: Stage duration: 20.129496ms
+STEP: deleting the Deployment
+Aug 23 18:23:38.850: INFO: Current test duration: 5.32551349s
+Aug 23 18:23:38.850: INFO: Stage duration: 65.782547ms
+STEP: Destroying namespace "deployment-3593" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.480 seconds
+Test Run #33
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:24:08.947: INFO: Current test duration: 12.50703ms
+Aug 23 18:24:08.947: INFO: Stage duration: 12.518081ms
+STEP: waiting for Deployment to be created
+Aug 23 18:24:08.948: INFO: Current test duration: 13.519177ms
+Aug 23 18:24:08.948: INFO: Stage duration: 1.006536ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:24:10.055: INFO: Current test duration: 1.121077452s
+Aug 23 18:24:10.055: INFO: Stage duration: 1.107564097s
+STEP: patching the Deployment
+Aug 23 18:24:10.067: INFO: Current test duration: 1.133031576s
+Aug 23 18:24:10.067: INFO: Stage duration: 11.943163ms
+STEP: waiting for Replicas to scale
+Aug 23 18:24:10.114: INFO: Current test duration: 1.179737181s
+Aug 23 18:24:10.114: INFO: Stage duration: 46.712938ms
+STEP: listing Deployments
+Aug 23 18:24:10.117: INFO: Current test duration: 1.183092249s
+Aug 23 18:24:10.117: INFO: Stage duration: 3.339008ms
+STEP: updating the Deployment
+Aug 23 18:24:10.140: INFO: Current test duration: 1.205723954s
+Aug 23 18:24:10.140: INFO: Stage duration: 22.637997ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:24:13.033: INFO: Current test duration: 4.098547034s
+Aug 23 18:24:13.033: INFO: Stage duration: 2.892821367s
+STEP: patching the DeploymentStatus
+Aug 23 18:24:13.047: INFO: Current test duration: 4.11231078s
+Aug 23 18:24:13.047: INFO: Stage duration: 13.749689ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:24:13.090: INFO: Current test duration: 4.156084709s
+Aug 23 18:24:13.090: INFO: Stage duration: 43.767327ms
+STEP: deleting the Deployment
+Aug 23 18:24:13.121: INFO: Current test duration: 4.186439029s
+Aug 23 18:24:13.121: INFO: Stage duration: 30.35462ms
+STEP: Destroying namespace "deployment-4073" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.338 seconds
+Test Run #34
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:24:43.385: INFO: Current test duration: 4.210421ms
+Aug 23 18:24:43.385: INFO: Stage duration: 4.220389ms
+STEP: waiting for Deployment to be created
+Aug 23 18:24:43.387: INFO: Current test duration: 5.915316ms
+Aug 23 18:24:43.387: INFO: Stage duration: 1.711678ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:24:45.287: INFO: Current test duration: 1.906376879s
+Aug 23 18:24:45.287: INFO: Stage duration: 1.900450052s
+STEP: patching the Deployment
+Aug 23 18:24:45.293: INFO: Current test duration: 1.912080638s
+Aug 23 18:24:45.293: INFO: Stage duration: 5.695133ms
+STEP: waiting for Replicas to scale
+Aug 23 18:24:45.360: INFO: Current test duration: 1.979172901s
+Aug 23 18:24:45.360: INFO: Stage duration: 67.097061ms
+STEP: listing Deployments
+Aug 23 18:24:45.363: INFO: Current test duration: 1.981779726s
+Aug 23 18:24:45.363: INFO: Stage duration: 2.599261ms
+STEP: updating the Deployment
+Aug 23 18:24:45.368: INFO: Current test duration: 1.987213611s
+Aug 23 18:24:45.368: INFO: Stage duration: 5.432693ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:24:48.200: INFO: Current test duration: 4.81966049s
+Aug 23 18:24:48.201: INFO: Stage duration: 2.832451237s
+STEP: patching the DeploymentStatus
+Aug 23 18:24:48.227: INFO: Current test duration: 4.845794991s
+Aug 23 18:24:48.227: INFO: Stage duration: 26.122568ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:24:48.254: INFO: Current test duration: 4.873372916s
+Aug 23 18:24:48.254: INFO: Stage duration: 27.575641ms
+STEP: deleting the Deployment
+Aug 23 18:24:48.315: INFO: Current test duration: 4.934252294s
+Aug 23 18:24:48.315: INFO: Stage duration: 60.869519ms
+STEP: Destroying namespace "deployment-8905" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.394 seconds
+Test Run #35
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:25:18.289: INFO: Current test duration: 5.450095ms
+Aug 23 18:25:18.289: INFO: Stage duration: 5.460825ms
+STEP: waiting for Deployment to be created
+Aug 23 18:25:18.290: INFO: Current test duration: 6.556458ms
+Aug 23 18:25:18.290: INFO: Stage duration: 1.101665ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:25:19.525: INFO: Current test duration: 1.24148979s
+Aug 23 18:25:19.525: INFO: Stage duration: 1.234940907s
+STEP: patching the Deployment
+Aug 23 18:25:19.529: INFO: Current test duration: 1.245899095s
+Aug 23 18:25:19.529: INFO: Stage duration: 4.392643ms
+STEP: waiting for Replicas to scale
+Aug 23 18:25:19.582: INFO: Current test duration: 1.298707777s
+Aug 23 18:25:19.582: INFO: Stage duration: 52.809034ms
+STEP: listing Deployments
+Aug 23 18:25:19.586: INFO: Current test duration: 1.303174288s
+Aug 23 18:25:19.586: INFO: Stage duration: 4.462734ms
+STEP: updating the Deployment
+Aug 23 18:25:19.593: INFO: Current test duration: 1.309366894s
+Aug 23 18:25:19.593: INFO: Stage duration: 6.191603ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:25:22.337: INFO: Current test duration: 4.05425606s
+Aug 23 18:25:22.337: INFO: Stage duration: 2.744889899s
+STEP: patching the DeploymentStatus
+Aug 23 18:25:22.350: INFO: Current test duration: 4.066653706s
+Aug 23 18:25:22.350: INFO: Stage duration: 12.395652ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:25:22.396: INFO: Current test duration: 4.112739388s
+Aug 23 18:25:22.396: INFO: Stage duration: 46.069933ms
+STEP: deleting the Deployment
+Aug 23 18:25:22.514: INFO: Current test duration: 4.230963881s
+Aug 23 18:25:22.514: INFO: Stage duration: 118.232427ms
+STEP: Destroying namespace "deployment-2950" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.391 seconds
+Test Run #36
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:25:52.648: INFO: Current test duration: 4.664012ms
+Aug 23 18:25:52.649: INFO: Stage duration: 4.677367ms
+STEP: waiting for Deployment to be created
+Aug 23 18:25:52.650: INFO: Current test duration: 5.915808ms
+Aug 23 18:25:52.650: INFO: Stage duration: 1.256545ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:25:53.758: INFO: Current test duration: 1.114292387s
+Aug 23 18:25:53.758: INFO: Stage duration: 1.108366119s
+STEP: patching the Deployment
+Aug 23 18:25:53.764: INFO: Current test duration: 1.120170733s
+Aug 23 18:25:53.764: INFO: Stage duration: 5.866134ms
+STEP: waiting for Replicas to scale
+Aug 23 18:25:53.841: INFO: Current test duration: 1.197133895s
+Aug 23 18:25:53.841: INFO: Stage duration: 76.987196ms
+STEP: listing Deployments
+Aug 23 18:25:53.844: INFO: Current test duration: 1.200378476s
+Aug 23 18:25:53.844: INFO: Stage duration: 3.220486ms
+STEP: updating the Deployment
+Aug 23 18:25:53.850: INFO: Current test duration: 1.206663375s
+Aug 23 18:25:53.851: INFO: Stage duration: 6.277455ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:25:56.693: INFO: Current test duration: 4.049568381s
+Aug 23 18:25:56.693: INFO: Stage duration: 2.842903113s
+STEP: patching the DeploymentStatus
+Aug 23 18:25:56.706: INFO: Current test duration: 4.061938955s
+Aug 23 18:25:56.706: INFO: Stage duration: 12.366616ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:25:56.733: INFO: Current test duration: 4.089138212s
+Aug 23 18:25:56.733: INFO: Stage duration: 27.193355ms
+STEP: deleting the Deployment
+Aug 23 18:25:56.773: INFO: Current test duration: 4.129594463s
+Aug 23 18:25:56.773: INFO: Stage duration: 40.456452ms
+STEP: Destroying namespace "deployment-8214" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.295 seconds
+Test Run #37
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:26:26.763: INFO: Current test duration: 3.423726ms
+Aug 23 18:26:26.763: INFO: Stage duration: 3.437342ms
+STEP: waiting for Deployment to be created
+Aug 23 18:26:26.764: INFO: Current test duration: 4.239445ms
+Aug 23 18:26:26.764: INFO: Stage duration: 810.148µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:26:28.827: INFO: Current test duration: 2.067883299s
+Aug 23 18:26:28.827: INFO: Stage duration: 2.0636579s
+STEP: patching the Deployment
+Aug 23 18:26:28.834: INFO: Current test duration: 2.074982004s
+Aug 23 18:26:28.834: INFO: Stage duration: 7.069118ms
+STEP: waiting for Replicas to scale
+Aug 23 18:26:28.876: INFO: Current test duration: 2.116478024s
+Aug 23 18:26:28.876: INFO: Stage duration: 41.496852ms
+STEP: listing Deployments
+Aug 23 18:26:28.886: INFO: Current test duration: 2.126596608s
+Aug 23 18:26:28.886: INFO: Stage duration: 10.113174ms
+STEP: updating the Deployment
+Aug 23 18:26:28.913: INFO: Current test duration: 2.153834836s
+Aug 23 18:26:28.913: INFO: Stage duration: 27.237156ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:26:31.868: INFO: Current test duration: 5.108731517s
+Aug 23 18:26:31.868: INFO: Stage duration: 2.954903855s
+STEP: patching the DeploymentStatus
+Aug 23 18:26:31.882: INFO: Current test duration: 5.122622141s
+Aug 23 18:26:31.882: INFO: Stage duration: 13.891715ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:26:31.892: INFO: Current test duration: 5.132511575s
+Aug 23 18:26:31.892: INFO: Stage duration: 9.863225ms
+STEP: deleting the Deployment
+Aug 23 18:26:31.940: INFO: Current test duration: 5.180831374s
+Aug 23 18:26:31.940: INFO: Stage duration: 48.327143ms
+STEP: Destroying namespace "deployment-4040" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.327 seconds
+Test Run #38
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:27:01.906: INFO: Current test duration: 3.373883ms
+Aug 23 18:27:01.906: INFO: Stage duration: 3.385735ms
+STEP: waiting for Deployment to be created
+Aug 23 18:27:01.907: INFO: Current test duration: 4.245366ms
+Aug 23 18:27:01.907: INFO: Stage duration: 864.58µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:27:04.187: INFO: Current test duration: 2.284712497s
+Aug 23 18:27:04.187: INFO: Stage duration: 2.280485805s
+STEP: patching the Deployment
+Aug 23 18:27:04.193: INFO: Current test duration: 2.290148324s
+Aug 23 18:27:04.193: INFO: Stage duration: 5.406693ms
+STEP: waiting for Replicas to scale
+Aug 23 18:27:04.239: INFO: Current test duration: 2.336658823s
+Aug 23 18:27:04.239: INFO: Stage duration: 46.524024ms
+STEP: listing Deployments
+Aug 23 18:27:04.242: INFO: Current test duration: 2.338864556s
+Aug 23 18:27:04.242: INFO: Stage duration: 2.199612ms
+STEP: updating the Deployment
+Aug 23 18:27:04.249: INFO: Current test duration: 2.345960014s
+Aug 23 18:27:04.249: INFO: Stage duration: 7.082293ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:27:07.221: INFO: Current test duration: 5.317822415s
+Aug 23 18:27:07.221: INFO: Stage duration: 2.971870205s
+STEP: patching the DeploymentStatus
+Aug 23 18:27:07.240: INFO: Current test duration: 5.337685592s
+Aug 23 18:27:07.240: INFO: Stage duration: 19.858548ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:27:07.258: INFO: Current test duration: 5.354819663s
+Aug 23 18:27:07.258: INFO: Stage duration: 17.113824ms
+STEP: deleting the Deployment
+Aug 23 18:27:07.311: INFO: Current test duration: 5.408150815s
+Aug 23 18:27:07.311: INFO: Stage duration: 53.331421ms
+STEP: Destroying namespace "deployment-2115" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.555 seconds
+Test Run #39
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:27:37.354: INFO: Current test duration: 3.842482ms
+Aug 23 18:27:37.354: INFO: Stage duration: 3.853633ms
+STEP: waiting for Deployment to be created
+Aug 23 18:27:37.356: INFO: Current test duration: 5.711484ms
+Aug 23 18:27:37.356: INFO: Stage duration: 1.863362ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:27:38.397: INFO: Current test duration: 1.04647943s
+Aug 23 18:27:38.397: INFO: Stage duration: 1.040771492s
+STEP: patching the Deployment
+Aug 23 18:27:38.404: INFO: Current test duration: 1.053911328s
+Aug 23 18:27:38.404: INFO: Stage duration: 7.417692ms
+STEP: waiting for Replicas to scale
+Aug 23 18:27:38.450: INFO: Current test duration: 1.09955411s
+Aug 23 18:27:38.450: INFO: Stage duration: 45.645157ms
+STEP: listing Deployments
+Aug 23 18:27:38.452: INFO: Current test duration: 1.102191233s
+Aug 23 18:27:38.452: INFO: Stage duration: 2.632063ms
+STEP: updating the Deployment
+Aug 23 18:27:38.460: INFO: Current test duration: 1.110097521s
+Aug 23 18:27:38.460: INFO: Stage duration: 7.90226ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:27:41.339: INFO: Current test duration: 3.988916238s
+Aug 23 18:27:41.339: INFO: Stage duration: 2.878829678s
+STEP: patching the DeploymentStatus
+Aug 23 18:27:41.362: INFO: Current test duration: 4.011807931s
+Aug 23 18:27:41.362: INFO: Stage duration: 22.875192ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:27:41.393: INFO: Current test duration: 4.043009868s
+Aug 23 18:27:41.393: INFO: Stage duration: 31.196607ms
+STEP: deleting the Deployment
+Aug 23 18:27:41.416: INFO: Current test duration: 4.065897083s
+Aug 23 18:27:41.416: INFO: Stage duration: 22.88468ms
+STEP: Destroying namespace "deployment-5454" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.221 seconds
+Test Run #40
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:28:11.311: INFO: Current test duration: 4.665424ms
+Aug 23 18:28:11.311: INFO: Stage duration: 4.678088ms
+STEP: waiting for Deployment to be created
+Aug 23 18:28:11.314: INFO: Current test duration: 7.164888ms
+Aug 23 18:28:11.314: INFO: Stage duration: 2.492441ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:28:13.627: INFO: Current test duration: 2.32038914s
+Aug 23 18:28:13.627: INFO: Stage duration: 2.313232086s
+STEP: patching the Deployment
+Aug 23 18:28:13.633: INFO: Current test duration: 2.326293325s
+Aug 23 18:28:13.633: INFO: Stage duration: 5.888326ms
+STEP: waiting for Replicas to scale
+Aug 23 18:28:13.690: INFO: Current test duration: 2.383073049s
+Aug 23 18:28:13.690: INFO: Stage duration: 56.782891ms
+STEP: listing Deployments
+Aug 23 18:28:13.695: INFO: Current test duration: 2.388278715s
+Aug 23 18:28:13.695: INFO: Stage duration: 5.196258ms
+STEP: updating the Deployment
+Aug 23 18:28:13.701: INFO: Current test duration: 2.39488694s
+Aug 23 18:28:13.701: INFO: Stage duration: 6.605019ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:28:16.515: INFO: Current test duration: 5.208010334s
+Aug 23 18:28:16.515: INFO: Stage duration: 2.813131949s
+STEP: patching the DeploymentStatus
+Aug 23 18:28:16.522: INFO: Current test duration: 5.215694124s
+Aug 23 18:28:16.522: INFO: Stage duration: 7.67823ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:28:16.535: INFO: Current test duration: 5.228181097s
+Aug 23 18:28:16.535: INFO: Stage duration: 12.472906ms
+STEP: deleting the Deployment
+Aug 23 18:28:16.581: INFO: Current test duration: 5.273995129s
+Aug 23 18:28:16.581: INFO: Stage duration: 45.810406ms
+STEP: Destroying namespace "deployment-7007" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.423 seconds
+Test Run #41
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:28:46.873: INFO: Current test duration: 4.464526ms
+Aug 23 18:28:46.873: INFO: Stage duration: 4.486478ms
+STEP: waiting for Deployment to be created
+Aug 23 18:28:46.874: INFO: Current test duration: 5.448611ms
+Aug 23 18:28:46.874: INFO: Stage duration: 967.864µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:28:50.027: INFO: Current test duration: 3.158071893s
+Aug 23 18:28:50.027: INFO: Stage duration: 3.152632409s
+STEP: patching the Deployment
+Aug 23 18:28:50.032: INFO: Current test duration: 3.163191177s
+Aug 23 18:28:50.032: INFO: Stage duration: 5.100248ms
+STEP: waiting for Replicas to scale
+Aug 23 18:28:50.100: INFO: Current test duration: 3.231136307s
+Aug 23 18:28:50.100: INFO: Stage duration: 67.944869ms
+STEP: listing Deployments
+Aug 23 18:28:50.104: INFO: Current test duration: 3.23567856s
+Aug 23 18:28:50.104: INFO: Stage duration: 4.539307ms
+STEP: updating the Deployment
+Aug 23 18:28:50.112: INFO: Current test duration: 3.24345798s
+Aug 23 18:28:50.112: INFO: Stage duration: 7.776524ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:28:52.710: INFO: Current test duration: 5.841070898s
+Aug 23 18:28:52.710: INFO: Stage duration: 2.597622656s
+STEP: patching the DeploymentStatus
+Aug 23 18:28:52.739: INFO: Current test duration: 5.869785393s
+Aug 23 18:28:52.739: INFO: Stage duration: 28.704227ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:28:52.759: INFO: Current test duration: 5.890150671s
+Aug 23 18:28:52.759: INFO: Stage duration: 20.357783ms
+STEP: deleting the Deployment
+Aug 23 18:28:52.812: INFO: Current test duration: 5.943155821s
+Aug 23 18:28:52.812: INFO: Stage duration: 52.995551ms
+STEP: Destroying namespace "deployment-6926" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.364 seconds
+Test Run #42
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:29:22.712: INFO: Current test duration: 5.686818ms
+Aug 23 18:29:22.712: INFO: Stage duration: 5.700383ms
+STEP: waiting for Deployment to be created
+Aug 23 18:29:22.713: INFO: Current test duration: 6.474715ms
+Aug 23 18:29:22.713: INFO: Stage duration: 779.291µs
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:29:24.364: INFO: Current test duration: 1.65780988s
+Aug 23 18:29:24.364: INFO: Stage duration: 1.651344724s
+STEP: patching the Deployment
+Aug 23 18:29:24.383: INFO: Current test duration: 1.676735309s
+Aug 23 18:29:24.383: INFO: Stage duration: 18.907396ms
+STEP: waiting for Replicas to scale
+Aug 23 18:29:24.443: INFO: Current test duration: 1.737075276s
+Aug 23 18:29:24.443: INFO: Stage duration: 60.356257ms
+STEP: listing Deployments
+Aug 23 18:29:24.447: INFO: Current test duration: 1.740549337s
+Aug 23 18:29:24.447: INFO: Stage duration: 3.45727ms
+STEP: updating the Deployment
+Aug 23 18:29:24.453: INFO: Current test duration: 1.747260465s
+Aug 23 18:29:24.453: INFO: Stage duration: 6.705297ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:29:27.070: INFO: Current test duration: 4.364180977s
+Aug 23 18:29:27.070: INFO: Stage duration: 2.616924951s
+STEP: patching the DeploymentStatus
+Aug 23 18:29:27.083: INFO: Current test duration: 4.377268916s
+Aug 23 18:29:27.083: INFO: Stage duration: 13.082368ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:29:27.096: INFO: Current test duration: 4.390010877s
+Aug 23 18:29:27.096: INFO: Stage duration: 12.726161ms
+STEP: deleting the Deployment
+Aug 23 18:29:27.234: INFO: Current test duration: 4.528132247s
+Aug 23 18:29:27.234: INFO: Stage duration: 138.120229ms
+STEP: Destroying namespace "deployment-7904" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.684 seconds
+Test Run #43
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:29:57.342: INFO: Current test duration: 9.598199ms
+Aug 23 18:29:57.342: INFO: Stage duration: 9.625049ms
+STEP: waiting for Deployment to be created
+Aug 23 18:29:57.343: INFO: Current test duration: 10.871836ms
+Aug 23 18:29:57.343: INFO: Stage duration: 1.251545ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:29:58.633: INFO: Current test duration: 1.30071916s
+Aug 23 18:29:58.633: INFO: Stage duration: 1.28985056s
+STEP: patching the Deployment
+Aug 23 18:29:58.641: INFO: Current test duration: 1.309257983s
+Aug 23 18:29:58.641: INFO: Stage duration: 8.517783ms
+STEP: waiting for Replicas to scale
+Aug 23 18:29:58.705: INFO: Current test duration: 1.37300232s
+Aug 23 18:29:58.705: INFO: Stage duration: 63.745559ms
+STEP: listing Deployments
+Aug 23 18:29:58.713: INFO: Current test duration: 1.380926701s
+Aug 23 18:29:58.713: INFO: Stage duration: 7.915625ms
+STEP: updating the Deployment
+Aug 23 18:29:58.720: INFO: Current test duration: 1.388207307s
+Aug 23 18:29:58.720: INFO: Stage duration: 7.277029ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:30:01.441: INFO: Current test duration: 4.109008969s
+Aug 23 18:30:01.441: INFO: Stage duration: 2.720803856s
+STEP: patching the DeploymentStatus
+Aug 23 18:30:01.460: INFO: Current test duration: 4.127562029s
+Aug 23 18:30:01.460: INFO: Stage duration: 18.53643ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:30:01.494: INFO: Current test duration: 4.16218576s
+Aug 23 18:30:01.494: INFO: Stage duration: 34.616807ms
+STEP: deleting the Deployment
+Aug 23 18:30:01.528: INFO: Current test duration: 4.195958906s
+Aug 23 18:30:01.528: INFO: Stage duration: 33.768929ms
+STEP: Destroying namespace "deployment-4330" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.359 seconds
+Test Run #44
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:30:31.631: INFO: Current test duration: 6.014141ms
+Aug 23 18:30:31.631: INFO: Stage duration: 6.034239ms
+STEP: waiting for Deployment to be created
+Aug 23 18:30:31.632: INFO: Current test duration: 7.145311ms
+Aug 23 18:30:31.632: INFO: Stage duration: 1.123767ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:30:32.871: INFO: Current test duration: 1.246275751s
+Aug 23 18:30:32.871: INFO: Stage duration: 1.239132104s
+STEP: patching the Deployment
+Aug 23 18:30:32.877: INFO: Current test duration: 1.252034273s
+Aug 23 18:30:32.877: INFO: Stage duration: 5.738214ms
+STEP: waiting for Replicas to scale
+Aug 23 18:30:32.932: INFO: Current test duration: 1.30711309s
+Aug 23 18:30:32.932: INFO: Stage duration: 55.077834ms
+STEP: listing Deployments
+Aug 23 18:30:32.934: INFO: Current test duration: 1.30935431s
+Aug 23 18:30:32.934: INFO: Stage duration: 2.239868ms
+STEP: updating the Deployment
+Aug 23 18:30:32.941: INFO: Current test duration: 1.315832451s
+Aug 23 18:30:32.941: INFO: Stage duration: 6.480586ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:30:36.839: INFO: Current test duration: 5.214447526s
+Aug 23 18:30:36.839: INFO: Stage duration: 3.898619343s
+STEP: patching the DeploymentStatus
+Aug 23 18:30:36.851: INFO: Current test duration: 5.226501828s
+Aug 23 18:30:36.851: INFO: Stage duration: 12.038763ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:30:36.862: INFO: Current test duration: 5.236830245s
+Aug 23 18:30:36.862: INFO: Stage duration: 10.318258ms
+STEP: deleting the Deployment
+Aug 23 18:30:36.922: INFO: Current test duration: 5.297637888s
+Aug 23 18:30:36.922: INFO: Stage duration: 60.799498ms
+STEP: Destroying namespace "deployment-5718" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.469 seconds
+Test Run #45
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:31:06.968: INFO: Current test duration: 8.575442ms
+Aug 23 18:31:06.968: INFO: Stage duration: 8.596772ms
+STEP: waiting for Deployment to be created
+Aug 23 18:31:06.971: INFO: Current test duration: 10.891642ms
+Aug 23 18:31:06.971: INFO: Stage duration: 2.31532ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:31:08.104: INFO: Current test duration: 1.144416489s
+Aug 23 18:31:08.104: INFO: Stage duration: 1.133523905s
+STEP: patching the Deployment
+Aug 23 18:31:08.109: INFO: Current test duration: 1.149543878s
+Aug 23 18:31:08.109: INFO: Stage duration: 5.102903ms
+STEP: waiting for Replicas to scale
+Aug 23 18:31:08.181: INFO: Current test duration: 1.221419835s
+Aug 23 18:31:08.181: INFO: Stage duration: 71.880696ms
+STEP: listing Deployments
+Aug 23 18:31:08.185: INFO: Current test duration: 1.224878116s
+Aug 23 18:31:08.185: INFO: Stage duration: 3.445537ms
+STEP: updating the Deployment
+Aug 23 18:31:08.192: INFO: Current test duration: 1.232079402s
+Aug 23 18:31:08.192: INFO: Stage duration: 7.204181ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:31:10.993: INFO: Current test duration: 4.033412237s
+Aug 23 18:31:10.993: INFO: Stage duration: 2.801337584s
+STEP: patching the DeploymentStatus
+Aug 23 18:31:11.012: INFO: Current test duration: 4.052229193s
+Aug 23 18:31:11.012: INFO: Stage duration: 18.814362ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:31:11.023: INFO: Current test duration: 4.063429334s
+Aug 23 18:31:11.023: INFO: Stage duration: 11.180073ms
+STEP: deleting the Deployment
+Aug 23 18:31:11.073: INFO: Current test duration: 4.113305228s
+Aug 23 18:31:11.073: INFO: Stage duration: 49.877708ms
+STEP: Destroying namespace "deployment-9733" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.264 seconds
+Test Run #46
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:31:40.938: INFO: Current test duration: 3.623892ms
+Aug 23 18:31:40.938: INFO: Stage duration: 3.634903ms
+STEP: waiting for Deployment to be created
+Aug 23 18:31:40.940: INFO: Current test duration: 4.905213ms
+Aug 23 18:31:40.940: INFO: Stage duration: 1.276732ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:31:43.453: INFO: Current test duration: 2.518516341s
+Aug 23 18:31:43.453: INFO: Stage duration: 2.513611308s
+STEP: patching the Deployment
+Aug 23 18:31:43.461: INFO: Current test duration: 2.525858601s
+Aug 23 18:31:43.461: INFO: Stage duration: 7.330989ms
+STEP: waiting for Replicas to scale
+Aug 23 18:31:43.506: INFO: Current test duration: 2.57149505s
+Aug 23 18:31:43.506: INFO: Stage duration: 45.638783ms
+STEP: listing Deployments
+Aug 23 18:31:43.509: INFO: Current test duration: 2.574306229s
+Aug 23 18:31:43.509: INFO: Stage duration: 2.808294ms
+STEP: updating the Deployment
+Aug 23 18:31:43.516: INFO: Current test duration: 2.581562959s
+Aug 23 18:31:43.516: INFO: Stage duration: 7.26706ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:31:46.206: INFO: Current test duration: 5.271525994s
+Aug 23 18:31:46.206: INFO: Stage duration: 2.689952736s
+STEP: patching the DeploymentStatus
+Aug 23 18:31:46.215: INFO: Current test duration: 5.280296912s
+Aug 23 18:31:46.215: INFO: Stage duration: 8.770027ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:31:46.229: INFO: Current test duration: 5.29426503s
+Aug 23 18:31:46.229: INFO: Stage duration: 13.952529ms
+STEP: deleting the Deployment
+Aug 23 18:31:46.290: INFO: Current test duration: 5.355074096s
+Aug 23 18:31:46.290: INFO: Stage duration: 60.809025ms
+STEP: Destroying namespace "deployment-3238" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 5.515 seconds
+Test Run #47
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:32:16.256: INFO: Current test duration: 4.273209ms
+Aug 23 18:32:16.256: INFO: Stage duration: 4.28454ms
+STEP: waiting for Deployment to be created
+Aug 23 18:32:16.259: INFO: Current test duration: 6.84544ms
+Aug 23 18:32:16.259: INFO: Stage duration: 2.578482ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:32:19.799: INFO: Current test duration: 3.547337425s
+Aug 23 18:32:19.799: INFO: Stage duration: 3.540489972s
+STEP: patching the Deployment
+Aug 23 18:32:19.809: INFO: Current test duration: 3.55690701s
+Aug 23 18:32:19.809: INFO: Stage duration: 9.547193ms
+STEP: waiting for Replicas to scale
+Aug 23 18:32:19.860: INFO: Current test duration: 3.60869042s
+Aug 23 18:32:19.860: INFO: Stage duration: 51.795202ms
+STEP: listing Deployments
+Aug 23 18:32:19.864: INFO: Current test duration: 3.612738186s
+Aug 23 18:32:19.864: INFO: Stage duration: 4.034471ms
+STEP: updating the Deployment
+Aug 23 18:32:19.870: INFO: Current test duration: 3.618756005s
+Aug 23 18:32:19.870: INFO: Stage duration: 6.02408ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:32:22.679: INFO: Current test duration: 6.427320131s
+Aug 23 18:32:22.679: INFO: Stage duration: 2.808570238s
+STEP: patching the DeploymentStatus
+Aug 23 18:32:22.727: INFO: Current test duration: 6.475707015s
+Aug 23 18:32:22.727: INFO: Stage duration: 48.371565ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:32:22.773: INFO: Current test duration: 6.521406382s
+Aug 23 18:32:22.773: INFO: Stage duration: 45.687324ms
+STEP: deleting the Deployment
+Aug 23 18:32:22.875: INFO: Current test duration: 6.623193958s
+Aug 23 18:32:22.875: INFO: Stage duration: 101.777447ms
+STEP: Destroying namespace "deployment-875" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 6.773 seconds
+Test Run #48
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:32:52.908: INFO: Current test duration: 4.394216ms
+Aug 23 18:32:52.908: INFO: Stage duration: 4.411959ms
+STEP: waiting for Deployment to be created
+Aug 23 18:32:52.909: INFO: Current test duration: 5.652744ms
+Aug 23 18:32:52.909: INFO: Stage duration: 1.259ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:32:53.987: INFO: Current test duration: 1.08422057s
+Aug 23 18:32:53.987: INFO: Stage duration: 1.078554851s
+STEP: patching the Deployment
+Aug 23 18:32:53.993: INFO: Current test duration: 1.089733051s
+Aug 23 18:32:53.993: INFO: Stage duration: 5.502653ms
+STEP: waiting for Replicas to scale
+Aug 23 18:32:54.042: INFO: Current test duration: 1.139021445s
+Aug 23 18:32:54.042: INFO: Stage duration: 49.296228ms
+STEP: listing Deployments
+Aug 23 18:32:54.046: INFO: Current test duration: 1.142373166s
+Aug 23 18:32:54.046: INFO: Stage duration: 3.348315ms
+STEP: updating the Deployment
+Aug 23 18:32:54.058: INFO: Current test duration: 1.154615621s
+Aug 23 18:32:54.058: INFO: Stage duration: 12.238127ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:32:56.913: INFO: Current test duration: 4.010100748s
+Aug 23 18:32:56.913: INFO: Stage duration: 2.855484326s
+STEP: patching the DeploymentStatus
+Aug 23 18:32:56.934: INFO: Current test duration: 4.030819919s
+Aug 23 18:32:56.934: INFO: Stage duration: 20.712989ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:32:56.946: INFO: Current test duration: 4.043303094s
+Aug 23 18:32:56.946: INFO: Stage duration: 12.469079ms
+STEP: deleting the Deployment
+Aug 23 18:32:56.994: INFO: Current test duration: 4.091324543s
+Aug 23 18:32:56.994: INFO: Stage duration: 48.018995ms
+STEP: Destroying namespace "deployment-5722" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.257 seconds
+Test Run #49
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:33:27.205: INFO: Current test duration: 4.781241ms
+Aug 23 18:33:27.205: INFO: Stage duration: 4.802531ms
+STEP: waiting for Deployment to be created
+Aug 23 18:33:27.208: INFO: Current test duration: 6.99502ms
+Aug 23 18:33:27.208: INFO: Stage duration: 2.202408ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:33:28.197: INFO: Current test duration: 996.536856ms
+Aug 23 18:33:28.197: INFO: Stage duration: 989.544982ms
+STEP: patching the Deployment
+Aug 23 18:33:28.204: INFO: Current test duration: 1.002807648s
+Aug 23 18:33:28.204: INFO: Stage duration: 6.254311ms
+STEP: waiting for Replicas to scale
+Aug 23 18:33:28.252: INFO: Current test duration: 1.051114422s
+Aug 23 18:33:28.252: INFO: Stage duration: 48.308778ms
+STEP: listing Deployments
+Aug 23 18:33:28.262: INFO: Current test duration: 1.061628457s
+Aug 23 18:33:28.262: INFO: Stage duration: 10.509857ms
+STEP: updating the Deployment
+Aug 23 18:33:28.333: INFO: Current test duration: 1.132650273s
+Aug 23 18:33:28.333: INFO: Stage duration: 71.031684ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:33:31.085: INFO: Current test duration: 3.88402336s
+Aug 23 18:33:31.085: INFO: Stage duration: 2.751365494s
+STEP: patching the DeploymentStatus
+Aug 23 18:33:31.097: INFO: Current test duration: 3.896344222s
+Aug 23 18:33:31.097: INFO: Stage duration: 12.311134ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:33:31.103: INFO: Current test duration: 3.902236384s
+Aug 23 18:33:31.103: INFO: Stage duration: 5.882805ms
+STEP: deleting the Deployment
+Aug 23 18:33:31.149: INFO: Current test duration: 3.948250912s
+Aug 23 18:33:31.149: INFO: Stage duration: 46.017464ms
+STEP: Destroying namespace "deployment-579" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.331 seconds
+Test Run #50
+{"msg":"Test Suite starting","total":1,"completed":0,"skipped":0,"failed":0}
+STEP: Creating a kubernetes client
+STEP: Building a namespace api object, basename deployment
+STEP: Waiting for a default service account to be provisioned in namespace
+STEP: creating a Deployment
+Aug 23 18:34:01.208: INFO: Current test duration: 13.839978ms
+Aug 23 18:34:01.208: INFO: Stage duration: 13.860446ms
+STEP: waiting for Deployment to be created
+Aug 23 18:34:01.209: INFO: Current test duration: 14.994311ms
+Aug 23 18:34:01.209: INFO: Stage duration: 1.138123ms
+STEP: waiting for all Replicas to be Ready
+Aug 23 18:34:02.403: INFO: Current test duration: 1.208421177s
+Aug 23 18:34:02.403: INFO: Stage duration: 1.193436293s
+STEP: patching the Deployment
+Aug 23 18:34:02.409: INFO: Current test duration: 1.21487416s
+Aug 23 18:34:02.409: INFO: Stage duration: 6.435141ms
+STEP: waiting for Replicas to scale
+Aug 23 18:34:02.450: INFO: Current test duration: 1.255813006s
+Aug 23 18:34:02.450: INFO: Stage duration: 40.938014ms
+STEP: listing Deployments
+Aug 23 18:34:02.456: INFO: Current test duration: 1.26179111s
+Aug 23 18:34:02.456: INFO: Stage duration: 5.972343ms
+STEP: updating the Deployment
+Aug 23 18:34:02.467: INFO: Current test duration: 1.272766159s
+Aug 23 18:34:02.467: INFO: Stage duration: 10.987041ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:34:05.255: INFO: Current test duration: 4.060782735s
+Aug 23 18:34:05.255: INFO: Stage duration: 2.788003803s
+STEP: patching the DeploymentStatus
+Aug 23 18:34:05.271: INFO: Current test duration: 4.077036357s
+Aug 23 18:34:05.271: INFO: Stage duration: 16.244795ms
+STEP: fetching the DeploymentStatus
+Aug 23 18:34:05.286: INFO: Current test duration: 4.091331849s
+Aug 23 18:34:05.286: INFO: Stage duration: 14.290071ms
+STEP: deleting the Deployment
+Aug 23 18:34:05.350: INFO: Current test duration: 4.156149557s
+Aug 23 18:34:05.350: INFO: Stage duration: 64.810645ms
+STEP: Destroying namespace "deployment-3435" for this suite.
+{"msg":"Test Suite completed","total":1,"completed":1,"skipped":5240,"failed":0}
+Ran 1 of 5241 Specs in 4.309 seconds
