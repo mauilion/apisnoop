@@ -3,11 +3,45 @@
 
 * Summary
 
-- https://github.com/cncf/apisnoop/blob/explore-test-flakes/tickets/k8s/prow/explore-flakes-pr93458.org
+[[https://github.com/kubernetes/kubernetes/pull/93458][PR93458]] has had a number of prow test flakes and this document looks into some of the latest test failures and running the test on low resources.
 
-* Prow History
+- [[https://prow.k8s.io/pr-history/?org=kubernetes&repo=kubernetes&pr=93458][Prow History]]
 
-- https://prow.k8s.io/pr-history/?org=kubernetes&repo=kubernetes&pr=93458
+* Add timings to test
+
+- [[https://github.com/ii/kubernetes/blob/pr93458/test/e2e/apps/deployment.go#L147-L477][https://github.com/ii/kubernetes/blob/pr93458/test/e2e/apps/deployment.go#L147-L477]]
+
+The following test runs don't show any issues with the test on a cluster with low resources.
+
+** [[https://github.com/cncf/apisnoop/blob/pr93458-flake/tickets/k8s/research/pr93458/log-pr93458-50runs.txt][log-pr93458-50runs.txt]]
+
+#+begin_src bash
+grep "^Ran" log-pr93458-50runs.txt | awk '{print $7}' | sort -n | tail -5
+#+end_src
+
+#+RESULTS:
+#+begin_src bash
+6.470
+6.471
+6.537
+6.587
+6.773
+#+end_src
+
+** [[https://github.com/cncf/apisnoop/blob/pr93458-flake/tickets/k8s/research/pr93458/log-pr93458-100runs.txt][log-pr93458-100runs.txt]]
+
+#+begin_src bash
+grep "^Ran" log-pr93458-100runs.txt | awk '{print $7}' | sort -n | tail -5
+#+end_src
+
+#+RESULTS:
+#+begin_src bash
+6.385
+6.407
+6.422
+6.581
+6.658
+#+end_src
 
 * Download build-log.txt
 ** Failed Job #1
