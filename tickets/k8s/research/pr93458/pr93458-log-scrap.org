@@ -15,7 +15,7 @@ The following test runs don't show any issues with the test on a cluster with lo
 
 ** [[https://github.com/cncf/apisnoop/blob/pr93458-flake/tickets/k8s/research/pr93458/log-pr93458-50runs.txt][log-pr93458-50runs.txt]]
 
-#+begin_src bash
+#+begin_src bash :exports both
 grep "^Ran" log-pr93458-50runs.txt | awk '{print $7}' | sort -n | tail -5
 #+end_src
 
@@ -30,7 +30,7 @@ grep "^Ran" log-pr93458-50runs.txt | awk '{print $7}' | sort -n | tail -5
 
 ** [[https://github.com/cncf/apisnoop/blob/pr93458-flake/tickets/k8s/research/pr93458/log-pr93458-100runs.txt][log-pr93458-100runs.txt]]
 
-#+begin_src bash
+#+begin_src bash :exports both
 grep "^Ran" log-pr93458-100runs.txt | awk '{print $7}' | sort -n | tail -5
 #+end_src
 
