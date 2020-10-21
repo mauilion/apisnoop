@@ -9,7 +9,7 @@ jobs:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: postgres 
+    container: postgres:12
 
     # Service containers to run with `container-job`
     services:
@@ -34,4 +34,4 @@ jobs:
       - name: install dependencies
         run: |
           psql --version
-          psql -U postgres -d postgres -h localhost -c '\d'
+          psql -U postgres -d postgres -h postgres -c '\d'
