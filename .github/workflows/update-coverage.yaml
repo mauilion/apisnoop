@@ -9,7 +9,7 @@ jobs:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: node:10.18-jessie
+    container: postgres 
 
     # Service containers to run with `container-job`
     services:
@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
         # Set health checks to wait until postgres has started
         options: >-
-          --health-cmd psql -U postgres -d postgres -h localhost -c 'select endpoint from conformance.new_endpoint limit 1;'
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -31,3 +31,7 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          psql --version
+          psql -U postgres -d postgres -h localhost -c '\d'
