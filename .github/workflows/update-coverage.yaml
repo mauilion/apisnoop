@@ -36,7 +36,7 @@ jobs:
       - name: install dependencies
         run: |
           psql --version
-          psql '\d'
+          psql -U postgres -d postgres -h postgres '\d'
         env:
           PG_USER: postgres
           PG_PASSWORD: postgres
