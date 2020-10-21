@@ -19,7 +19,9 @@ jobs:
         image: zachboyofdestiny/snoopdb:action
         # Provide the password for postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -34,4 +36,9 @@ jobs:
       - name: install dependencies
         run: |
           psql --version
-          psql -U postgres -d postgres -h postgres -c '\d'
+          psql '\d'
+        env:
+          PG_USER: postgres
+          PG_PASSWORD: postgres
+          PG_DATABASE: postgres
+          PG_PORT: ${{job.services.postgres.ports['5432']}}
