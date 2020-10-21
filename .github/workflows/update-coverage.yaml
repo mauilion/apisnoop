@@ -13,7 +13,7 @@ jobs:
     services:
       # Label used to access the service container
       postgres:
-        image: zachboyofdestiny/snoopdb:action
+        image: postgres 
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
