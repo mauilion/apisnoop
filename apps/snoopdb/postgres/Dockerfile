@@ -29,4 +29,5 @@ FROM postgres:12.0
 COPY initdb /docker-entrypoint-initdb.d
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY ./snoopUtils.py /usr/local/lib/python3.7/dist-packages/snoopUtils.py
+USER postgres
 # ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh", "--user postgres"]
