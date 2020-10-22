@@ -56,7 +56,9 @@ Conformance with Kubernetes ensures:
 
 Currently, there are ~67 certified distributions.
 
-- [[https://landscape.cncf.io/category=platform&format=card-mode&grouping=category][landscape.cncf.io]]
+[[https://landscape.cncf.io/category=platform&format=card-mode&grouping=category][landscape.cncf.io]]
+
+[[./kubecon-2020-north-america-landscape.png]]
 
 Click *Certified K8s/KCSP/KTP* link on the left
 ** How do I certify/verify a distribution?
