@@ -31,17 +31,18 @@ CNCF Kubernetes Conformance ensures
 
 ** Conformance website
 
+https://cncf.io/ck
+
 #+NAME: Conformance-Kubernetes
 [[./kubecon-2020-north-america-ck.png]]
 
-https://cncf.io/ck
-
 ** k8s-conformance repo
+
+https://github.com/cncf/k8s-conformance
 
 #+NAME: Kubernetes Conformance repo
 [[./kubecon-2020-north-america-conformance-repo.png]]
 
-https://github.com/cncf/k8s-conformance
 
 ** Why is Kubernetes Conformance important?
 
@@ -123,7 +124,7 @@ Example *README.md* with instructions:
     #+begin_src tmate :window push :prologue "cd k8s-conformance"
       git add v1.18/notkind
       git commit -m 'Conformance results for v1.18/notkind'
-      git push ii notkind1-v1.18:notkind1-v1.18-test
+      git push ii --force notkind1-v1.18:notkind1-v1.18-test
     #+end_src
 *** Open a PR to cncf/k8s-conformance
 [[https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test][cncf/k8s-conformance/compare/master...your:branch]]
