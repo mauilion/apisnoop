@@ -13,12 +13,13 @@ This presentation should be run from within sharing.io cluster.
 This will allow the tmate block/sessions to work correctly.
 
 * About ii
-** ii.coop
-
-** Hippie Hacker
-
-** Caleb Woodbine
-
+** People
+- Hippie Hacker
+- Caleb Woodbine
+- Zach Mandeville
+- Stephen Heywood
+- Berno Kleinhans
+- Riaan Kleinhans
 * Intro
 ** What is Kubernetes Conformance?
 
@@ -35,14 +36,14 @@ CNCF Kubernetes Conformance ensures
 
 Conformance with Kubernetes ensures:
 
-- portability workloads
+- portability of workloads
   - stable APIs behave the same everywhere
 - freedom from vendor lock-in
   - consistency with APIs
 
 *** How many Kubernetes Distributions are Certified?
 
-Currently, there are 70 certified distributions.
+Currently, there are ~67 certified distributions.
 
 - [[https://landscape.cncf.io/category=platform&format=card-mode&grouping=category][landscape.cncf.io]]
 
