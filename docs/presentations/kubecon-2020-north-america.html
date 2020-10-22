@@ -27,19 +27,19 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">Contributing to Kubernetes Conformance Coverage</h1><h2 class="author">ii.coop</h2><p class="date">Created: 2020-10-22 Thu 16:45</p>
+<h1 class="title">Contributing to Kubernetes Conformance Coverage</h1><h2 class="author">ii.coop</h2><p class="date">Created: 2020-10-22 Thu 16:55</p>
 </section>
 
 <section>
-<section id="slide-org65799a6">
-<h2 id="org65799a6">About ii</h2>
-<div class="outline-text-2" id="text-org65799a6">
+<section id="slide-org699bb85">
+<h2 id="org699bb85">About ii</h2>
+<div class="outline-text-2" id="text-org699bb85">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org9d61af9">
-<h3 id="org9d61af9">People</h3>
+<section id="slide-org6ee6cf7">
+<h3 id="org6ee6cf7">People</h3>
 <ul>
 <li>Hippie Hacker</li>
 <li>Caleb Woodbine</li>
@@ -52,15 +52,15 @@
 </section>
 </section>
 <section>
-<section id="slide-org49a74c8">
-<h2 id="org49a74c8">Intro</h2>
-<div class="outline-text-2" id="text-org49a74c8">
+<section id="slide-org0e873c6">
+<h2 id="org0e873c6">Intro</h2>
+<div class="outline-text-2" id="text-org0e873c6">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orge0694f3">
-<h3 id="orge0694f3">What is Kubernetes Conformance?</h3>
+<section id="slide-org39fbdc3">
+<h3 id="org39fbdc3">What is Kubernetes Conformance?</h3>
 <p>
 CNCF Kubernetes Conformance ensures
 </p>
@@ -74,10 +74,10 @@ CNCF Kubernetes Conformance ensures
 </section>
 </section>
 <section>
-<section id="slide-org82f763b">
-<h3 id="org82f763b">Conformance website</h3>
+<section id="slide-orgedb3e91">
+<h3 id="orgedb3e91">Conformance website</h3>
 
-<div id="org5223b1b" class="figure">
+<div id="orga923044" class="figure">
 <p><img src="./kubecon-2020-north-america-ck.png" alt="kubecon-2020-north-america-ck.png" />
 </p>
 </div>
@@ -89,10 +89,10 @@ CNCF Kubernetes Conformance ensures
 </section>
 </section>
 <section>
-<section id="slide-org378ba33">
-<h3 id="org378ba33">k8s-conformance repo</h3>
+<section id="slide-org2b4ecee">
+<h3 id="org2b4ecee">k8s-conformance repo</h3>
 
-<div id="org57ff35c" class="figure">
+<div id="org773bcd9" class="figure">
 <p><img src="./kubecon-2020-north-america-conformance-repo.png" alt="kubecon-2020-north-america-conformance-repo.png" />
 </p>
 </div>
@@ -104,8 +104,8 @@ CNCF Kubernetes Conformance ensures
 </section>
 </section>
 <section>
-<section id="slide-orgda8f208">
-<h3 id="orgda8f208">Why is Kubernetes Conformance important?</h3>
+<section id="slide-orgf18f0a3">
+<h3 id="orgf18f0a3">Why is Kubernetes Conformance important?</h3>
 <p>
 Conformance with Kubernetes ensures:
 </p>
@@ -125,8 +125,8 @@ Conformance with Kubernetes ensures:
 </ul>
 
 </section>
-<section id="slide-org35d0f4c">
-<h4 id="org35d0f4c">How many Kubernetes Distributions are Certified?</h4>
+<section id="slide-org910e5c0">
+<h4 id="org910e5c0">How many Kubernetes Distributions are Certified?</h4>
 <p>
 Currently, there are ~67 certified distributions.
 </p>
@@ -147,13 +147,13 @@ Click <b>Certified K8s/KCSP/KTP</b> link on the left
 </section>
 </section>
 <section>
-<section id="slide-orgf63b571">
-<h3 id="orgf63b571">How do I certify/verify a distribution?</h3>
-<div class="outline-text-3" id="text-orgf63b571">
+<section id="slide-orgdc4abab">
+<h3 id="orgdc4abab">How do I certify/verify a distribution?</h3>
+<div class="outline-text-3" id="text-orgdc4abab">
 </div>
 </section>
-<section id="slide-orgceefcfc">
-<h4 id="orgceefcfc">Creating your Conformance Submission</h4>
+<section id="slide-org670aecc">
+<h4 id="org670aecc">Creating your Conformance Submission</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/blob/master/instructions.md">cncf/k8s-conformance /instructions.md</a>
 </p>
@@ -166,8 +166,8 @@ vX.Y/$dir/PRODUCT.yaml: Details of your PRODUCT
 </pre>
 
 </section>
-<section id="slide-org1cfd8d7">
-<h4 id="org1cfd8d7">Document How to Bring test your cluster</h4>
+<section id="slide-org7608296">
+<h4 id="org7608296">Document How to Bring test your cluster</h4>
 <p>
 Example <b>README.md</b> with instructions:
 </p>
@@ -183,38 +183,38 @@ Example <b>README.md</b> with instructions:
 </div>
 
 </section>
-<section id="slide-org20accf0">
-<h4 id="org20accf0">Watch Sonobuoy</h4>
+<section id="slide-orgd0fb504">
+<h4 id="orgd0fb504">Watch Sonobuoy</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >watch kubectl get all --all-namespaces
 </code></pre>
 </div>
 </section>
-<section id="slide-org491fd8f">
-<h4 id="org491fd8f">Sonobuoy Logs</h4>
+<section id="slide-org35b29be">
+<h4 id="org35b29be">Sonobuoy Logs</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >sonobuoy logs -f
 </code></pre>
 </div>
 </section>
-<section id="slide-orgf550ded">
-<h4 id="orgf550ded">Sonobuoy Results</h4>
+<section id="slide-org0a330f3">
+<h4 id="org0a330f3">Sonobuoy Results</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >find v1.*/plugins/e2e/results/global
 </code></pre>
 </div>
 </section>
-<section id="slide-org4984b50">
-<h4 id="org4984b50">Submit cncf/k8s-conformance results</h4>
+<section id="slide-orgff63cb4">
+<h4 id="orgff63cb4">Submit cncf/k8s-conformance results</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/blob/master/instructions.md#uploading">cncf/k8s-conformance instructions.md#uploading</a>
 </p>
 
 <ul class="org-ul">
-<li><a id="orgbe41f9c"></a>Fork+Branch+Remote<br />
+<li><a id="org280b352"></a>Fork+Branch+Remote<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >git clone https://github.com/cncf/k8s-conformance
@@ -224,7 +224,7 @@ git checkout -b notkind-v1.18
 </code></pre>
 </div>
 </li>
-<li><a id="orgfefc3ee"></a>Copy results into place<br />
+<li><a id="orge123866"></a>Copy results into place<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >cp -a ../notkind v1.18/notkind
@@ -233,7 +233,7 @@ git status
 </code></pre>
 </div>
 </li>
-<li><a id="orga4c7c5c"></a>Commit and Push Results<br />
+<li><a id="orgc40146c"></a>Commit and Push Results<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >git add v1.18/notkind
@@ -244,8 +244,8 @@ git push ii notkind-v1.18:notkind-v1.18-test
 </li>
 </ul>
 </section>
-<section id="slide-orgd86bcfe">
-<h4 id="orgd86bcfe">Open a PR to cncf/k8s-conformance</h4>
+<section id="slide-orgec5a004">
+<h4 id="orgec5a004">Open a PR to cncf/k8s-conformance</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test">cncf/k8s-conformance/compare/master&#x2026;your:branch</a>
 </p>
@@ -267,15 +267,15 @@ required for conformance.
 </section>
 </section>
 <section>
-<section id="slide-orge4bef0a">
-<h2 id="orge4bef0a">Identifying Gaps in Kubernetes Conformance Coverage</h2>
-<div class="outline-text-2" id="text-orge4bef0a">
+<section id="slide-orgfd174ad">
+<h2 id="orgfd174ad">Identifying Gaps in Kubernetes Conformance Coverage</h2>
+<div class="outline-text-2" id="text-orgfd174ad">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orgbdf25ba">
-<h3 id="orgbdf25ba">Loading K8s API into SQL</h3>
+<section id="slide-orgdf04ac9">
+<h3 id="orgdf04ac9">Loading K8s API into SQL</h3>
 <ul>
 <li>SnoopDB loads the OpenAPI swagger.json</li>
 <li>Enables queries of K8s API definition</li>
@@ -285,8 +285,8 @@ required for conformance.
 </section>
 </section>
 <section>
-<section id="slide-orgb2590e2">
-<h3 id="orgb2590e2">How can I deploy and explore snoopdb?</h3>
+<section id="slide-org491ac3d">
+<h3 id="org491ac3d">How can I deploy and explore snoopdb?</h3>
 <div class="org-src-container">
 
 <pre><code class=" bash" >git clone https://github.com/cncf/apisnoop
@@ -309,8 +309,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org0cf97bf">
-<h3 id="org0cf97bf">psql</h3>
+<section id="slide-orgb25a4f0">
+<h3 id="orgb25a4f0">psql</h3>
 <div class="org-src-container">
 
 <pre><code class=" bash" >export PGUSER=apisnoop PGHOST=localhost
@@ -328,8 +328,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org4f49384">
-<h3 id="org4f49384">sql-mode</h3>
+<section id="slide-org531ef6d">
+<h3 id="org531ef6d">sql-mode</h3>
 <div class="org-src-container">
 
 <pre><code class=" sql-mode" >select 1;
@@ -339,8 +339,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-orga828a7c">
-<h3 id="orga828a7c">Loading CI logs into SQL</h3>
+<section id="slide-org1e20e04">
+<h3 id="org1e20e04">Loading CI logs into SQL</h3>
 <ul>
 <li>SnoopDB loads recent CI audit logs</li>
 <li>Enables queries of K8s API usage</li>
@@ -351,8 +351,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org91ee151">
-<h3 id="org91ee151">e2e.test framework support</h3>
+<section id="slide-org1f86c5f">
+<h3 id="org1f86c5f">e2e.test framework support</h3>
 <ul>
 <li>UserAgent updated to include test name</li>
 <li>AuditLogs include test and operation</li>
@@ -362,8 +362,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org9956e67">
-<h3 id="org9956e67">Query Gaps in Conformance Coverage</h3>
+<section id="slide-orgc386777">
+<h3 id="orgc386777">Query Gaps in Conformance Coverage</h3>
 <ul>
 <li>Compare Operations hit by [Conformance]</li>
 <li>Query untested surface area</li>
@@ -373,22 +373,22 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-orgbb2dc52">
-<h3 id="orgbb2dc52">Visualize Data</h3>
+<section id="slide-org4274e73">
+<h3 id="org4274e73">Visualize Data</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org96473dd">
-<h2 id="org96473dd">Closing Gaps in Kubernetes Conformance Coverage</h2>
+<section id="slide-orgb6b9149">
+<h2 id="orgb6b9149">Closing Gaps in Kubernetes Conformance Coverage</h2>
 <p>
 APISnoop + AuditSink + Test writing
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgfd1dc50">
-<h3 id="orgfd1dc50">Auditing the OpenAPI</h3>
+<section id="slide-org34b05a0">
+<h3 id="org34b05a0">Auditing the OpenAPI</h3>
 <ul>
 <li>APIServer can be configured to log usage</li>
 <li>Combining an AuditPolicy and AuditSink</li>
@@ -398,8 +398,8 @@ APISnoop + AuditSink + Test writing
 </section>
 </section>
 <section>
-<section id="slide-org5f381c0">
-<h3 id="org5f381c0">SnoopDB in cluster</h3>
+<section id="slide-org4437d89">
+<h3 id="org4437d89">SnoopDB in cluster</h3>
 <ul>
 <li>Identify in Cluster Usage</li>
 <li>Focus on hitting Gaps in API</li>
@@ -408,14 +408,14 @@ APISnoop + AuditSink + Test writing
 </section>
 </section>
 <section>
-<section id="slide-org67b657e">
-<h3 id="org67b657e">MockTest Demo</h3>
+<section id="slide-orgd0689b7">
+<h3 id="orgd0689b7">MockTest Demo</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org9214cd9">
-<h2 id="org9214cd9">Preventing gaps in Kubernetes Conformance Coverage</h2>
+<section id="slide-orge848c76">
+<h2 id="orge848c76">Preventing gaps in Kubernetes Conformance Coverage</h2>
 <p>
 prow.cncf.io
 **
@@ -424,8 +424,8 @@ prow.cncf.io
 </section>
 </section>
 <section>
-<section id="slide-org4e06ea3">
-<h2 id="org4e06ea3">Verifying Cloud Provider Submission</h2>
+<section id="slide-org83699f5">
+<h2 id="org83699f5">Verifying Cloud Provider Submission</h2>
 <p>
 prow.cncf.io
 </p>
@@ -437,8 +437,8 @@ For every vendor and distribution to be marked as official, tests must be run ag
 </section>
 </section>
 <section>
-<section id="slide-org1596bc5">
-<h3 id="org1596bc5">The submitted PR</h3>
+<section id="slide-orga563435">
+<h3 id="orga563435">Results submitted</h3>
 
 <div class="figure">
 <p><img src="./kubecon-2020-north-america-pr-page.png" alt="kubecon-2020-north-america-pr-page.png" />
@@ -448,8 +448,8 @@ For every vendor and distribution to be marked as official, tests must be run ag
 </section>
 </section>
 <section>
-<section id="slide-org0e8cd4a">
-<h3 id="org0e8cd4a">Prow comments</h3>
+<section id="slide-org6746040">
+<h3 id="org6746040">CNCF CI comments</h3>
 
 <div class="figure">
 <p><img src="./kubecon-2020-north-america-prow-comments.png" alt="kubecon-2020-north-america-prow-comments.png" />
@@ -459,11 +459,22 @@ For every vendor and distribution to be marked as official, tests must be run ag
 </section>
 </section>
 <section>
-<section id="slide-org344fdef">
-<h3 id="org344fdef">PR labels</h3>
+<section id="slide-orgdf907fc">
+<h3 id="orgdf907fc">Informational labels</h3>
 
 <div class="figure">
 <p><img src="./kubecon-2020-north-america-pr-labels.png" alt="kubecon-2020-north-america-pr-labels.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8062d21">
+<h3 id="org8062d21">Certified distributions</h3>
+
+<div class="figure">
+<p><img src="./kubecon-2020-north-america-certified-distributions.png" alt="kubecon-2020-north-america-certified-distributions.png" />
 </p>
 </div>
 </div>

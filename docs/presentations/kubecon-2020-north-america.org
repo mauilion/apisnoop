@@ -256,6 +256,10 @@ For every vendor and distribution to be marked as official, tests must be run ag
 
 [[./kubecon-2020-north-america-pr-labels.png]]
 
+** Certified distributions
+
+[[./kubecon-2020-north-america-certified-distributions.png]]
+
 * Footnotes
 
 #+REVEAL_ROOT: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.9.2
