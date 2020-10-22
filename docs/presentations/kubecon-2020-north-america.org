@@ -107,28 +107,28 @@ Example *README.md* with instructions:
 [[https://github.com/cncf/k8s-conformance/blob/master/instructions.md#uploading][cncf/k8s-conformance instructions.md#uploading]]
 
 **** Fork+Branch+Remote
-    #+begin_src tmate :window PR
-        git clone https://github.com/cncf/k8s-conformance
-        cd k8s-conformance
-        git remote add ii git@github.com:ii/k8s-conformance
-        git checkout -b notkind-v1.18
+    #+begin_src tmate :window fork
+      git clone https://github.com/cncf/k8s-conformance
+      cd k8s-conformance
+      git remote add ii git@github.com:ii/k8s-conformance
+      git checkout -b notkind1-v1.18
     #+end_src
 **** Copy results into place
-    #+begin_src tmate :window PR
+    #+begin_src tmate :window copy :prologue "cd k8s-conformance"
       cp -a ../notkind v1.18/notkind
       cp -a ../v1.*/plugins/e2e/results/global/* v1.18/notkind
       git status
     #+end_src
 **** Commit and Push Results
-    #+begin_src tmate :window PR
+    #+begin_src tmate :window push :prologue "cd k8s-conformance"
       git add v1.18/notkind
       git commit -m 'Conformance results for v1.18/notkind'
-      git push ii notkind-v1.18:notkind-v1.18-test
+      git push ii notkind1-v1.18:notkind1-v1.18-test
     #+end_src
 *** Open a PR to cncf/k8s-conformance
 [[https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test][cncf/k8s-conformance/compare/master...your:branch]]
 
-    #+begin_src bash :dir k8s-conformance
+    #+begin_src tmate :dir k8s-conformance :window push
       git diff --name-only origin/master
     #+end_src
 
