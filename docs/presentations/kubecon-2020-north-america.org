@@ -107,29 +107,30 @@ Example *README.md* with instructions:
 
 [[https://github.com/cncf/k8s-conformance/blob/master/instructions.md#uploading][cncf/k8s-conformance instructions.md#uploading]]
 
-**** Fork+Branch+Remote
-    #+begin_src tmate :window fork
-      git clone https://github.com/cncf/k8s-conformance
-      cd k8s-conformance
-      git remote add ii git@github.com:ii/k8s-conformance
-      git checkout -b notkind1-v1.18
-    #+end_src
-**** Copy results into place
-    #+begin_src tmate :window copy :prologue "cd k8s-conformance"
-      cp -a ../notkind v1.18/notkind
-      cp -a ../v1.*/plugins/e2e/results/global/* v1.18/notkind
-      git status
-    #+end_src
-**** Commit and Push Results
-    #+begin_src tmate :window push :prologue "cd k8s-conformance"
-      git add v1.18/notkind
-      git commit -m 'Conformance results for v1.18/notkind'
-      git push ii --force notkind1-v1.18:notkind1-v1.18-test
-    #+end_src
+*** Fork+Branch+Remote
+   #+begin_src tmate :window fork
+     git clone https://github.com/cncf/k8s-conformance || true
+     cd k8s-conformance
+     git remote add ii git@github.com:ii/k8s-conformance
+     git checkout -b notkind1-v1.18
+   #+end_src
+*** Copy results into place
+   #+begin_src tmate :window copy :prologue "cd k8s-conformance"
+     cp -a ../notkind v1.18/notkind
+     cp -a ../v1.*/plugins/e2e/results/global/* v1.18/notkind
+     git status
+   #+end_src
+*** Commit and Push Results
+   #+begin_src tmate :window push :prologue "cd k8s-conformance"
+     git add v1.18/notkind
+     git commit -m 'Conformance results for v1.18/notkind'
+     git push ii --force notkind1-v1.18:notkind1-v1.18-test
+   #+end_src
 *** Open a PR to cncf/k8s-conformance
 [[https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test][cncf/k8s-conformance/compare/master...your:branch]]
+*** PR includes logs, docs, and metadata
 
-    #+begin_src tmate :dir k8s-conformance :window push
+    #+begin_src tmate :window diff :prologue "cd k8s-conformance"
       git diff --name-only origin/master
     #+end_src
 
@@ -241,6 +242,8 @@ prow.cncf.io
 **
 
 * Verifying Cloud Provider Submission
+
+
 prow.cncf.io
 
 For every vendor and distribution to be marked as official, tests must be run against the Kubernetes cluster to verify it's APIs behave in a given way per the test.
