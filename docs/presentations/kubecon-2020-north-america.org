@@ -32,16 +32,19 @@ CNCF Kubernetes Conformance ensures
 ** Conformance website
 
 #+NAME: Conformance-Kubernetes
-[[./kubecon-2020-north-america-ck.png]]
 
 https://cncf.io/ck
 
+[[./kubecon-2020-north-america-ck.png]]
+
+
 ** k8s-conformance repo
+
+https://github.com/cncf/k8s-conformance
 
 #+NAME: Kubernetes Conformance repo
 [[./kubecon-2020-north-america-conformance-repo.png]]
 
-https://github.com/cncf/k8s-conformance
 
 ** Why is Kubernetes Conformance important?
 
@@ -106,25 +109,25 @@ Example *README.md* with instructions:
 
 [[https://github.com/cncf/k8s-conformance/blob/master/instructions.md#uploading][cncf/k8s-conformance instructions.md#uploading]]
 
-**** Fork+Branch+Remote
-    #+begin_src tmate :window PR
-        git clone https://github.com/cncf/k8s-conformance
-        cd k8s-conformance
-        git remote add ii git@github.com:ii/k8s-conformance
-        git checkout -b notkind-v1.18
-    #+end_src
-**** Copy results into place
-    #+begin_src tmate :window PR
-      cp -a ../notkind v1.18/notkind
-      cp -a ../v1.*/plugins/e2e/results/global/* v1.18/notkind
-      git status
-    #+end_src
-**** Commit and Push Results
-    #+begin_src tmate :window PR
-      git add v1.18/notkind
-      git commit -m 'Conformance results for v1.18/notkind'
-      git push ii notkind-v1.18:notkind-v1.18-test
-    #+end_src
+*** Fork+Branch+Remote
+   #+begin_src tmate :window PR
+       git clone https://github.com/cncf/k8s-conformance
+       cd k8s-conformance
+       git remote add ii git@github.com:ii/k8s-conformance
+       git checkout -b notkind-v1.18
+   #+end_src
+*** Copy results into place
+   #+begin_src tmate :window PR
+     cp -a ../notkind v1.18/notkind
+     cp -a ../v1.*/plugins/e2e/results/global/* v1.18/notkind
+     git status
+   #+end_src
+*** Commit and Push Results
+   #+begin_src tmate :window PR
+     git add v1.18/notkind
+     git commit -m 'Conformance results for v1.18/notkind'
+     git push ii notkind-v1.18:notkind-v1.18-test
+   #+end_src
 *** Open a PR to cncf/k8s-conformance
 [[https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test][cncf/k8s-conformance/compare/master...your:branch]]
 
