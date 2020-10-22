@@ -29,8 +29,19 @@ CNCF Kubernetes Conformance ensures
 ... that every vendor’s version of Kubernetes supports the required APIs, as do open source community versions
 #+end_quote
 
-- https://cncf.io/ck
-- https://github.com/cncf/k8s-conformance
+** Conformance website
+
+#+NAME: Conformance-Kubernetes
+[[./kubecon-2020-north-america-ck.png]]
+
+https://cncf.io/ck
+
+** k8s-conformance repo
+
+#+NAME: Kubernetes Conformance repo
+[[./kubecon-2020-north-america-conformance-repo.png]]
+
+https://github.com/cncf/k8s-conformance
 
 ** Why is Kubernetes Conformance important?
 

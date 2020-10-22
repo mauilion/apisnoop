@@ -27,44 +27,40 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">Contributing to Kubernetes Conformance Coverage</h1><h2 class="author">ii.coop</h2><p class="date">Created: 2020-10-20 Tue 20:39</p>
+<h1 class="title">Contributing to Kubernetes Conformance Coverage</h1><h2 class="author">ii.coop</h2><p class="date">Created: 2020-10-22 Thu 15:11</p>
 </section>
 
 <section>
-<section id="slide-org2298cdb">
-<h2 id="org2298cdb">About ii</h2>
-<div class="outline-text-2" id="text-org2298cdb">
+<section id="slide-orge99d640">
+<h2 id="orge99d640">About ii</h2>
+<div class="outline-text-2" id="text-orge99d640">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org866aef7">
-<h3 id="org866aef7">ii.coop</h3>
+<section id="slide-org36e8855">
+<h3 id="org36e8855">People</h3>
+<ul>
+<li>Hippie Hacker</li>
+<li>Caleb Woodbine</li>
+<li>Zach Mandeville</li>
+<li>Stephen Heywood</li>
+<li>Berno Kleinhans</li>
+<li>Riaan Kleinhans</li>
 
+</ul>
 </section>
 </section>
 <section>
-<section id="slide-org908797c">
-<h3 id="org908797c">Hippie Hacker</h3>
-
-</section>
-</section>
-<section>
-<section id="slide-org75c03af">
-<h3 id="org75c03af">Caleb Woodbine</h3>
-
-</section>
-</section>
-<section>
-<section id="slide-orgb52de14">
-<h2 id="orgb52de14">Intro</h2>
-<div class="outline-text-2" id="text-orgb52de14">
+<section id="slide-org35e4d3b">
+<h2 id="org35e4d3b">Intro</h2>
+<div class="outline-text-2" id="text-org35e4d3b">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orgac8f5c6">
-<h3 id="orgac8f5c6">What is Kubernetes Conformance?</h3>
+<section id="slide-org71de2cd">
+<h3 id="org71de2cd">What is Kubernetes Conformance?</h3>
 <p>
 CNCF Kubernetes Conformance ensures
 </p>
@@ -75,23 +71,47 @@ CNCF Kubernetes Conformance ensures
 </p>
 </blockquote>
 
-<ul>
-<li><a href="https://cncf.io/ck">https://cncf.io/ck</a></li>
-<li><a href="https://github.com/cncf/k8s-conformance">https://github.com/cncf/k8s-conformance</a></li>
+</section>
+</section>
+<section>
+<section id="slide-org5604356">
+<h3 id="org5604356">Conformance website</h3>
 
-</ul>
+<div id="org6ce3c97" class="figure">
+<p><img src="./kubecon-2020-north-america-ck.png" alt="kubecon-2020-north-america-ck.png" />
+</p>
+</div>
+
+<p>
+<a href="https://cncf.io/ck">https://cncf.io/ck</a>
+</p>
 
 </section>
 </section>
 <section>
-<section id="slide-org4115289">
-<h3 id="org4115289">Why is Kubernetes Conformance important?</h3>
+<section id="slide-org28ac44b">
+<h3 id="org28ac44b">k8s-conformance repo</h3>
+
+<div id="orgaa964bf" class="figure">
+<p><img src="./kubecon-2020-north-america-conformance-repo.png" alt="kubecon-2020-north-america-conformance-repo.png" />
+</p>
+</div>
+
+<p>
+<a href="https://github.com/cncf/k8s-conformance">https://github.com/cncf/k8s-conformance</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org26d5b49">
+<h3 id="org26d5b49">Why is Kubernetes Conformance important?</h3>
 <p>
 Conformance with Kubernetes ensures:
 </p>
 
 <ul>
-<li>portability workloads
+<li>portability of workloads
 <ul>
 <li>stable APIs behave the same everywhere</li>
 
@@ -105,10 +125,10 @@ Conformance with Kubernetes ensures:
 </ul>
 
 </section>
-<section id="slide-org7c0d57a">
-<h4 id="org7c0d57a">How many Kubernetes Distributions are Certified?</h4>
+<section id="slide-org4bf52ce">
+<h4 id="org4bf52ce">How many Kubernetes Distributions are Certified?</h4>
 <p>
-Currently, there are 70 certified distributions.
+Currently, there are ~67 certified distributions.
 </p>
 
 <ul>
@@ -122,13 +142,13 @@ Click <b>Certified K8s/KCSP/KTP</b> link on the left
 </section>
 </section>
 <section>
-<section id="slide-org356eef0">
-<h3 id="org356eef0">How do I certify/verify a distribution?</h3>
-<div class="outline-text-3" id="text-org356eef0">
+<section id="slide-org2d0bf42">
+<h3 id="org2d0bf42">How do I certify/verify a distribution?</h3>
+<div class="outline-text-3" id="text-org2d0bf42">
 </div>
 </section>
-<section id="slide-orgea87ada">
-<h4 id="orgea87ada">Creating your Conformance Submission</h4>
+<section id="slide-orgc2bb5bd">
+<h4 id="orgc2bb5bd">Creating your Conformance Submission</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/blob/master/instructions.md">cncf/k8s-conformance /instructions.md</a>
 </p>
@@ -141,8 +161,8 @@ vX.Y/$dir/PRODUCT.yaml: Details of your PRODUCT
 </pre>
 
 </section>
-<section id="slide-org9ea4939">
-<h4 id="org9ea4939">Document How to Bring test your cluster</h4>
+<section id="slide-org4981cae">
+<h4 id="org4981cae">Document How to Bring test your cluster</h4>
 <p>
 Example <b>README.md</b> with instructions:
 </p>
@@ -158,44 +178,38 @@ Example <b>README.md</b> with instructions:
 </div>
 
 </section>
-<section id="slide-org4c46b9b">
-<h4 id="org4c46b9b">Watch Sonobuoy</h4>
+<section id="slide-org3acb60b">
+<h4 id="org3acb60b">Watch Sonobuoy</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >watch kubectl get all --all-namespaces
 </code></pre>
 </div>
 </section>
-<section id="slide-org96c8a93">
-<h4 id="org96c8a93">Sonobuoy Logs</h4>
+<section id="slide-orgbd4afe4">
+<h4 id="orgbd4afe4">Sonobuoy Logs</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >sonobuoy logs -f
 </code></pre>
 </div>
 </section>
-<section id="slide-org59c771c">
-<h4 id="org59c771c">Sonobuoy Results</h4>
+<section id="slide-orgfda65b6">
+<h4 id="orgfda65b6">Sonobuoy Results</h4>
 <div class="org-src-container">
 
 <pre><code class=" tmate" >find v1.*/plugins/e2e/results/global
 </code></pre>
 </div>
-
-<pre class="example">
-v1.18.0_2020-10-20_14:34.00/plugins/e2e/results/global
-v1.18.0_2020-10-20_14:34.00/plugins/e2e/results/global/junit_01.xml
-v1.18.0_2020-10-20_14:34.00/plugins/e2e/results/global/e2e.log
-</pre>
 </section>
-<section id="slide-org4f3ddd5">
-<h4 id="org4f3ddd5">Submit cncf/k8s-conformance results</h4>
+<section id="slide-orge098d42">
+<h4 id="orge098d42">Submit cncf/k8s-conformance results</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/blob/master/instructions.md#uploading">cncf/k8s-conformance instructions.md#uploading</a>
 </p>
 
 <ul class="org-ul">
-<li><a id="orgcc999f5"></a>Fork+Branch+Remote<br />
+<li><a id="orgf604d37"></a>Fork+Branch+Remote<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >git clone https://github.com/cncf/k8s-conformance
@@ -205,7 +219,7 @@ git checkout -b notkind-v1.18
 </code></pre>
 </div>
 </li>
-<li><a id="org26d90ad"></a>Copy results into place<br />
+<li><a id="org203c480"></a>Copy results into place<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >cp -a ../notkind v1.18/notkind
@@ -214,7 +228,7 @@ git status
 </code></pre>
 </div>
 </li>
-<li><a id="org872ac6f"></a>Commit and Push Results<br />
+<li><a id="org0321a3d"></a>Commit and Push Results<br />
 <div class="org-src-container">
 
 <pre><code class=" tmate" >git add v1.18/notkind
@@ -225,8 +239,8 @@ git push ii notkind-v1.18:notkind-v1.18-test
 </li>
 </ul>
 </section>
-<section id="slide-org25b4cb8">
-<h4 id="org25b4cb8">Open a PR to cncf/k8s-conformance</h4>
+<section id="slide-org3ed648f">
+<h4 id="org3ed648f">Open a PR to cncf/k8s-conformance</h4>
 <p>
 <a href="https://github.com/cncf/k8s-conformance/compare/master...ii:notkind-v1.18-test">cncf/k8s-conformance/compare/master&#x2026;your:branch</a>
 </p>
@@ -234,15 +248,6 @@ git push ii notkind-v1.18:notkind-v1.18-test
 <div class="org-src-container">
 
 <pre><code class=" bash" >git diff --name-only origin/master
-</code></pre>
-</div>
-
-<div class="org-src-container">
-
-<pre><code class=" bash" >v1.18/notkind/PRODUCT.yaml
-v1.18/notkind/README.md
-v1.18/notkind/e2e.log
-v1.18/notkind/junit_01.xml
 </code></pre>
 </div>
 <aside class="notes">
@@ -257,15 +262,15 @@ required for conformance.
 </section>
 </section>
 <section>
-<section id="slide-org53e1734">
-<h2 id="org53e1734">Identifying Gaps in Kubernetes Conformance Coverage</h2>
-<div class="outline-text-2" id="text-org53e1734">
+<section id="slide-orgc833569">
+<h2 id="orgc833569">Identifying Gaps in Kubernetes Conformance Coverage</h2>
+<div class="outline-text-2" id="text-orgc833569">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orge822812">
-<h3 id="orge822812">Loading K8s API into SQL</h3>
+<section id="slide-orgd1d4b92">
+<h3 id="orgd1d4b92">Loading K8s API into SQL</h3>
 <ul>
 <li>SnoopDB loads the OpenAPI swagger.json</li>
 <li>Enables queries of K8s API definition</li>
@@ -275,8 +280,8 @@ required for conformance.
 </section>
 </section>
 <section>
-<section id="slide-org0a6032a">
-<h3 id="org0a6032a">How can I deploy and explore snoopdb?</h3>
+<section id="slide-org112cd6e">
+<h3 id="org112cd6e">How can I deploy and explore snoopdb?</h3>
 <div class="org-src-container">
 
 <pre><code class=" bash" >git clone https://github.com/cncf/apisnoop
@@ -299,8 +304,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org87c969a">
-<h3 id="org87c969a">psql</h3>
+<section id="slide-orga496a3c">
+<h3 id="orga496a3c">psql</h3>
 <div class="org-src-container">
 
 <pre><code class=" bash" >export PGUSER=apisnoop PGHOST=localhost
@@ -315,45 +320,22 @@ psql -c "select distinct useragent \
 </code></pre>
 </div>
 
-<pre class="example">
-                           useragent                            
-----------------------------------------------------------------
- kubelet/v1.18.0 (linux/amd64) kubernetes/9e99141
- kindnetd/v0.0.0 (linux/amd64) kubernetes/$Format
- sonobuoy/v0.0.0 (darwin/amd64) kubernetes/$Format
- kubectl/v1.19.2 (darwin/amd64) kubernetes/f574309
- coredns/v0.0.0 (linux/amd64) kubernetes/$Format
- local-path-provisioner/v0.0.0 (linux/amd64) kubernetes/$Format
-(6 rows)
-
-</pre>
-
 </section>
 </section>
 <section>
-<section id="slide-org435b88b">
-<h3 id="org435b88b">sql-mode</h3>
+<section id="slide-orgadb7513">
+<h3 id="orgadb7513">sql-mode</h3>
 <div class="org-src-container">
 
 <pre><code class=" sql-mode" >select 1;
 </code></pre>
 </div>
 
-<div class="org-src-container">
-
-<pre><code class=" example" > ?column?
-----------
-        1
-(1 row)
-
-</code></pre>
-</div>
-
 </section>
 </section>
 <section>
-<section id="slide-org568cbcc">
-<h3 id="org568cbcc">Loading CI logs into SQL</h3>
+<section id="slide-org4dfaf21">
+<h3 id="org4dfaf21">Loading CI logs into SQL</h3>
 <ul>
 <li>SnoopDB loads recent CI audit logs</li>
 <li>Enables queries of K8s API usage</li>
@@ -364,8 +346,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-org2378ad0">
-<h3 id="org2378ad0">e2e.test framework support</h3>
+<section id="slide-orgd3ab27c">
+<h3 id="orgd3ab27c">e2e.test framework support</h3>
 <ul>
 <li>UserAgent updated to include test name</li>
 <li>AuditLogs include test and operation</li>
@@ -375,8 +357,8 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-orgf0634ca">
-<h3 id="orgf0634ca">Query Gaps in Conformance Coverage</h3>
+<section id="slide-orge6274cf">
+<h3 id="orge6274cf">Query Gaps in Conformance Coverage</h3>
 <ul>
 <li>Compare Operations hit by [Conformance]</li>
 <li>Query untested surface area</li>
@@ -386,22 +368,22 @@ psql -c "select distinct useragent \
 </section>
 </section>
 <section>
-<section id="slide-orgdc0b927">
-<h3 id="orgdc0b927">Visualize Data</h3>
+<section id="slide-org2b7ecfc">
+<h3 id="org2b7ecfc">Visualize Data</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org59bc104">
-<h2 id="org59bc104">Closing Gaps in Kubernetes Conformance Coverage</h2>
+<section id="slide-org5986db9">
+<h2 id="org5986db9">Closing Gaps in Kubernetes Conformance Coverage</h2>
 <p>
 APISnoop + AuditSink + Test writing
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org8b79bc3">
-<h3 id="org8b79bc3">Auditing the OpenAPI</h3>
+<section id="slide-org6b1d708">
+<h3 id="org6b1d708">Auditing the OpenAPI</h3>
 <ul>
 <li>APIServer can be configured to log usage</li>
 <li>Combining an AuditPolicy and AuditSink</li>
@@ -411,8 +393,8 @@ APISnoop + AuditSink + Test writing
 </section>
 </section>
 <section>
-<section id="slide-orga7bfdee">
-<h3 id="orga7bfdee">SnoopDB in cluster</h3>
+<section id="slide-org9b216de">
+<h3 id="org9b216de">SnoopDB in cluster</h3>
 <ul>
 <li>Identify in Cluster Usage</li>
 <li>Focus on hitting Gaps in API</li>
@@ -421,14 +403,14 @@ APISnoop + AuditSink + Test writing
 </section>
 </section>
 <section>
-<section id="slide-orgf40c9bd">
-<h3 id="orgf40c9bd">MockTest Demo</h3>
+<section id="slide-orge042ead">
+<h3 id="orge042ead">MockTest Demo</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org0c76196">
-<h2 id="org0c76196">Preventing gaps in Kubernetes Conformance Coverage</h2>
+<section id="slide-org8d378ca">
+<h2 id="org8d378ca">Preventing gaps in Kubernetes Conformance Coverage</h2>
 <p>
 prow.cncf.io
 **
@@ -437,8 +419,8 @@ prow.cncf.io
 </section>
 </section>
 <section>
-<section id="slide-org59be568">
-<h2 id="org59be568">Verifying Cloud Provider Submission</h2>
+<section id="slide-org3b32ed9">
+<h2 id="org3b32ed9">Verifying Cloud Provider Submission</h2>
 <p>
 prow.cncf.io
 </p>
