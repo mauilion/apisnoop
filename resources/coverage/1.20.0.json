@@ -32589,7 +32589,7 @@
             "description": "replace the specified VolumeAttachment"
         }
     ],
-    "release_date": "2020-11-05T21:39:04",
+    "release_date": "2020-11-05T21:47:35",
     "total endpoints": 833,
     "tested endpoints": 339,
     "new conformance eligible endpoints": 2,
